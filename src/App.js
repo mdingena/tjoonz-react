@@ -1,10 +1,13 @@
 import React from 'react';
-import ResizeObserverProvider from './providers/ResizeObserver';
+import StoreProvider from './providers/StoreProvider';
+import ResizeObserverProvider from './providers/ResizeObserverProvider';
 
 const App = () => (
-  <ResizeObserverProvider>
-    <div className='app' />
-  </ResizeObserverProvider>
+  <StoreProvider>
+    <ResizeObserverProvider>
+      <div className='app' />
+    </ResizeObserverProvider>
+  </StoreProvider>
 );
 
 export default App;
