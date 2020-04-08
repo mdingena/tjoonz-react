@@ -6373,6 +6373,13 @@ highlight.js@~9.13.0:
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-9.13.1.tgz#054586d53a6863311168488a0f58d6c505ce641e"
   integrity sha512-Sc28JNQNDzaH6PORtRLMvif9RSn1mYuOoX3omVjnb0+HbpPygU2ALBI0R/wsiqCb4/fcp07Gdo8g+fhtFrQl6A==
 
+history@5.0.0-beta.4:
+  version "5.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/history/-/history-5.0.0-beta.4.tgz#7fd3bb1f6c75d00d9b5112a816766bfc72d1a3cd"
+  integrity sha512-LMUnKPB5UlEzDF1BO0VxtDsrguGPO7SuQEmB/5OjL1305afR1O8FvX29rbJep4g2SLmKK3YdDA7+8ZDs8P8n8g==
+  dependencies:
+    "@babel/runtime" "^7.7.6"
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -10587,6 +10594,22 @@ react-redux@^7.2.0:
     loose-envify "^1.4.0"
     prop-types "^15.7.2"
     react-is "^16.9.0"
+
+react-router-dom@^6.0.0-alpha.3:
+  version "6.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-6.0.0-alpha.3.tgz#295aa7691de913b81f481b7cb14418e3b2f08edf"
+  integrity sha512-3Fu9Az+ofgv58WxtaPokADdNXJmxE6td5na2HFIN0cgRBYo2TPJ83KlIt4XCNvq1Y473pr8hOkD621CmauztEw==
+  dependencies:
+    history "5.0.0-beta.4"
+    prop-types "^15.7.2"
+
+react-router@^6.0.0-alpha.3:
+  version "6.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/react-router/-/react-router-6.0.0-alpha.3.tgz#c031a5262801315571f8b609620ae9c1b083dee3"
+  integrity sha512-Evp8ua5c7rFDIuF0KK/tkzbh7aPIWWyjWKr3yOLNine1liiphHZidDL/5jLTBjE9HN0/vdCZPuV2VWjZ82TShA==
+  dependencies:
+    history "5.0.0-beta.4"
+    prop-types "^15.7.2"
 
 react-scripts@3.4.1:
   version "3.4.1"
