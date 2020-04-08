@@ -1,0 +1,25 @@
+.root {
+  display: inline-block;
+  padding: 0 20px;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--colour-blue-200);
+  border-bottom: 3px solid transparent;
+}
+
+.root:hover {
+  color: var(--colour-grey-100);
+}
+
+.collapsed {
+  composes: root;
+}
+
+.root.active {
+  border-bottom: 3px solid var(--colour-blue-400);
+}
+
+.collapsed.active {
+  border-bottom: 0;
+  border-left: 3px solid var(--colour-blue-400);
+}

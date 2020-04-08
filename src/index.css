@@ -5,9 +5,19 @@
   margin: 0;
 }
 
+html {
+  --colour-blue-400: #1ea7fd;
+  --colour-blue-700: #1a1f24;
+  --colour-blue-800: #13161a;
+  --colour-blue-900: #0e1013;
+  --colour-grey-100: #f1f1f1;
+  --colour-grey-200: #cad1d9;
+}
+
 body {
   min-height: 100vh;
-  background-color: #1a1f24;
-  color: #cad1d9;
+  background-color: var(--colour-blue-700);
+  color: var(--colour-grey-200);
   font-family: 'Abel', sans-serif;
+  font-size: 16px;
 }

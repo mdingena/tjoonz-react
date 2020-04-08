@@ -1,0 +1,63 @@
+.root {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: max-content 1fr 46px;
+  padding: 0 20px;
+  background-color: var(--colour-blue-800);
+  font-size: 1.0625rem;
+  line-height: 46px;
+}
+
+.links {
+  white-space: nowrap;
+}
+
+.logo {
+  display: inline-block;
+  padding: 0 20px;
+  text-decoration: none;
+  white-space: nowrap;
+  color: var(--colour-grey-200);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.open,
+.closed {
+  composes: dropdown;
+}
+
+.open {
+  background-color: var(--colour-blue-900);
+}
+
+.button {
+  width: 100%;
+  padding: 0 20px;
+  background: transparent;
+  border: 0;
+  font-size: 1.0625rem;
+  line-height: 46px;
+  font-weight: 700;
+  color: var(--colour-grey-200);
+  cursor: pointer;
+}
+
+.button:hover {
+  color: var(--colour-grey-100);
+}
+
+.list {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  display: grid;
+  grid-auto-rows: auto;
+  background-color: var(--colour-blue-900);
+}
+
