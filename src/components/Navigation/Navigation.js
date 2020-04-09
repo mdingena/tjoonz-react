@@ -1,12 +1,12 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useResizeObserver } from '@envato/react-breakpoints';
 import { NavLink } from 'react-router-dom';
-import { Link } from './Link';
+import Link from './Link';
 import Downshift from 'downshift';
 import PropTypes from 'prop-types';
 import styles from './Navigation.module.css';
 
-export const Navigation = ({ links = [] }) => {
+const Navigation = ({ links = [] }) => {
   const [linkWidths, setLinkWidths] = useState({});
   const [cutoffIndex, setCutoffIndex] = useState(0);
   const [ref, observedEntry] = useResizeObserver({ box: 'content-box' });
@@ -121,3 +121,5 @@ Navigation.propTypes = {
     text: PropTypes.string.isRequired
   })).isRequired
 };
+
+export default Navigation;

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { IsFacettedSearchItemChecked } from '../../selectors/IsFacettedSearchItemChecked';
-import { toggleFacettedSearchItem } from '../../actions/toggleFacettedSearchItem';
-import { Icon } from '../Icon';
+import IsFacettedSearchItemChecked from '../../selectors/IsFacettedSearchItemChecked';
+import toggleFacettedSearchItem from '../../actions/toggleFacettedSearchItem';
+import Icon from '../Icon';
 import PropTypes from 'prop-types';
 import styles from './FacettedSearchItem.module.css';
 
-export const FacettedSearchItem = ({ facet, itemId, text, count }) => {
+const FacettedSearchItem = ({ facet, itemId, text, count }) => {
   const dispatch = useDispatch();
   const isChecked = useSelector(IsFacettedSearchItemChecked(facet, itemId));
 
@@ -41,3 +41,5 @@ FacettedSearchItem.propTypes = {
   text: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired
 };
+
+export default FacettedSearchItem;

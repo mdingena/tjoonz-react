@@ -6,7 +6,7 @@ import styles from './Link.module.css';
 
 const noOp = () => {};
 
-export const Link = ({ to, text, onResize, onClick = noOp, collapsed = false }) => {
+const Link = ({ to, text, onResize, onClick = noOp, collapsed = false }) => {
   const [ref, observedEntry] = useResizeObserver({ box: 'border-box' });
 
   useEffect(() => {
@@ -38,3 +38,5 @@ Link.propTypes = {
   onClick: PropTypes.func,
   collapsed: PropTypes.bool
 };
+
+export default Link;

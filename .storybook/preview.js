@@ -1,8 +1,8 @@
 import React from 'react';
 import { addDecorator, addParameters } from '@storybook/react';
 import { themes } from '@storybook/theming';
-import { StoreProvider } from '../src/providers/StoreProvider';
-import { ResizeObserverProvider } from '../src/providers/ResizeObserverProvider';
+import StoreProvider from '../src/providers/StoreProvider';
+import ResizeObserverProvider from '../src/providers/ResizeObserverProvider';
 import { MemoryRouter } from 'react-router-dom';
 import '../src/index.css';
 

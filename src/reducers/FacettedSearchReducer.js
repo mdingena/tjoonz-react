@@ -16,7 +16,7 @@ const initialState = {
   }
 };
 
-export const FacettedSearchReducer = (state = initialState, { type, facet, itemId }) => {
+const FacettedSearchReducer = (state = initialState, { type, facet, itemId }) => {
   switch (type) {
     case actionTypes.TOGGLE_FACET_SEARCH_ITEM:
       return {
@@ -33,3 +33,5 @@ export const FacettedSearchReducer = (state = initialState, { type, facet, itemI
       return state;
   }
 };
+
+export default FacettedSearchReducer;

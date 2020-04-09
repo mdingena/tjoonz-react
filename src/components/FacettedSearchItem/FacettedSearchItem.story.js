@@ -1,5 +1,5 @@
 import React from 'react';
-import { FacettedSearchItem } from './FacettedSearchItem';
+import FacettedSearchItem from './FacettedSearchItem';
 
 export default {
   title: 'FacettedSearchItem',

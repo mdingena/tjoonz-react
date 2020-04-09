@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import { FacettedSearchReducer } from './FacettedSearchReducer';
+import FacettedSearchReducer from './FacettedSearchReducer';
 
-export const AppReducer = combineReducers({
+const AppReducer = combineReducers({
   facettedSearch: FacettedSearchReducer
 });
+
+export default AppReducer;
