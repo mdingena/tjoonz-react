@@ -1,0 +1,45 @@
+.root {
+  padding: 2px 5px;
+  line-height: 1.5;
+}
+
+.root:hover {
+  background-color: var(--colour-blue-800);
+}
+
+.checked,
+.unchecked {
+  composes: root;
+}
+
+.count svg,
+.checked:hover .count span {
+  display: none;
+}
+
+.checked:hover .count svg {
+  display: inline-block;
+}
+
+.checked {
+  background-color: var(--colour-blue-800);
+}
+
+.label {
+  display: block;
+  cursor: pointer;
+}
+
+.count {
+  float: right;
+}
+
+.icon {
+  padding: 0 6px;
+  height: 1rem;
+  vertical-align: -0.125em;
+}
+
+.icon path {
+  fill: var(--colour-grey-200);
+}

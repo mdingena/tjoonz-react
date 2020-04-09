@@ -1,0 +1,1 @@
+export { FacettedSearchItem } from './FacettedSearchItem';
