@@ -1,0 +1,3 @@
+export default {
+  TOGGLE_FACET_SEARCH_ITEM: 'TOGGLE_FACET_SEARCH_ITEM'
+};
