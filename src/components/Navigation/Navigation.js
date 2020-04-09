@@ -17,7 +17,6 @@ export const Navigation = ({ links = [] }) => {
    */
   const handleLinkResize = (to, width) => {
     if (width > 0 && width !== linkWidths[to]) {
-      console.log(to, width);
       const widths = { ...linkWidths, [to]: width };
       setLinkWidths(widths);
     }
