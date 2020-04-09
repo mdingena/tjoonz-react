@@ -1,6 +1,4 @@
 .root {
-  display: inline-block;
-  padding: 0 20px;
   text-decoration: none;
   white-space: nowrap;
   color: var(--colour-blue-200);
@@ -22,4 +20,9 @@
 .collapsed.active {
   border-bottom: 0;
   border-left: 3px solid var(--colour-blue-400);
+}
+
+.text {
+  display: inline-block;
+  padding: 0 20px;
 }

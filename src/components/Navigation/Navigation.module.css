@@ -12,11 +12,11 @@
 }
 
 .links {
-  white-space: nowrap;
+  display: flex;
+  flex-flow: row nowrap;
 }
 
 .logo {
-  display: inline-block;
   padding: 0 20px;
   text-decoration: none;
   white-space: nowrap;

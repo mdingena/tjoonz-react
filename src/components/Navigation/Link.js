@@ -17,9 +17,13 @@ export const Link = ({ to, text, onResize, onClick, collapsed = false }) => {
       className={collapsed ? styles.collapsed : styles.root}
       activeClassName={styles.active}
       onClick={onClick}
-      ref={ref}
     >
-      {text}
+      <span
+        ref={ref}
+        className={styles.text}
+      >
+        {text}
+      </span>
     </NavLink>
   );
 };
