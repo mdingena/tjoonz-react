@@ -7,9 +7,10 @@
 
 html {
   --colour-blue-400: #1ea7fd;
-  --colour-blue-700: #1a1f24;
-  --colour-blue-800: #13161a;
-  --colour-blue-900: #0e1013;
+  --colour-blue-800: #242a32;
+  --colour-blue-900: #1a1f24;
+  --colour-blue-910: #13161a;
+  --colour-blue-920: #0e1013;
   --colour-grey-100: #f1f1f1;
   --colour-grey-200: #cad1d9;
 
@@ -19,7 +20,7 @@ html {
 
 body {
   min-height: 100vh;
-  background-color: var(--colour-blue-700);
+  background-color: var(--colour-blue-900);
   color: var(--colour-grey-200);
   font-family: 'Abel', sans-serif;
   font-size: 16px;

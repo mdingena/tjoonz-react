@@ -6,7 +6,7 @@
   display: grid;
   grid-template-columns: max-content 1fr 46px;
   padding: 0 20px;
-  background-color: var(--colour-blue-800);
+  background-color: var(--colour-blue-910);
   font-size: 1.0625rem;
   line-height: 46px;
 }
@@ -33,7 +33,7 @@
 }
 
 .open {
-  background-color: var(--colour-blue-900);
+  background-color: var(--colour-blue-920);
 }
 
 .button {
@@ -59,7 +59,7 @@
   display: grid;
   grid-auto-rows: auto;
   max-height: calc(100vh - 10px - (var(--size-navigation-bar) + 3px) - var(--size-player-bar));
-  background-color: var(--colour-blue-900);
+  background-color: var(--colour-blue-920);
   overflow-y: auto;
 }
 
