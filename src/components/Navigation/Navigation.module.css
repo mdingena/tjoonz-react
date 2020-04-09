@@ -38,7 +38,7 @@
 
 .button {
   width: 100%;
-  padding: 0 20px;
+  padding: 0 20px 3px;
   background: transparent;
   border: 0;
   font-size: 1.0625rem;
@@ -58,6 +58,8 @@
   top: 100%;
   display: grid;
   grid-auto-rows: auto;
+  max-height: calc(100vh - 10px - (var(--size-navigation-bar) + 3px) - var(--size-player-bar));
   background-color: var(--colour-blue-900);
+  overflow-y: auto;
 }
 

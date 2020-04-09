@@ -12,6 +12,9 @@ html {
   --colour-blue-900: #0e1013;
   --colour-grey-100: #f1f1f1;
   --colour-grey-200: #cad1d9;
+
+  --size-navigation-bar: 46px;
+  --size-player-bar: 46px;
 }
 
 body {
