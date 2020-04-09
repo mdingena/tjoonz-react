@@ -1,9 +1,12 @@
 import React, { useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useResizeObserver } from '@envato/react-breakpoints';
+import PropTypes from 'prop-types';
 import styles from './Link.module.css';
 
-export const Link = ({ to, text, onResize, onClick, collapsed = false }) => {
+const noOp = () => {};
+
+export const Link = ({ to, text, onResize, onClick = noOp, collapsed = false }) => {
   const [ref, observedEntry] = useResizeObserver({ box: 'border-box' });
 
   useEffect(() => {
@@ -26,4 +29,12 @@ export const Link = ({ to, text, onResize, onClick, collapsed = false }) => {
       </span>
     </NavLink>
   );
+};
+
+Link.propTypes = {
+  to: PropTypes.string.isRequired,
+  text: PropTypes.string.isRequired,
+  onResize: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
+  collapsed: PropTypes.bool
 };

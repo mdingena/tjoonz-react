@@ -3,6 +3,7 @@ import { useResizeObserver } from '@envato/react-breakpoints';
 import { NavLink } from 'react-router-dom';
 import { Link } from './Link';
 import Downshift from 'downshift';
+import PropTypes from 'prop-types';
 import styles from './Navigation.module.css';
 
 export const Navigation = ({ links = [] }) => {
@@ -112,4 +113,11 @@ export const Navigation = ({ links = [] }) => {
       </div>
     </div>
   );
+};
+
+Navigation.propTypes = {
+  links: PropTypes.arrayOf(PropTypes.shape({
+    to: PropTypes.string.isRequired,
+    text: PropTypes.string.isRequired
+  })).isRequired
 };
