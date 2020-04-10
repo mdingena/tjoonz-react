@@ -1,8 +1,8 @@
 import qs from 'qs';
-import api from '../constants/api';
+import { BASE_URL, ITEMS_PER_PAGE } from '../constants/api';
 
 const defaultOptions = {
-  per_page: api.ITEMS_PER_PAGE
+  per_page: ITEMS_PER_PAGE
 };
 
 /**
@@ -16,7 +16,7 @@ const fetchPage = async (endpoint, page, options = {}) => {
   const query = qs.stringify({ ...defaultOptions, ...options, page });
 
   /* Fetch a page. */
-  const response = await window.fetch(`${api.URL}${endpoint}${query}`);
+  const response = await window.fetch(`${BASE_URL}${endpoint}${query}`);
   if (!response.ok) return response;
 
   /* Extract data. */
