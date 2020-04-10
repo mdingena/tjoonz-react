@@ -18,7 +18,7 @@ const initialState = {
 
 const FacettedSearchReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case actionTypes.TOGGLE_FACET_SEARCH_ITEM:
+    case actionTypes.TOGGLE_FACETTED_SEARCH_ITEM:
       return {
         ...state,
         [payload.facet]: {
