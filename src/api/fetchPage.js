@@ -13,7 +13,7 @@ const defaultOptions = {
  */
 const fetchPage = async (endpoint, page, options = {}) => {
   /* Construct a query string for fetching the resource. */
-  const query = qs.stringify({ ...defaultOptions, ...options, page });
+  const query = qs.stringify({ ...defaultOptions, ...options, page }, { addQueryPrefix: true });
 
   /* Fetch a page. */
   const response = await window.fetch(`${BASE_URL}${endpoint}${query}`);
