@@ -25,7 +25,7 @@ const FacettedSearchReducer = (state = initialState, { type, facet, itemId }) =>
           ...state[facet],
           ids: state[facet].ids.includes(itemId)
             ? state[facet].ids.filter(id => id !== itemId)
-            : state[facet].ids.concat(itemId)
+            : [itemId, ...state[facet].ids]
         }
       };
 
