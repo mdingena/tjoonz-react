@@ -36,7 +36,10 @@ const FacettedSearchItem = ({ facet, itemId, text, count }) => {
 };
 
 FacettedSearchItem.propTypes = {
-  facet: PropTypes.string.isRequired,
+  facet: PropTypes.shape({
+    KEY: PropTypes.string.isRequired,
+    ENDPOINT: PropTypes.string.isRequired
+  }).isRequired,
   itemId: PropTypes.number.isRequired,
   text: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired

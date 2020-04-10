@@ -1,5 +1,5 @@
 const selectIsFacettedSearchItemChecked = (facet, itemId) =>
   ({ facettedSearch }) =>
-    facettedSearch[facet].ids.includes(itemId);
+    facettedSearch[facet.KEY].ids.includes(itemId);
 
 export default selectIsFacettedSearchItemChecked;

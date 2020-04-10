@@ -1,4 +1,5 @@
 import React from 'react';
+import { ARTISTS } from '../../constants/facettedSearchFacets';
 import FacettedSearchItem from './FacettedSearchItem';
 
 export default {
@@ -7,5 +8,5 @@ export default {
 };
 
 export const facettedSearchItem = () => (
-  <FacettedSearchItem facet='artists' itemId={42} text='Test 42' count={1234} />
+  <FacettedSearchItem facet={ARTISTS} itemId={42} text='Test 42' count={1234} />
 );

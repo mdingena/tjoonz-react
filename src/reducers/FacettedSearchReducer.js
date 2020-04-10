@@ -1,16 +1,17 @@
 import { TOGGLE_FACETTED_SEARCH_ITEM } from '../constants/actionTypes';
+import { ARTISTS, GENRES, TAGS } from '../constants/facettedSearchFacets';
 import { OR } from '../constants/facettedSearchRelations';
 
 const initialState = {
-  artists: {
+  [ARTISTS.KEY]: {
     relation: OR,
     ids: []
   },
-  genres: {
+  [GENRES.KEY]: {
     relation: OR,
     ids: []
   },
-  tags: {
+  [TAGS.KEY]: {
     relation: OR,
     ids: []
   }
@@ -21,11 +22,11 @@ const FacettedSearchReducer = (state = initialState, { type, payload }) => {
     case TOGGLE_FACETTED_SEARCH_ITEM:
       return {
         ...state,
-        [payload.facet]: {
-          ...state[payload.facet],
-          ids: state[payload.facet].ids.includes(payload.itemId)
-            ? state[payload.facet].ids.filter(id => id !== payload.itemId)
-            : [payload.itemId, ...state[payload.facet].ids]
+        [payload.facet.KEY]: {
+          ...state[payload.facet.KEY],
+          ids: state[payload.facet.KEY].ids.includes(payload.itemId)
+            ? state[payload.facet.KEY].ids.filter(id => id !== payload.itemId)
+            : [payload.itemId, ...state[payload.facet.KEY].ids]
         }
       };
 

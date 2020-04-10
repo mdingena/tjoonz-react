@@ -1,4 +1,3 @@
-export default {
-  AND: 'AND',
-  OR: 'OR'
-};
+export const AND = 'AND';
+
+export const OR = 'OR';
