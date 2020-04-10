@@ -2,11 +2,11 @@ import actionTypes from '../constants/actionTypes';
 import facettedSearchRelations from '../constants/facettedSearchRelations';
 
 const initialState = {
-  artist: {
+  artists: {
     relation: facettedSearchRelations.OR,
     ids: []
   },
-  genre: {
+  genres: {
     relation: facettedSearchRelations.OR,
     ids: []
   },

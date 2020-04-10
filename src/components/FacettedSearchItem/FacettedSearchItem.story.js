@@ -7,5 +7,5 @@ export default {
 };
 
 export const facettedSearchItem = () => (
-  <FacettedSearchItem facet='artist' itemId={42} text='Test 42' count={1234} />
+  <FacettedSearchItem facet='artists' itemId={42} text='Test 42' count={1234} />
 );
