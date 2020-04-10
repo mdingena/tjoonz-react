@@ -16,16 +16,16 @@ const initialState = {
   }
 };
 
-const FacettedSearchReducer = (state = initialState, { type, facet, itemId }) => {
+const FacettedSearchReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case actionTypes.TOGGLE_FACET_SEARCH_ITEM:
       return {
         ...state,
-        [facet]: {
-          ...state[facet],
-          ids: state[facet].ids.includes(itemId)
-            ? state[facet].ids.filter(id => id !== itemId)
-            : [itemId, ...state[facet].ids]
+        [payload.facet]: {
+          ...state[payload.facet],
+          ids: state[payload.facet].ids.includes(payload.itemId)
+            ? state[payload.facet].ids.filter(id => id !== payload.itemId)
+            : [payload.itemId, ...state[payload.facet].ids]
         }
       };
 
