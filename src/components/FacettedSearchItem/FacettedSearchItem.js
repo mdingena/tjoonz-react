@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import IsFacettedSearchItemChecked from '../../selectors/IsFacettedSearchItemChecked';
+import selectIsFacettedSearchItemChecked from '../../selectors/selectIsFacettedSearchItemChecked';
 import toggleFacettedSearchItem from '../../actions/toggleFacettedSearchItem';
 import Icon from '../Icon';
 import PropTypes from 'prop-types';
@@ -8,7 +8,7 @@ import styles from './FacettedSearchItem.module.css';
 
 const FacettedSearchItem = ({ facet, itemId, text, count }) => {
   const dispatch = useDispatch();
-  const isChecked = useSelector(IsFacettedSearchItemChecked(facet, itemId));
+  const isChecked = useSelector(selectIsFacettedSearchItemChecked(facet, itemId));
 
   const toggle = () => {
     const action = toggleFacettedSearchItem(facet, itemId);
