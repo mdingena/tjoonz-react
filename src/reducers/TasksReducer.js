@@ -1,17 +1,24 @@
-import { ADD_TASKS, DECREASE_TASKS } from '../constants/actionTypes';
+import { ADD_TASKS, COMPLETE_TASKS } from '../constants/actionTypes';
 
-const TasksReducer = (state = {}, { type, payload }) => {
+const initialState = {
+  completed: 0,
+  queued: {}
+};
+
+const TasksReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case ADD_TASKS:
       return {
         ...state,
-        [payload.key]: payload.count + (state[payload.key] || 0)
+        queued: {
+          [payload.key]: payload.count + (state.queued[payload.key] || 0)
+        }
       };
 
-    case DECREASE_TASKS:
+    case COMPLETE_TASKS:
       return {
         ...state,
-        [payload.key]: Math.max((state[payload.key] || 0) - payload.count, 0)
+        completed: state.completed + payload.count
       };
 
     default:
