@@ -7,7 +7,7 @@ const defaultOptions = {
 
 /**
  * Fetch a page of the WP API resource at `endpoint`.
- * @param {String} endpoint - Name of the WP API resource.
+ * @param {String} endpoint - URI of the WP API resource.
  * @param {Number} page - Page number to fetch.
  * @param {Object} [options] - Sets options for fetching, such as sorting and results per page.
  */
@@ -17,13 +17,14 @@ const fetchPage = async (endpoint, page, options = {}) => {
 
   /* Fetch a page. */
   const response = await window.fetch(`${api.URL}${endpoint}${query}`);
+  if (!response.ok) return response;
 
   /* Extract data. */
   const pageCount = response.headers.get('X-WP-TotalPages');
   const resources = await response.json();
 
   /* Return results. */
-  return { resources, pageCount };
+  return { ok: true, resources, pageCount };
 };
 
 export default fetchPage;
