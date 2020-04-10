@@ -2,18 +2,29 @@ import { TOGGLE_FACETTED_SEARCH_ITEM } from '../constants/actionTypes';
 import { ARTISTS, GENRES, TAGS } from '../constants/facettedSearchFacets';
 import { OR } from '../constants/facettedSearchRelations';
 
+const now = Date.now();
+
 const initialState = {
   [ARTISTS.KEY]: {
+    isFetching: false,
+    lastUpdated: now,
     relation: OR,
-    ids: []
+    options: [],
+    selected: []
   },
   [GENRES.KEY]: {
+    isFetching: false,
+    lastUpdated: now,
     relation: OR,
-    ids: []
+    options: [],
+    selected: []
   },
   [TAGS.KEY]: {
+    isFetching: false,
+    lastUpdated: now,
     relation: OR,
-    ids: []
+    options: [],
+    selected: []
   }
 };
 
@@ -24,9 +35,9 @@ const FacettedSearchReducer = (state = initialState, { type, payload }) => {
         ...state,
         [payload.facet.KEY]: {
           ...state[payload.facet.KEY],
-          ids: state[payload.facet.KEY].ids.includes(payload.itemId)
-            ? state[payload.facet.KEY].ids.filter(id => id !== payload.itemId)
-            : [payload.itemId, ...state[payload.facet.KEY].ids]
+          selected: isSelectedFacetItem(state, payload.facet, payload.item)
+            ? deselectFacetItem(state, payload.facet, payload.item)
+            : selectFacetItem(state, payload.facet, payload.item)
         }
       };
 
@@ -36,3 +47,12 @@ const FacettedSearchReducer = (state = initialState, { type, payload }) => {
 };
 
 export default FacettedSearchReducer;
+
+export const isSelectedFacetItem = (state, facet, item) =>
+  state[facet.KEY].selected.some(({ id }) => id === item.id);
+
+const deselectFacetItem = (state, facet, item) =>
+  state[facet.KEY].selected.filter(({ id }) => id !== item.id);
+
+const selectFacetItem = (state, facet, item) =>
+  [item, ...state[facet.KEY].selected];
