@@ -1,24 +1,24 @@
-import actionTypes from '../constants/actionTypes';
-import facettedSearchRelations from '../constants/facettedSearchRelations';
+import { TOGGLE_FACETTED_SEARCH_ITEM } from '../constants/actionTypes';
+import { OR } from '../constants/facettedSearchRelations';
 
 const initialState = {
   artists: {
-    relation: facettedSearchRelations.OR,
+    relation: OR,
     ids: []
   },
   genres: {
-    relation: facettedSearchRelations.OR,
+    relation: OR,
     ids: []
   },
   tags: {
-    relation: facettedSearchRelations.OR,
+    relation: OR,
     ids: []
   }
 };
 
 const FacettedSearchReducer = (state = initialState, { type, payload }) => {
   switch (type) {
-    case actionTypes.TOGGLE_FACETTED_SEARCH_ITEM:
+    case TOGGLE_FACETTED_SEARCH_ITEM:
       return {
         ...state,
         [payload.facet]: {

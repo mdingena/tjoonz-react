@@ -1,7 +1,7 @@
-import actionTypes from '../constants/actionTypes';
+import { TOGGLE_FACETTED_SEARCH_ITEM } from '../constants/actionTypes';
 
 const toggleFacettedSearchItem = (facet, itemId) => ({
-  type: actionTypes.TOGGLE_FACETTED_SEARCH_ITEM,
+  type: TOGGLE_FACETTED_SEARCH_ITEM,
   payload: { facet, itemId }
 });
 
