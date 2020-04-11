@@ -20,6 +20,11 @@ const TasksReducer = (state = {}, { type, payload }) => {
         }
       };
 
+    case REMOVE_ALL_TASKS:
+      return {
+        ...removeFromQueue(state, payload)
+      };
+
     default:
       return state;
   }
@@ -38,3 +43,11 @@ export const getTasksTotal = state =>
 
 const hasMoreTasks = (state, payload) =>
   state[payload.key].pending > (state[payload.key].completed + payload.count);
+
+const removeFromQueue = (state, payload) =>
+  Object.entries(state).reduce(
+    (queue, { key, tasks }) => key !== payload.key
+      ? { ...queue, [key]: tasks }
+      : queue,
+    {}
+  );
