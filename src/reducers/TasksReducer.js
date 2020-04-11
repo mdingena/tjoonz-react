@@ -32,7 +32,7 @@ const TasksReducer = (state = {}, { type, payload }) => {
 
 export default TasksReducer;
 
-export const getTasksTotal = state =>
+export const getAllTasks = state =>
   Object.values(state).reduce(
     (queue, { completed, pending }) => ({
       completed: queue.completed + completed,
@@ -40,6 +40,8 @@ export const getTasksTotal = state =>
     }),
     { completed: 0, pending: 0 }
   );
+
+export const getTasks = (state, key) => state[key];
 
 const hasMoreTasks = (state, payload) =>
   state[payload.key].pending > (state[payload.key].completed + payload.count);
