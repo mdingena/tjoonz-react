@@ -1,6 +1,8 @@
+import { getQueuedTasksCount } from '../reducers/TasksReducer';
+
 const selectAllTasks = ({ tasks }) => ({
   completed: tasks.completed,
-  queued: Object.values(tasks.queued).reduce((sum, taskCount) => sum + taskCount, 0)
+  queued: getQueuedTasksCount(tasks)
 });
 
 export default selectAllTasks;
