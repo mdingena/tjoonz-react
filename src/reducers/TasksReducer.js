@@ -18,7 +18,8 @@ const TasksReducer = (state = initialState, { type, payload }) => {
     case COMPLETE_TASKS:
       return {
         ...state,
-        completed: state.completed + payload.count
+        completed: hasMoreTasks(state, payload) ? (state.completed + payload.count) : 0,
+        queued: hasMoreTasks(state, payload) ? state.queued : 0
       };
 
     default:
@@ -27,3 +28,9 @@ const TasksReducer = (state = initialState, { type, payload }) => {
 };
 
 export default TasksReducer;
+
+export const getQueuedTasksCount = state =>
+  Object.values(state.queued).reduce((sum, taskCount) => sum + taskCount, 0);
+
+const hasMoreTasks = (state, payload) =>
+  getQueuedTasksCount(state) > (state.completed + payload.count);
