@@ -1,25 +1,23 @@
-import { ADD_TASKS, COMPLETE_TASKS } from '../constants/actionTypes';
+import { ADD_TASKS, COMPLETE_TASKS, REMOVE_ALL_TASKS } from '../constants/actionTypes';
 
-const initialState = {
-  completed: 0,
-  queued: {}
-};
-
-const TasksReducer = (state = initialState, { type, payload }) => {
+const TasksReducer = (state = {}, { type, payload }) => {
   switch (type) {
     case ADD_TASKS:
       return {
         ...state,
-        queued: {
-          [payload.key]: payload.count + (state.queued[payload.key] || 0)
-        }
+        [payload.key]: state[payload.key]
+          ? { ...state[payload.key], pending: payload.count + state[payload.key].pending }
+          : { completed: 0, pending: payload.count }
       };
 
     case COMPLETE_TASKS:
       return {
         ...state,
-        completed: hasMoreTasks(state, payload) ? (state.completed + payload.count) : 0,
-        queued: hasMoreTasks(state, payload) ? state.queued : 0
+        [payload.key]: {
+          ...state[payload.key],
+          completed: hasMoreTasks(state, payload) ? (state[payload.key].completed + payload.count) : 0,
+          pending: hasMoreTasks(state, payload) ? state[payload.key].pending : 0
+        }
       };
 
     default:
@@ -29,8 +27,14 @@ const TasksReducer = (state = initialState, { type, payload }) => {
 
 export default TasksReducer;
 
-export const getQueuedTasksCount = state =>
-  Object.values(state.queued).reduce((sum, taskCount) => sum + taskCount, 0);
+export const getTasksTotal = state =>
+  Object.values(state).reduce(
+    (queue, { completed, pending }) => ({
+      completed: queue.completed + completed,
+      pending: queue.pending + pending
+    }),
+    { completed: 0, pending: 0 }
+  );
 
 const hasMoreTasks = (state, payload) =>
-  getQueuedTasksCount(state) > (state.completed + payload.count);
+  state[payload.key].pending > (state[payload.key].completed + payload.count);

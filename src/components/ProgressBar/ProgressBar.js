@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import selectAllTasks from '../../selectors/selectAllTasks';
+import selectTasksTotal from '../../selectors/selectTasksTotal';
 import styles from './ProgressBar.module.css';
 
 const ProgressBar = () => {
-  const { completed, queued } = useSelector(selectAllTasks);
-  const progress = queued > 0 ? (completed / queued) : 1;
+  const { completed, pending } = useSelector(selectTasksTotal);
+  const progress = pending > 0 ? (completed / pending) : 1;
   const progressing = progress < 1;
 
   return (
