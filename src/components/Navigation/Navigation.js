@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { useResizeObserver } from '@envato/react-breakpoints';
-import { NavLink } from 'react-router-dom';
+import Logo from './Logo';
 import Link from './Link';
 import Downshift from 'downshift';
 import PropTypes from 'prop-types';
@@ -66,7 +66,7 @@ const Navigation = ({ links = [] }) => {
 
   return (
     <div className={styles.root}>
-      <NavLink to='/' className={styles.logo}>Tjoonz.com</NavLink>
+      <Logo />
       <div ref={ref} className={styles.links}>
         {visibleLinks.map(({ to, text }) => (
           <Link
