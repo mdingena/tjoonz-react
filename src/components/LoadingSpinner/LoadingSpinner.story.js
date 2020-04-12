@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import addTasks from '../../actions/addTasks';
 import completeTasks from '../../actions/completeTasks';
-import ProgressBar from './ProgressBar';
+import LoadingSpinner from './LoadingSpinner';
 
 export default {
-  title: 'ProgressBar',
-  component: ProgressBar
+  title: 'LoadingSpinner',
+  component: LoadingSpinner
 };
 
 const Wrapper = ({ children }) => {
@@ -25,8 +25,8 @@ const Wrapper = ({ children }) => {
   );
 };
 
-export const progressBar = () => (
+export const Spinning = () => (
   <Wrapper>
-    <ProgressBar />
+    <LoadingSpinner size={500} />
   </Wrapper>
 );

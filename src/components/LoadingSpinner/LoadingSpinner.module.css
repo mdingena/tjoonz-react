@@ -1,0 +1,77 @@
+.root {
+  width: calc(var(--width) * 1.3639702);
+  padding: 0 calc(var(--width) * 0.1819851);
+}
+
+.skew {
+  position: relative;
+  width: var(--width);
+  height: var(--height);
+  transform: skewX(-20deg);
+}
+
+.indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: var(--colour-grey-100);
+  transition-property: transform, width, height;
+  transition-duration: 75ms;
+  transition-timing-function: linear;
+  will-change: transform, width, height;
+}
+
+.cube {
+  width: calc((var(--width) / 2) - (var(--gap) / 2));
+  height: calc((var(--height) / 2) - (var(--gap) / 2));
+}
+
+.tall {
+  width: calc((var(--width) / 2) - (var(--gap) / 2));
+  height: 100%;
+}
+
+.wide {
+  width: 100%;
+  height: calc((var(--height) / 2) - (var(--gap) / 2));
+}
+
+.leftShrinkVertically {
+  composes: indicator cube;
+  transform: translate(0px, 0px);
+}
+
+.rightShrinkVertically {
+  composes: indicator cube;
+  transform: translate(calc((var(--width) / 2) + (var(--gap) / 2)), calc((var(--height) / 2) + (var(--gap) / 2)));
+}
+
+.topExpandHorizontally {
+  composes: indicator wide;
+  transform: translate(0px, 0px);
+}
+
+.bottomExpandHorizontally {
+  composes: indicator wide;
+  transform: translate(0px, calc((var(--height) / 2) + (var(--gap) / 2)));
+}
+
+.topShrinkHorizontally {
+  composes: indicator cube;
+  transform: translate(calc((var(--width) / 2) + (var(--gap) / 2)), 0px);
+}
+
+.bottomShrinkHorizontally {
+  composes: indicator cube;
+  transform: translate(0px, calc((var(--height) / 2) + (var(--gap) / 2)));
+}
+
+.leftExpandVertically {
+  composes: indicator tall;
+  transform: translate(0px, 0px);
+}
+
+.rightExpandVertically {
+  composes: indicator tall;
+  transform: translate(calc((var(--width) / 2) + (var(--gap) / 2)), 0px);
+}
