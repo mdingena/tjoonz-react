@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import styles from './LoadingSpinner.module.css';
 
 const LoadingSpinner = ({ size }) => {
-  const { completed, pending } = useSelector(selectAllTasks);
-  const shouldSettle = pending === 0 && completed === 0;
+  const { completed, count } = useSelector(selectAllTasks);
+  const shouldSettle = count === 0 && completed === 0;
   const [isSettled, setSettled] = useState(false);
 
   const [classNameA, setClassNameA] = useState(styles.leftSettled);

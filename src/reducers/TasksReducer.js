@@ -6,19 +6,20 @@ const TasksReducer = (state = {}, { type, payload }) => {
       return {
         ...state,
         [payload.key]: state[payload.key]
-          ? { ...state[payload.key], pending: payload.count + state[payload.key].pending }
-          : { completed: 0, pending: payload.count }
+          ? { ...state[payload.key], count: payload.count + state[payload.key].count }
+          : { completed: 0, count: payload.count }
       };
 
     case COMPLETE_TASKS:
-      return {
-        ...state,
-        [payload.key]: {
-          ...state[payload.key],
-          completed: hasMoreTasks(state, payload) ? (state[payload.key].completed + payload.count) : 0,
-          pending: hasMoreTasks(state, payload) ? state[payload.key].pending : 0
+      return hasMoreTasks(state, payload)
+        ? {
+          ...state,
+          [payload.key]: {
+            ...state[payload.key],
+            completed: state[payload.key].completed + payload.count
+          }
         }
-      };
+        : {};
 
     case REMOVE_ALL_TASKS:
       return {
@@ -34,17 +35,25 @@ export default TasksReducer;
 
 export const getAllTasks = state =>
   Object.values(state).reduce(
-    (queue, { completed, pending }) => ({
+    (queue, { completed, count }) => ({
       completed: queue.completed + completed,
-      pending: queue.pending + pending
+      count: queue.count + count
     }),
-    { completed: 0, pending: 0 }
+    { completed: 0, count: 0 }
   );
 
 export const getTasks = (state, key) => state[key];
 
-const hasMoreTasks = (state, payload) =>
-  state[payload.key].pending > (state[payload.key].completed + payload.count);
+const hasMoreTasks = (state, payload) => {
+  const hasMoreCurrentTasks = state[payload.key]
+    ? state[payload.key].count > (state[payload.key].completed + payload.count)
+    : false;
+
+  const { completed, count } = getAllTasks(state);
+  const hasMoreOtherTasks = count > (completed + payload.count);
+
+  return hasMoreCurrentTasks || hasMoreOtherTasks;
+};
 
 const removeFromQueue = (state, payload) =>
   Object.entries(state).reduce(
