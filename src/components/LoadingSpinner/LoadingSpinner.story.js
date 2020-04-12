@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import addTasks from '../../actions/addTasks';
 import completeTasks from '../../actions/completeTasks';
