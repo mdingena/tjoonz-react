@@ -42,7 +42,7 @@ export const getAllTasks = state =>
     { completed: 0, count: 0 }
   );
 
-export const getTasks = (state, key) => state[key];
+export const getTasks = (state, key) => state[key] || { completed: 0, count: 0 };
 
 const hasMoreTasks = (state, payload) => {
   const hasMoreCurrentTasks = state[payload.key]
