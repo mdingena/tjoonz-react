@@ -67,15 +67,17 @@ const FacettedSearchReducer = (state = initialState, { type, payload }) => {
       };
 
     case TOGGLE_FACETTED_SEARCH_ITEM:
-      return {
-        ...state,
-        [payload.facet.KEY]: {
-          ...state[payload.facet.KEY],
-          selected: isSelectedFacetItem(state, payload.facet, payload.item)
-            ? deselectFacetItem(state, payload.facet, payload.item)
-            : selectFacetItem(state, payload.facet, payload.item)
+      return payload.item
+        ? {
+          ...state,
+          [payload.facet.KEY]: {
+            ...state[payload.facet.KEY],
+            selected: isSelectedFacetItem(state, payload.facet, payload.item)
+              ? deselectFacetItem(state, payload.facet, payload.item)
+              : selectFacetItem(state, payload.facet, payload.item)
+          }
         }
-      };
+        : state;
 
     default:
       return state;
