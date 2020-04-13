@@ -52,7 +52,7 @@ const FacettedSearchReducer = (state = initialState, { type, payload }) => {
         [payload.facet.KEY]: {
           ...state[payload.facet.KEY],
           lastUpdated: Date.now(),
-          options: payload.options
+          options: orderByCountDesc(payload.options)
         }
       };
 
@@ -92,3 +92,6 @@ const deselectFacetItem = (state, facet, item) =>
 
 const selectFacetItem = (state, facet, item) =>
   [item, ...state[facet.KEY].selected];
+
+const orderByCountDesc = items =>
+  [...items].sort((a, b) => b.count - a.count);
