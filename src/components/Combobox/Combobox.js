@@ -30,7 +30,8 @@ const Combobox = ({ placeholder, onSelect, optionsSelector }) => {
     items,
     onInputValueChange: handleInputChange,
     onSelectedItemChange: handleSelection,
-    itemToString: _ => ''
+    selectedItem: () => null,
+    itemToString: () => ''
   });
 
   return (
