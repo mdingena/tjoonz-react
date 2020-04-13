@@ -1,3 +1,12 @@
+import PropTypes from 'prop-types';
+
+export const FACET_PROPTYPES = PropTypes.shape({
+  KEY: PropTypes.string.isRequired,
+  ENDPOINT: PropTypes.string.isRequired,
+  NAME_SINGULAR: PropTypes.string.isRequired,
+  NAME_PLURAL: PropTypes.string.isRequired
+});
+
 export const ARTISTS = {
   KEY: 'ARTISTS',
   ENDPOINT: '/artist',
