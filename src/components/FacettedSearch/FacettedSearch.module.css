@@ -28,8 +28,15 @@
   background-color: var(--colour-blue-800);
   border: 0;
   border-bottom: 1px solid transparent;
-  color: var(--colour-grey-200);
-  line-height: 1.5em;
+  font-family: 'Oxanium', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 200;
+  letter-spacing: -.02em;
+  color: var(--colour-grey-100);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
 }
 
 .input:focus {

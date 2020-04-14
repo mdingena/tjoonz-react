@@ -10,15 +10,17 @@
   border: none;
   background: transparent;
   background-color: var(--colour-blue-800);
-  font-weight: normal;
-  line-height: normal;
+  font-family: 'Oxanium', sans-serif;
+  line-height: 1.5;
+  font-weight: 500;
+  letter-spacing: -.02em;
   text-transform: uppercase;
   color: var(--colour-grey-400);
   cursor: pointer;
   outline: none;
-  -webkit-font-smoothing: inherit;
-  -moz-osx-font-smoothing: inherit;
-  -webkit-appearance: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
 }
 
 .root:disabled {
@@ -31,7 +33,7 @@
 
 .icon {
   height: 1rem;
-  padding-right: .25rem;
+  padding-right: .4rem;
   fill: var(--colour-grey-400);
 }
 
@@ -40,6 +42,5 @@
 }
 
 .text {
-  font-size: .796875rem;
-  vertical-align: middle;
+  font-size: .8rem;
 }

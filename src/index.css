@@ -23,6 +23,13 @@ body {
   min-height: 100vh;
   background-color: var(--colour-blue-900);
   color: var(--colour-grey-200);
-  font-family: 'Abel', sans-serif;
+  font-family: 'Oxanium', sans-serif;
   font-size: 16px;
+  font-weight: 200;
+  letter-spacing: -.02em;
+}
+
+b,
+strong {
+  font-weight: 500;
 }
