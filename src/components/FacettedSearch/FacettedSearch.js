@@ -155,7 +155,7 @@ const FacettedSearch = ({ facet, previewCount = 10, showCombobox = false }) => {
         <Button
           onClick={handleExpandClick}
           text={`Show ${isExpanded ? 'less' : 'all'} ${facet.NAME_PLURAL}`}
-          Icon={isExpanded ? Icon.CaretSquareUp : Icon.CaretSquareDown}
+          Icon={isExpanded ? Icon.CaretUp : Icon.CaretDown}
         />
       </div>
     );

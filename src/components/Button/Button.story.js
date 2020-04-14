@@ -11,6 +11,6 @@ export const button = () => (
   <Button
     onClick={() => console.log('Clicked button')}
     text='This is a button'
-    Icon={Icon.CaretSquareDown}
+    Icon={Icon.CaretDown}
   />
 );
