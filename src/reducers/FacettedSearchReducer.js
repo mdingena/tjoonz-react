@@ -2,10 +2,11 @@ import {
   DONE_FETCHING_FACETTED_SEARCH_OPTIONS,
   SET_FACETTED_SEARCH_OPTIONS,
   START_FETCHING_FACETTED_SEARCH_OPTIONS,
-  TOGGLE_FACETTED_SEARCH_ITEM
+  TOGGLE_FACETTED_SEARCH_ITEM,
+  TOGGLE_FACETTED_SEARCH_RELATION
 } from '../constants/actionTypes';
 import { ARTISTS, GENRES, TAGS } from '../constants/facettedSearchFacets';
-import { OR } from '../constants/facettedSearchRelations';
+import { AND, OR } from '../constants/facettedSearchRelations';
 
 const initialState = {
   [ARTISTS.KEY]: {
@@ -78,6 +79,17 @@ const FacettedSearchReducer = (state = initialState, { type, payload }) => {
           }
         }
         : state;
+
+    case TOGGLE_FACETTED_SEARCH_RELATION:
+      return {
+        ...state,
+        [payload.facet.KEY]: {
+          ...state[payload.facet.KEY],
+          relation: state[payload.facet.KEY].relation === OR
+            ? AND
+            : OR
+        }
+      };
 
     default:
       return state;
