@@ -10,6 +10,8 @@ import he from 'he';
 import FacettedSearchItem from '../FacettedSearchItem';
 import LoadingSpinner from '../LoadingSpinner';
 import ProgressBar from '../ProgressBar';
+import Button from '../Button';
+import Icon from '../Icon';
 import PropTypes from 'prop-types';
 import styles from './FacettedSearch.module.css';
 
@@ -150,7 +152,11 @@ const FacettedSearch = ({ facet, previewCount = 10, showCombobox = false }) => {
               item={item}
             />
           ))}
-        <button onClick={handleExpandClick}>Show {isExpanded ? 'less' : 'all'}</button>
+        <Button
+          onClick={handleExpandClick}
+          text={`Show ${isExpanded ? 'less' : 'all'} ${facet.NAME_PLURAL}`}
+          Icon={isExpanded ? Icon.CaretSquareUp : Icon.CaretSquareDown}
+        />
       </div>
     );
   }
