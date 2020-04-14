@@ -7,6 +7,7 @@ import fetchFacettedSearchOptions from '../../actions/fetchFacettedSearchOptions
 import toggleFacettedSearchItem from '../../actions/toggleFacettedSearchItem';
 import { useCombobox } from 'downshift';
 import he from 'he';
+import FacettedSearchHeader from '../FacettedSearchHeader';
 import FacettedSearchItem from '../FacettedSearchItem';
 import LoadingSpinner from '../LoadingSpinner';
 import ProgressBar from '../ProgressBar';
@@ -66,6 +67,7 @@ const FacettedSearch = ({ facet, previewCount = 10, showCombobox = false }) => {
   if (isFetching) {
     return (
       <div className={styles.root}>
+        <FacettedSearchHeader facet={facet} />
         {showCombobox && (
           <div className={styles.combobox}>
             <input
@@ -98,6 +100,7 @@ const FacettedSearch = ({ facet, previewCount = 10, showCombobox = false }) => {
   if (showCombobox) {
     return (
       <div className={styles.root}>
+        <FacettedSearchHeader facet={facet} />
         <div className={styles.combobox}>
           <div {...getComboboxProps()}>
             <input
@@ -134,6 +137,7 @@ const FacettedSearch = ({ facet, previewCount = 10, showCombobox = false }) => {
   } else {
     return (
       <div className={styles.root}>
+        <FacettedSearchHeader facet={facet} />
         {listItems
           .slice(0, previewCount)
           .map((item, index) => (
