@@ -1,0 +1,8 @@
+.navigation {
+  z-index: 1; /* Float above content. */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: var(--colour-blue-910);
+}
+

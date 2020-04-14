@@ -1,12 +1,6 @@
 .root {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
   display: grid;
   grid-template-columns: max-content 1fr 46px;
-  padding: 0 20px;
-  background-color: var(--colour-blue-910);
   font-size: 1.0625rem;
   line-height: 46px;
 }
