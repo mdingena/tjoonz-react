@@ -35,8 +35,8 @@
 }
 
 .icon {
-  padding: 0 6px;
   height: 1rem;
+  padding-right: .3rem;
   vertical-align: -0.125em;
 }
 
