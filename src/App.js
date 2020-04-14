@@ -1,16 +1,17 @@
 import React from 'react';
 import StoreProvider from './providers/StoreProvider';
 import ResizeObserverProvider from './providers/ResizeObserverProvider';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from 'react-router-dom';
-import Listen from './screens/Listen';
+import { BrowserRouter as Router } from 'react-router-dom';
+import Screens from './screens';
 import Wrap from './components/Wrap';
 import Navigation from './components/Navigation';
+import Listen from './screens/Listen';
 import styles from './App.module.css';
+
+const routes = [
+  { path: '/', element: <div>Home screen</div> },
+  { path: 'listen', element: <Listen /> }
+];
 
 const App = () => (
   <StoreProvider>
@@ -38,10 +39,7 @@ const App = () => (
 
         <Wrap>
           <div className={styles.screens}>
-            <Routes>
-              <Route path='/' element={<div>Home <Link to='listen'>Listen</Link></div>} />
-              <Route path='listen' element={<Listen />} />
-            </Routes>
+            <Screens routes={routes} />
           </div>
         </Wrap>
 
