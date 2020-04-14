@@ -6,7 +6,10 @@
 }
 
 html {
-  --colour-blue-400: #1ea7fd;
+  --colour-blue-400: #19a3ff;
+  --colour-blue-500: #196dbb;
+  --colour-blue-600: #285681;
+  --colour-blue-700: #25354b;
   --colour-blue-800: #242a32;
   --colour-blue-900: #1a1f24;
   --colour-blue-910: #13161a;

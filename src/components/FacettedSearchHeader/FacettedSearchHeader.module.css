@@ -1,0 +1,68 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 2px 5px;
+  color: var(--colour-grey-100);
+  line-height: 1.5;
+}
+
+.heading {
+  font-weight: 500;
+}
+
+.facet {
+  font-size: .9rem;
+  text-transform: uppercase;
+}
+
+.selected {
+  margin-left: .4rem;
+  padding: 3px 4px 1px;
+  font-size: .75rem;
+  color: var(--colour-blue-900);
+  background-color: var(--colour-blue-400);
+  border-radius: 6px;
+  vertical-align: middle;
+}
+
+.toggle {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  font-family: 'Oxanium', sans-serif;
+  font-size: .9rem;
+  line-height: 1.5;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+  color: var(--colour-grey-100);
+  cursor: pointer;
+  outline: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
+}
+
+.icon {
+  height: 1rem;
+  margin: 0 .3rem;
+  line-height: 1.5;
+  fill: var(--colour-grey-100);
+  will-change: transform;
+}
+
+.matchAny {
+  composes: icon;
+  transform: scaleX(-1);
+}
+
+.matchAll {
+  composes: icon;
+  transform: scaleX(1);
+}
