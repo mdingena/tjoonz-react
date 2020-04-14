@@ -25,4 +25,6 @@
 .text {
   display: inline-block;
   padding: 0 20px;
+  line-height: 1.2;
+  vertical-align: text-top;
 }

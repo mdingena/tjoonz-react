@@ -12,6 +12,12 @@
   position: relative;
 }
 
+.text {
+  font-weight: 500;
+  line-height: 1.2;
+  vertical-align: text-top;
+}
+
 .progressBar {
   position: absolute;
   left: 0;
