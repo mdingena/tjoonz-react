@@ -1,13 +1,13 @@
 import React from 'react';
-import { StoreProvider } from './providers/StoreProvider';
-import { ResizeObserverProvider } from './providers/ResizeObserverProvider';
+import StoreProvider from './providers/StoreProvider';
+import ResizeObserverProvider from './providers/ResizeObserverProvider';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Link
 } from 'react-router-dom';
-import { Navigation } from './components/Navigation';
+import Navigation from './components/Navigation';
 
 const App = () => (
   <StoreProvider>
