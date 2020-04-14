@@ -7,6 +7,7 @@ import {
   Route,
   Link
 } from 'react-router-dom';
+import Listen from './screens/Listen';
 import Wrap from './components/Wrap';
 import Navigation from './components/Navigation';
 import styles from './App.module.css';
@@ -16,10 +17,6 @@ const App = () => (
     <ResizeObserverProvider>
       <Router>
 
-        <Routes>
-          <Route path='/' element={<div>Home <Link to='listen'>Listen</Link></div>} />
-          <Route path='listen' element={<div>Listen <Link to='/'>Back home</Link></div>} />
-        </Routes>
         <div className={styles.navigation}>
           <Wrap>
             <Navigation
@@ -39,7 +36,17 @@ const App = () => (
           </Wrap>
         </div>
 
+        <Wrap>
+          <div className={styles.screens}>
+            <Routes>
+              <Route path='/' element={<div>Home <Link to='listen'>Listen</Link></div>} />
+              <Route path='listen' element={<Listen />} />
+            </Routes>
+          </div>
+        </Wrap>
+
         <div className='player'>Player</div>
+
       </Router>
     </ResizeObserverProvider>
   </StoreProvider>
