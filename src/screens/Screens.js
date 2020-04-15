@@ -1,26 +1,22 @@
 import React from 'react';
-import {
-  Routes,
-  Route,
-  useLocation
-} from 'react-router-dom';
+import { Switch, useLocation } from 'react-router-dom';
+import Transition from './Transition';
 import PropTypes from 'prop-types';
 
-const Screens = ({ routes }) => {
+const Screens = ({ children }) => {
   const location = useLocation();
 
   return (
-    <Routes location={location}>
-      {routes.map(route => <Route key={route.path} {...route} />)}
-    </Routes>
+    <Transition location={location}>
+      <Switch location={location}>
+        {children}
+      </Switch>
+    </Transition>
   );
 };
 
 Screens.propTypes = {
-  routes: PropTypes.arrayOf(PropTypes.shape({
-    path: PropTypes.string.isRequired,
-    element: PropTypes.node.isRequired
-  })).isRequired
+  children: PropTypes.node.isRequired
 };
 
 export default Screens;

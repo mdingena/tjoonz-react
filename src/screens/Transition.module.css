@@ -1,0 +1,12 @@
+.root {
+  transition-property: opacity;
+  transition-duration: var(--duration);
+  transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1);
+  will-change: opacity;
+  opacity: 1;
+}
+
+.transparent {
+  composes: root;
+  opacity: 0;
+}
