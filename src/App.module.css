@@ -1,11 +1,22 @@
-.navigation {
+.fixedBar {
   z-index: 1; /* Float above content. */
   position: fixed;
-  top: 0;
   width: 100%;
   background-color: var(--colour-blue-910);
 }
 
+.navigation {
+  composes: fixedBar;
+  top: 0;
+}
+
 .screens {
   padding-top: 65px;
+  padding-bottom: 136px;
+}
+
+.player {
+  composes: fixedBar;
+  bottom: 0;
+  height: 120px;
 }

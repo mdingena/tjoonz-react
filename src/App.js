@@ -42,7 +42,7 @@ const App = () => (
           </div>
         </Wrap>
 
-        <div className='player'>Player</div>
+        <div className={styles.player}>Player</div>
 
       </Router>
     </ResizeObserverProvider>
