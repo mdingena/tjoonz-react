@@ -7,10 +7,10 @@ const Button = ({
   text,
   Icon = () => null,
   disabled = false,
-  size = 'small',
+  type = 'small',
   align = 'center'
 }) => {
-  const className = [styles.root, styles[size], styles[align]].join(' ');
+  const className = [styles.root, styles[type], styles[align]].join(' ');
 
   return (
     <button
@@ -35,7 +35,7 @@ Button.propTypes = {
   text: PropTypes.string,
   Icon: PropTypes.func,
   disabled: PropTypes.bool,
-  size: PropTypes.oneOf(['small', 'large']),
+  type: PropTypes.oneOf(['small', 'large', 'navigation']),
   align: PropTypes.oneOf(['left', 'center', 'right'])
 };
 
