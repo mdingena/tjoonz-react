@@ -1,4 +1,4 @@
-import { isSelectedFacetItem } from '../reducers/FacettedSearchReducer';
+import { isSelectedFacetItem } from '../reducers/facettedSearchReducer';
 
 const selectIsFacettedSearchItemSelected = (facet, item) =>
   ({ facettedSearch }) =>

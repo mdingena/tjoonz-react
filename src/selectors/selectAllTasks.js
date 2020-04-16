@@ -1,4 +1,4 @@
-import { getAllTasks } from '../reducers/TasksReducer';
+import { getAllTasks } from '../reducers/tasksReducer';
 
 const selectAllTasks = ({ tasks }) =>
   getAllTasks(tasks);
