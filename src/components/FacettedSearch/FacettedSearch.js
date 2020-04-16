@@ -16,6 +16,7 @@ import Icon from '../Icon';
 import PropTypes from 'prop-types';
 import styles from './FacettedSearch.module.css';
 
+/** @todo Fix warnings introduced by React 16.13 https://github.com/facebook/react/issues/18147 */
 const FacettedSearch = ({ facet, previewCount = 10, showCombobox = false }) => {
   const dispatch = useDispatch();
   const {
