@@ -31,7 +31,7 @@ const FacettedSearch = ({ facet, previewCount = 10, showCombobox = false }) => {
     if (updateRequired) {
       dispatch(fetchFacettedSearchOptions(facet));
     }
-  }, [facet, lastUpdated]);
+  }, [facet, lastUpdated, dispatch]);
 
   const [comboboxItems, setComboboxItems] = useState(options);
   const handleComboboxChange = ({ inputValue }) => {
