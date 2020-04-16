@@ -13,7 +13,7 @@ const initialState = {
     isFetching: false,
     lastUpdated: 0,
     statusText: null,
-    relation: OR,
+    relation: AND,
     options: [],
     selected: []
   },
@@ -21,7 +21,7 @@ const initialState = {
     isFetching: false,
     lastUpdated: 0,
     statusText: null,
-    relation: OR,
+    relation: AND,
     options: [],
     selected: []
   },
