@@ -1,12 +1,11 @@
 .root {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
   width: 100%;
-  height: 34px;
+  height: 2.125em;
   margin: 0;
-  padding: 0;
+  padding: 2px 5px;
   border: none;
   background: transparent;
   background-color: var(--colour-blue-800);
@@ -23,6 +22,26 @@
   -moz-osx-font-smoothing: antialiased;
 }
 
+.left {
+  justify-content: flex-start;
+}
+
+.center {
+  justify-content: center;
+}
+
+.right {
+  justify-content: flex-end;
+}
+
+.small {
+  font-size: 1rem;
+}
+
+.large {
+  font-size: 1.25rem;
+}
+
 .root:disabled {
   cursor: initial;
 }
@@ -32,9 +51,18 @@
 }
 
 .icon {
-  height: 1rem;
-  padding-right: .4rem;
+  height: 1em;
   fill: var(--colour-grey-400);
+}
+
+.iconLeft {
+  composes: icon;
+  padding-right: .4em;
+}
+
+.iconRight {
+  composes: icon;
+  padding-left: .4em;
 }
 
 .root:hover .icon {
@@ -42,5 +70,5 @@
 }
 
 .text {
-  font-size: .8rem;
+  font-size: .8em;
 }
