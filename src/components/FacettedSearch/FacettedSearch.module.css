@@ -49,6 +49,7 @@
 }
 
 .list {
+  z-index: 1; /* Float above content. */
   position: absolute;
   top: 100%;
   width: 100%;
