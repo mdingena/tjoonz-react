@@ -1,6 +1,6 @@
 import { ADD_TASKS, COMPLETE_TASKS, REMOVE_ALL_TASKS } from '../constants/actionTypes';
 
-const TasksReducer = (state = {}, { type, payload }) => {
+const tasksReducer = (state = {}, { type, payload }) => {
   switch (type) {
     case ADD_TASKS:
       return {
@@ -31,7 +31,7 @@ const TasksReducer = (state = {}, { type, payload }) => {
   }
 };
 
-export default TasksReducer;
+export default tasksReducer;
 
 export const getAllTasks = state =>
   Object.values(state).reduce(

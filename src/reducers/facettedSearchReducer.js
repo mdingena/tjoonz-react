@@ -35,7 +35,7 @@ const initialState = {
   }
 };
 
-const FacettedSearchReducer = (state = initialState, { type, payload }) => {
+const facettedSearchReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case DONE_FETCHING_FACETTED_SEARCH_OPTIONS:
       return {
@@ -96,7 +96,7 @@ const FacettedSearchReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export default FacettedSearchReducer;
+export default facettedSearchReducer;
 
 export const isSelectedFacetItem = (state, facet, item) =>
   state[facet.KEY].selected.some(({ id }) => id === item.id);
