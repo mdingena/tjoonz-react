@@ -33,14 +33,14 @@ const App = () => (
           </Wrap>
         </div>
 
-        <Wrap>
-          <div className={styles.screens}>
+        <div className={styles.screens}>
+          <Wrap>
             <Screens>
               <Route exact path='/' component={Home} />
               <Route path='/listen/' component={Listen} />
             </Screens>
-          </div>
-        </Wrap>
+          </Wrap>
+        </div>
 
         <div className={styles.player}>Player</div>
 
