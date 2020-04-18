@@ -7,7 +7,7 @@ const Button = ({
   text,
   Icon = () => null,
   disabled = false,
-  type = 'small',
+  type = 'normal',
   align = 'center'
 }) => {
   const className = [styles.root, styles[type], styles[align]].join(' ');
@@ -35,7 +35,7 @@ Button.propTypes = {
   text: PropTypes.string,
   Icon: PropTypes.func,
   disabled: PropTypes.bool,
-  type: PropTypes.oneOf(['small', 'large', 'navigation']),
+  type: PropTypes.oneOf(['normal', 'navigation']),
   align: PropTypes.oneOf(['left', 'center', 'right'])
 };
 
