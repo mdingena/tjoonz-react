@@ -1,0 +1,6 @@
+.root {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-gap: 16px;
+  align-content: flex-start;
+}
