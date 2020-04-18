@@ -1,1 +1,0 @@
-export const SEARCH_SIDEBAR = 'SEARCH_SIDEBAR';
