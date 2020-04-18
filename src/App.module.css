@@ -8,6 +8,7 @@
 .navigation {
   composes: fixedBar;
   top: 0;
+  height: var(--size-navigation-bar);
 }
 
 .screens {
@@ -18,5 +19,5 @@
 .player {
   composes: fixedBar;
   bottom: 0;
-  height: 120px;
+  height: var(--size-player-bar);
 }
