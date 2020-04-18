@@ -1,7 +1,7 @@
 .root {
   transition-property: opacity;
   transition-duration: var(--duration);
-  transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1);
+  transition-timing-function: var(--timing-function-ease-out-cubic);
   will-change: opacity;
   opacity: 1;
 }
