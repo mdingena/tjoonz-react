@@ -1,0 +1,23 @@
+.root {
+  display: grid;
+  grid-gap: 30px;
+}
+
+.oneColumn {
+  composes: root;
+  grid-template-columns: 1fr;
+}
+
+.twoColumns {
+  composes: root;
+  grid-template-columns: 220px 1fr;
+}
+
+.threeColumns {
+  composes: root;
+  grid-template-columns: 220px 1fr 280px;
+}
+
+.searchButton {
+  padding-bottom: 16px;
+}

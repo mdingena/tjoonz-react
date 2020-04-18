@@ -1,9 +1,0 @@
-.stack {
-  position: relative;
-}
-
-.spread {
-  display: grid;
-  grid-template-columns: 220px 1fr 280px;
-  grid-gap: 30px;
-}

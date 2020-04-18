@@ -5,10 +5,8 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Screens from './screens';
 import Wrap from './components/Wrap';
 import Navigation from './components/Navigation';
-import Listen from './screens/Listen';
+import Home from './screens/Home';
 import styles from './App.module.css';
-
-const Home = () => <div>Home screen</div>;
 
 const App = () => (
   <StoreProvider>
@@ -20,7 +18,6 @@ const App = () => (
           <Wrap>
             <Navigation
               links={[
-                { to: '/listen/', text: 'Listen' },
                 { to: '/charts/', text: 'Charts' },
                 { to: '/about/', text: 'About Tjoonz' },
                 { to: '/about/uploading/', text: 'About Uploading' },
@@ -37,7 +34,6 @@ const App = () => (
           <Wrap>
             <Screens>
               <Route exact path='/' component={Home} />
-              <Route path='/listen/' component={Listen} />
             </Screens>
           </Wrap>
         </div>
