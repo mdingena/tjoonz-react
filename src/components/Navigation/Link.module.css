@@ -1,8 +1,8 @@
 .root {
+  height: var(--size-navigation-bar);
   text-decoration: none;
   white-space: nowrap;
   color: var(--colour-blue-200);
-  border-bottom: 3px solid transparent;
 }
 
 .root:hover {

@@ -1,6 +1,7 @@
 .root {
   display: grid;
   grid-template-columns: max-content 1fr 46px;
+  height: var(--size-navigation-bar);
   font-size: 1.0625rem;
   line-height: 46px;
 }
@@ -19,6 +20,7 @@
 
 .dropdown {
   position: relative;
+  height: var(--size-navigation-bar);
 }
 
 .open,
@@ -32,11 +34,11 @@
 
 .button {
   width: 100%;
-  padding: 0 20px 3px;
+  height: var(--size-navigation-bar);
+  padding: 0 20px;
   background: transparent;
   border: 0;
   font-size: 1.0625rem;
-  line-height: 46px;
   font-weight: 700;
   color: var(--colour-grey-200);
   cursor: pointer;
@@ -52,8 +54,35 @@
   top: 100%;
   display: grid;
   grid-auto-rows: auto;
-  max-height: calc(100vh - 10px - (var(--size-navigation-bar) + 3px) - var(--size-player-bar));
+  max-height: calc(100vh - var(--size-navigation-bar) - var(--size-player-bar) - 10px);
   background-color: var(--colour-blue-920);
   overflow-y: auto;
 }
 
+.sidebar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--size-navigation-bar);
+  padding: 0 16px;
+  background-color: var(--colour-blue-910);
+  border-bottom: 3px solid var(--colour-blue-910);
+  transition: opacity var(--duration-medium) var(--timing-function-ease-out-cubic);
+}
+
+@media (min-width: 426px) {
+  .sidebar {
+    padding: 0 36px;
+  }
+}
+
+.hide {
+  composes: sidebar;
+  opacity: 0;
+}
+
+.reveal {
+  composes: sidebar;
+  opacity: 1;
+}

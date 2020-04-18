@@ -1,0 +1,63 @@
+.root {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: var(--size-navigation-bar);
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  background-color: var(--colour-blue-910);
+  font-family: 'Oxanium', sans-serif;
+  font-size: 1.0625rem;
+  line-height: 1;
+  font-weight: 500;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+  color: var(--colour-grey-200);
+  cursor: pointer;
+  outline: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
+}
+
+.left {
+  justify-content: flex-start;
+}
+
+.center {
+  justify-content: center;
+}
+
+.right {
+  justify-content: flex-end;
+}
+
+.root:hover {
+  color: var(--colour-grey-100);
+}
+
+.icon {
+  height: 1.25em;
+  fill: var(--colour-grey-200);
+}
+
+.iconLeft {
+  composes: icon;
+  padding-right: .4em;
+}
+
+.iconRight {
+  composes: icon;
+  padding-left: .4em;
+}
+
+.root:hover .icon {
+  fill: var(--colour-grey-100);
+}
+
+.text {
+  font-size: .7647058824em;
+}

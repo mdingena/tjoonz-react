@@ -1,12 +1,29 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import selectDrawer from '../../selectors/selectDrawer';
 import { useResizeObserver } from '@envato/react-breakpoints';
 import Logo from './Logo';
 import Link from './Link';
 import Downshift from 'downshift';
+import CloseButton from './CloseButton';
 import PropTypes from 'prop-types';
 import styles from './Navigation.module.css';
 
 const Navigation = ({ links = [] }) => {
+  const timeout = useRef();
+  const drawerData = useSelector(selectDrawer);
+  const [staleDrawerData, setStaleDrawerData] = useState(null);
+
+  useEffect(() => {
+    if (drawerData !== null && staleDrawerData === null) {
+      clearTimeout(timeout);
+      timeout.current = setTimeout(() => setStaleDrawerData(drawerData), 10);
+    } else if (drawerData === null && staleDrawerData !== null) {
+      clearTimeout(timeout);
+      timeout.current = setTimeout(() => setStaleDrawerData(null), 300);
+    }
+  }, [drawerData, staleDrawerData]);
+
   const [linkWidths, setLinkWidths] = useState({});
   const [cutoffIndex, setCutoffIndex] = useState(0);
   const [ref, observedEntry] = useResizeObserver({ box: 'content-box' });
@@ -64,6 +81,9 @@ const Navigation = ({ links = [] }) => {
   const visibleLinks = links.slice(0, cutoffIndex);
   const hiddenLinks = links.slice(cutoffIndex);
 
+  const drawer = staleDrawerData || drawerData;
+  const sidebarClassName = staleDrawerData && drawerData ? styles.reveal : styles.hide;
+
   return (
     <div className={styles.root}>
       <Logo />
@@ -111,6 +131,11 @@ const Navigation = ({ links = [] }) => {
           </Downshift>
         )}
       </div>
+      {drawer && (
+        <div className={sidebarClassName}>
+          <CloseButton drawer={drawer} />
+        </div>
+      )}
     </div>
   );
 };
