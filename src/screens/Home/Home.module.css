@@ -18,6 +18,14 @@
   grid-template-columns: 220px 1fr 280px;
 }
 
+.search {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 16px;
+  align-content: flex-start;
+  background-color: var(--colour-blue-900);
+}
+
 .results {
   display: grid;
   grid-template-columns: 1fr;
