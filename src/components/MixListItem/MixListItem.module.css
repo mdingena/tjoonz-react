@@ -15,7 +15,6 @@
 .thumbnail {
   width: 34px;
   height: 34px;
-  margin-right: 8px;
 }
 
 .thumbnail img {
@@ -40,6 +39,10 @@
   -moz-osx-font-smoothing: antialiased;
 }
 
+.play {
+  margin-left: 8px;
+}
+
 .icon {
   height: 1rem;
   fill: var(--colour-grey-200);
@@ -49,18 +52,6 @@
 .play:hover .icon,
 .queue:hover .icon {
   fill: var(--colour-grey-100);
-}
-
-.queue .icon + .icon {
-  display: none;
-}
-
-.root:hover .queue .icon {
-  display: none;
-}
-
-.root:hover .queue .icon + .icon {
-  display: unset;
 }
 
 .meta {
@@ -75,6 +66,15 @@
   color: var(--colour-grey-100);
 }
 
+.oneColumn {
+  composes: meta;
+  grid-template-columns: 1fr;
+}
+
+.twoColumns {
+  composes: meta;
+  grid-template-columns: 1fr 2fr;
+}
 
 .threeColumns {
   composes: meta;
@@ -92,14 +92,14 @@
   overflow: hidden;
 }
 
-.labels {
-  display: none;
-}
-
-.fourColumns .labels {
-  display: block;
-}
-
 .published {
   color: var(--colour-grey-400);
 }
+
+.play[hidden],
+.queue[hidden],
+.labels[hidden],
+.published[hidden] {
+  display: none;
+}
+

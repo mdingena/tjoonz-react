@@ -5,51 +5,58 @@ import Icon from '../Icon';
 import PropTypes from 'prop-types';
 import styles from './MixListItem.module.css';
 
+const columns = {
+  1: styles.oneColumn,
+  2: styles.twoColumns,
+  3: styles.threeColumns,
+  4: styles.fourColumns
+};
+
 const MixListItem = ({
+  slug,
   thumbnail,
   title,
   artists,
   labels,
-  url,
   published
 }) => (
   <Observe
     box='content-box'
     breakpoints={{
       widths: {
-        0: styles.threeColumns,
-        530: styles.fourColumns
+        0: 1,
+        360: 2,
+        460: 3,
+        630: 4
       }
     }}
-    render={({ observedElementProps, widthMatch = styles.threeColumns }) => (
-      <div className={styles.root}>
+    render={({ observedElementProps, widthMatch = 1 }) => (
+      <div className={styles.root} {...observedElementProps}>
         <div className={styles.controls}>
           <div className={styles.thumbnail}>
-            <img src={thumbnail} alt={`${title} by ${artists}`} />
+            <img src={thumbnail} alt={`${title} by ${artists}`} loading='lazy' />
           </div>
-          <button className={styles.play} title='Play now'>
+          <button className={styles.play} title='Play now' hidden={widthMatch < 3}>
             <Icon.Play className={styles.icon} />
           </button>
-          <button className={styles.queue} title='Add to playlist'>
+          <button className={styles.queue} title='Add to playlist' hidden={widthMatch < 3}>
             <Icon.Square className={styles.icon} />
-            <Icon.PlusSquare className={styles.icon} />
           </button>
         </div>
         <Link
-          to={url}
-          className={widthMatch}
-          {...observedElementProps}
+          to={`/mix/${slug}/`}
+          className={columns[widthMatch]}
         >
-          <div className={styles.artists}>
+          <div className={styles.artists} hidden={widthMatch < 2}>
             {artists}
           </div>
           <div className={styles.title}>
             {title}
           </div>
-          <div className={styles.labels}>
+          <div className={styles.labels} hidden={widthMatch < 4}>
             {labels}
           </div>
-          <div className={styles.published}>
+          <div className={styles.published} hidden={widthMatch < 3}>
             {published}
           </div>
         </Link>
@@ -59,11 +66,11 @@ const MixListItem = ({
 );
 
 MixListItem.propTypes = {
+  slug: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   artists: PropTypes.string.isRequired,
   labels: PropTypes.string.isRequired,
-  url: PropTypes.string.isRequired,
   published: PropTypes.string.isRequired
 };
 
