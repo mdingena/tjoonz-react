@@ -18,6 +18,13 @@
   grid-template-columns: 220px 1fr 280px;
 }
 
+.results {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 2px;
+  align-content: flex-start;
+}
+
 .searchButton {
   padding-bottom: 16px;
 }

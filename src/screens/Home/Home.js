@@ -9,6 +9,7 @@ import Aside from '../../components/Aside';
 import Icon from '../../components/Icon';
 import FacettedSearch from '../../components/FacettedSearch';
 import Button from '../../components/Button';
+import MixListItem from '../../components/MixListItem';
 import styles from './Home.module.css';
 
 const Home = () => {
@@ -49,7 +50,38 @@ const Home = () => {
                 />
               </div>
             )}
-            Results
+            <MixListItem
+              slug='ill-ektro-bassnectar-mixtape-title'
+              thumbnail='https://via.placeholder.com/68x68'
+              title='Mixtape title'
+              artists='ill Ektro, Bassnectar'
+              labels='Fidget House, Dubstep, Shambhala'
+              published='2020-04-20'
+            />
+            <MixListItem
+              slug='ill-ektro-bassnectar-mixtape-title'
+              thumbnail='https://via.placeholder.com/68x68'
+              title='Mixtape title'
+              artists='ill Ektro, Bassnectar'
+              labels='Fidget House, Dubstep, Shambhala'
+              published='2020-04-20'
+            />
+            <MixListItem
+              slug='ill-ektro-bassnectar-mixtape-title'
+              thumbnail='https://via.placeholder.com/68x68'
+              title='Mixtape title'
+              artists='ill Ektro, Bassnectar'
+              labels='Fidget House, Dubstep, Shambhala'
+              published='2020-04-20'
+            />
+            <MixListItem
+              slug='ill-ektro-bassnectar-mixtape-title'
+              thumbnail='https://via.placeholder.com/68x68'
+              title='Mixtape title'
+              artists='ill Ektro, Bassnectar'
+              labels='Fidget House, Dubstep, Shambhala'
+              published='2020-04-20'
+            />
           </div>
           {widthMatch === styles.threeColumns && (
             <div className={styles.details}>
