@@ -25,8 +25,6 @@ const MixDetails = ({
 
   const handlePosterLoaded = () => revealPoster(true);
 
-  console.log(posterRevealed);
-
   return (
     <div className={styles.root}>
       <div className={posterRevealed ? styles.posterRevealed : styles.posterLoading}>

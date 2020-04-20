@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const Aside = ({ drawer, children }) =>
   drawer
-    ? <Drawer align={drawer.ALIGN}>{children}</Drawer>
+    ? <Drawer drawerKey={drawer.KEY} align={drawer.ALIGN}>{children}</Drawer>
     : <Sidebar>{children}</Sidebar>;
 
 Aside.propTypes = {
