@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Observe } from '@envato/react-breakpoints';
 import { useDispatch, useSelector } from 'react-redux';
 import selectDrawer from '../../selectors/selectDrawer';
+import selectQuery from '../../selectors/selectQuery';
 import openDrawer from '../../actions/openDrawer';
+import fetchNextPage from '../../actions/fetchNextPage';
 import { SEARCH_DRAWER, RESULT_DETAILS_DRAWER } from '../../constants/drawers';
 import { ARTISTS, GENRES, TAGS } from '../../constants/facettedSearchFacets';
 import Aside from '../../components/Aside';
@@ -22,6 +24,17 @@ const columns = {
 const Home = () => {
   const dispatch = useDispatch();
   const drawer = useSelector(selectDrawer);
+  const query = useSelector(selectQuery);
+
+  useEffect(() => {
+    dispatch(fetchNextPage());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (!query.isFetching && (query.nextPage === 2 || query.nextPage === null)) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [query]);
 
   const handleOpenDrawer = () => {
     const action = openDrawer(SEARCH_DRAWER);
@@ -59,38 +72,16 @@ const Home = () => {
                 />
               </div>
             )}
-            <MixListItem
-              slug='ill-ektro-bassnectar-mixtape-title'
-              thumbnail='https://via.placeholder.com/68x68'
-              title='Mixtape title'
-              artists='ill Ektro, Bassnectar'
-              labels='Fidget House, Dubstep, Shambhala'
-              published='2020-04-20'
-            />
-            <MixListItem
-              slug='ill-ektro-bassnectar-mixtape-title'
-              thumbnail='https://via.placeholder.com/68x68'
-              title='Mixtape title'
-              artists='ill Ektro, Bassnectar'
-              labels='Fidget House, Dubstep, Shambhala'
-              published='2020-04-20'
-            />
-            <MixListItem
-              slug='ill-ektro-bassnectar-mixtape-title'
-              thumbnail='https://via.placeholder.com/68x68'
-              title='Mixtape title'
-              artists='ill Ektro, Bassnectar'
-              labels='Fidget House, Dubstep, Shambhala'
-              published='2020-04-20'
-            />
-            <MixListItem
-              slug='ill-ektro-bassnectar-mixtape-title'
-              thumbnail='https://via.placeholder.com/68x68'
-              title='Mixtape title'
-              artists='ill Ektro, Bassnectar'
-              labels='Fidget House, Dubstep, Shambhala'
-              published='2020-04-20'
-            />
+            {query.results.length === 0
+              ? query.statusText
+              : query.results.map((result, index) => (
+                <MixListItem
+                  key={`result-${index}`}
+                  detailsInDrawer={widthMatch < 3}
+                  {...result}
+                />
+              ))}
+            {!query.isFetching && <button onClick={() => dispatch(fetchNextPage())}>Test fetch next page</button>}
           </div>
           <Aside drawer={widthMatch < 3 ? RESULT_DETAILS_DRAWER : undefined}>
             <MixDetails
