@@ -20,7 +20,7 @@ const fetchPage = async (endpoint, page, options = {}) => {
   if (!response.ok) return response;
 
   /* Extract data. */
-  const pageCount = response.headers.get('X-WP-TotalPages');
+  const pageCount = Number(response.headers.get('X-WP-TotalPages'));
   const resources = await response.json();
 
   /* Return results. */
