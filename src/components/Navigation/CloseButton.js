@@ -2,6 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { DRAWER_PROPTYPES } from '../../constants/drawers';
 import closeDrawer from '../../actions/closeDrawer';
+import LoadingSpinner from '../LoadingSpinner';
 import styles from './CloseButton.module.css';
 
 const CloseButton = ({ drawer }) => {
@@ -22,10 +23,16 @@ const CloseButton = ({ drawer }) => {
       type='button'
     >
       {drawer.ALIGN !== 'right' && <Icon className={styles.iconLeft} />}
+      {drawer.SHOW_PROGRESS && drawer.ALIGN === 'right' && (
+        <div className={styles.spinnerLeft}><LoadingSpinner size={32} /></div>
+      )}
       {drawer.CLOSE_TEXT && (
         <span className={styles.text}>
           {drawer.CLOSE_TEXT}
         </span>
+      )}
+      {drawer.SHOW_PROGRESS && drawer.ALIGN !== 'right' && (
+        <div className={styles.spinnerRight}><LoadingSpinner size={32} /></div>
       )}
       {drawer.ALIGN === 'right' && <Icon className={styles.iconRight} />}
     </button>

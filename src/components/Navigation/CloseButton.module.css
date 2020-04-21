@@ -1,4 +1,5 @@
 .root {
+  position: relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -60,4 +61,14 @@
 
 .text {
   font-size: .7647058824em;
+}
+
+.spinnerLeft {
+  position: absolute;
+  left: 0;
+}
+
+.spinnerRight {
+  position: absolute;
+  right: 0;
 }
