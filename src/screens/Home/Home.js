@@ -29,8 +29,10 @@ const Home = () => {
   const details = useSelector(selectDetails);
 
   useEffect(() => {
-    const action = fetchNextPage();
-    dispatch(action);
+    if (query.statusText === null && query.results.length === 0) {
+      const action = fetchNextPage();
+      dispatch(action);
+    }
   }, [dispatch]);
 
   useEffect(() => {
