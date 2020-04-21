@@ -1,3 +1,5 @@
+import he from 'he';
+
 /**
  * Convert WordPress post response into Tjoonz mix data.
  * @param {Object} mix Post JSON with mix data.
@@ -23,12 +25,12 @@ const extractMixData = ({
 }) => ({
   id,
   slug,
-  content,
-  description,
-  title,
-  artists: extractTermsByTaxonomy(terms, 'artist').map(({ name }) => name).join(', '),
-  genres: extractTermsByTaxonomy(terms, 'genre').map(({ name }) => name).join(', '),
-  tags: extractTermsByTaxonomy(terms, 'post_tag').map(({ name }) => name).join(', '),
+  content: he.decode(content),
+  description: he.decode(description),
+  title: he.decode(title),
+  artists: he.decode(extractTermsByTaxonomy(terms, 'artist').map(({ name }) => name).join(', ')),
+  genres: he.decode(extractTermsByTaxonomy(terms, 'genre').map(({ name }) => name).join(', ')),
+  tags: he.decode(extractTermsByTaxonomy(terms, 'post_tag').map(({ name }) => name).join(', ')),
   published: toPublishDate(published),
   poster: extractArtworkSrc(featuredImage, 'full'),
   thumbnail: extractArtworkSrc(featuredImage, 'thumbnail'),
