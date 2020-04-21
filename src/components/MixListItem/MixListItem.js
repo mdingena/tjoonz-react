@@ -44,7 +44,7 @@ const MixListItem = ({
         <div className={styles.root} {...observedElementProps}>
           <div className={styles.controls}>
             <div className={styles.thumbnail}>
-              <img src={thumbnail} alt={`${title} by ${artists}`} loading='lazy' />
+              <img src={thumbnail} alt={`${title} by ${artists}`} loading='lazy' width={34} height={34} />
             </div>
             <button className={styles.play} title='Play now' hidden={widthMatch < 3}>
               <Icon.Play className={styles.icon} />
