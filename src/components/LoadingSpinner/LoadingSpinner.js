@@ -21,7 +21,10 @@ const LoadingSpinner = ({ size }) => {
   useEffect(() => {
     const interval = isSettled ? null : setInterval(() => setTick(t => t + 1), 80);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      setTick(t => t >= 6 ? 6 : 0);
+    };
   }, [isSettled]);
 
   useEffect(() => {
