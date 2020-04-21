@@ -84,7 +84,7 @@ export const toDuration = seconds => {
 * @returns {Number} Rate in kilobits per second.
 */
 export const toKbps = bps => {
-  return (bps / 1000).toFixed(0);
+  return Number((bps / 1000).toFixed(0));
 };
 
 /**
