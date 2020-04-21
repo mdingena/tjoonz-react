@@ -51,7 +51,7 @@
   cursor: initial;
 }
 
-.root:hover {
+.root:not(:disabled):hover {
   color: var(--colour-grey-200);
 }
 

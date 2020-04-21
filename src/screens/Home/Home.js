@@ -88,7 +88,27 @@ const Home = () => {
                   {...result}
                 />
               ))}
-            {!query.isFetching && <button onClick={() => dispatch(fetchNextPage())}>Test fetch next page</button>}
+            <div className={styles.footer}>
+              {query.nextPage && !query.statusText
+                ? (
+                  <Button
+                    onClick={() => dispatch(fetchNextPage())}
+                    text={query.isFetching ? 'Loading' : 'Show more results'}
+                    Icon={query.isFetching ? Icon.Snooze : Icon.CaretDown}
+                    disabled={query.isFetching}
+                  />
+                )
+                : (
+                  <div>
+                    <Button
+                      onClick={() => { /* noop */ }}
+                      text={query.isFetching ? 'Loading' : 'Need more? Change your search options'}
+                      Icon={query.isFetching ? Icon.Snooze : () => null}
+                      disabled
+                    />
+                  </div>
+                )}
+            </div>
           </div>
           <Aside drawer={widthMatch < 3 ? RESULT_DETAILS_DRAWER : undefined}>
             {details
