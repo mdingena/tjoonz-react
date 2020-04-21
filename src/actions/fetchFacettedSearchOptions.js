@@ -8,7 +8,7 @@ import fetchAllFacetPages from '../api/fetchAllFacetPages';
 const fetchFacettedSearchOptions = facet => async dispatch => {
   dispatch(startFetching(facet));
 
-  const response = await fetchAllFacetPages(dispatch, facet);
+  const response = await fetchAllFacetPages(dispatch, facet, { per_page: 100 });
 
   if (!response.ok) {
     dispatch(doneFetching(facet, response.statusText));
