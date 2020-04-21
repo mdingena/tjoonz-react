@@ -33,7 +33,7 @@ const Home = () => {
       const action = fetchNextPage();
       dispatch(action);
     }
-  }, [dispatch]);
+  }, [query.statusText, query.results.length, dispatch]);
 
   useEffect(() => {
     if (!query.isFetching && (query.nextPage === 2 || query.nextPage === null)) {
