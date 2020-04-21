@@ -1,6 +1,9 @@
 import {
+  APPEND_QUERY_RESULTS,
+  DONE_FETCHING_NEXT_QUERY_RESULTS_PAGE,
   DONE_FETCHING_QUERY_RESULTS,
   SET_QUERY_RESULTS,
+  START_FETCHING_NEXT_QUERY_RESULTS_PAGE,
   START_FETCHING_QUERY_RESULTS
 } from '../constants/actionTypes';
 import { initialState as facettedSearchInitialState } from './facettedSearchReducer';
@@ -25,6 +28,13 @@ const initialState = {
 
 const queryReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case APPEND_QUERY_RESULTS:
+      return {
+        ...state,
+        results: [...state.results, ...payload.results]
+      };
+
+    case DONE_FETCHING_NEXT_QUERY_RESULTS_PAGE:
     case DONE_FETCHING_QUERY_RESULTS:
       return {
         ...state,
@@ -37,6 +47,12 @@ const queryReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         results: payload.results
+      };
+
+    case START_FETCHING_NEXT_QUERY_RESULTS_PAGE:
+      return {
+        ...state,
+        isFetching: true
       };
 
     case START_FETCHING_QUERY_RESULTS:
