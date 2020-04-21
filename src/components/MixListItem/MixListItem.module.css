@@ -13,7 +13,6 @@
 }
 
 .thumbnail {
-  position: relative;
   width: 34px;
   height: 34px;
 }
@@ -115,8 +114,4 @@
 .labels[hidden],
 .published[hidden] {
   display: none;
-}
-
-.logo {
-  composes: logo from '../MixDetails/MixDetails.module.css';
 }
