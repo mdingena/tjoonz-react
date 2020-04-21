@@ -3,6 +3,7 @@ import { Observe } from '@envato/react-breakpoints';
 import { useDispatch, useSelector } from 'react-redux';
 import selectDrawer from '../../selectors/selectDrawer';
 import selectQuery from '../../selectors/selectQuery';
+import selectDetails from '../../selectors/selectDetails';
 import openDrawer from '../../actions/openDrawer';
 import fetchNextPage from '../../actions/fetchNextPage';
 import { SEARCH_DRAWER, RESULT_DETAILS_DRAWER } from '../../constants/drawers';
@@ -25,9 +26,11 @@ const Home = () => {
   const dispatch = useDispatch();
   const drawer = useSelector(selectDrawer);
   const query = useSelector(selectQuery);
+  const details = useSelector(selectDetails);
 
   useEffect(() => {
-    dispatch(fetchNextPage());
+    const action = fetchNextPage();
+    dispatch(action);
   }, [dispatch]);
 
   useEffect(() => {
@@ -84,22 +87,9 @@ const Home = () => {
             {!query.isFetching && <button onClick={() => dispatch(fetchNextPage())}>Test fetch next page</button>}
           </div>
           <Aside drawer={widthMatch < 3 ? RESULT_DETAILS_DRAWER : undefined}>
-            <MixDetails
-              slug='ill-ektro-bassnectar-mixtape-title'
-              thumbnail='https://www.tjoonz.com/wp-content/uploads/Excision-Shambhala-2012-Dubstep-Mix-54x54.jpg'
-              poster='https://www.tjoonz.com/wp-content/uploads/Excision-Shambhala-2012-Dubstep-Mix.jpg'
-              published='2020-04-20'
-              title='Mixtape title'
-              artists='ill Ektro, Bassnectar, Landerz, Something Else'
-              genres='Fidget House, Dubstep'
-              tags='Shambhala'
-              duration='1:20:31'
-              description="Finally it's here: Excision's Shambhala 2012 Dubstep Mix. Full tracklist, artwork and mp3 download available here! Get ready for an elevated existence!"
-              plays={2255}
-              downloads={542}
-              bitrate={320}
-              filesize={185}
-            />
+            {details
+              ? <MixDetails {...details} />
+              : <MixDetails empty />}
           </Aside>
         </div>
       )}
