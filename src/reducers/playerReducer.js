@@ -1,13 +1,14 @@
 import {
   APPEND_PLAYLIST_ITEMS,
+  PLAY_NOW,
   REMOVE_PLAYLIST_ITEMS
 } from '../constants/actionTypes';
 
 const initialState = {
   isPlaying: false,
   volumeLevel: 0.8,
-  current: null,
-  playlist: []
+  playlist: [],
+  playhead: null
 };
 
 const playerReducer = (state = initialState, { type, payload }) => {
@@ -16,6 +17,13 @@ const playerReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         playlist: [...state.playlist, ...payload.items]
+      };
+
+    case PLAY_NOW:
+      return {
+        ...state,
+        playlist: [...state.playlist, payload.item],
+        playhead: state.playlist.length
       };
 
     case REMOVE_PLAYLIST_ITEMS:
