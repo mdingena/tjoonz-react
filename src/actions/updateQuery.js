@@ -10,7 +10,9 @@ import completeTasks from '../actions/completeTasks';
 import fetchPage from '../api/fetchPage';
 import extractMixData from '../api/extractMixData';
 
-const updateQuery = facettedSearch => async dispatch => {
+const updateQuery = () => async (dispatch, getState) => {
+  const { facettedSearch } = getState();
+
   dispatch(startFetching(facettedSearch));
   dispatch(addTasks(SET_QUERY_RESULTS, 1));
 

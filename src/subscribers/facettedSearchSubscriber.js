@@ -18,7 +18,7 @@ export default () => {
 
       if (isStale) {
         /* Update query state and fetch new results. */
-        const action = updateQuery(facettedSearch);
+        const action = updateQuery();
         store.dispatch(action);
       }
     }
