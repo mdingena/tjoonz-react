@@ -15,19 +15,25 @@ const columns = {
 };
 
 const MixListItem = ({
+  detailsInDrawer = false,
   slug,
   thumbnail,
   title,
   artists,
-  labels,
+  genres,
+  tags,
   published
 }) => {
   const dispatch = useDispatch();
 
   const handleOpenDrawer = () => {
-    const action = openDrawer(RESULT_DETAILS_DRAWER);
-    dispatch(action);
+    if (detailsInDrawer) {
+      const drawerAction = openDrawer(RESULT_DETAILS_DRAWER);
+      dispatch(drawerAction);
+    }
   };
+
+  const labels = [genres, tags].join(', ');
 
   return (
     <Observe
@@ -80,11 +86,13 @@ const MixListItem = ({
 };
 
 MixListItem.propTypes = {
+  detailsInDrawer: PropTypes.bool,
   slug: PropTypes.string.isRequired,
   thumbnail: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   artists: PropTypes.string.isRequired,
-  labels: PropTypes.string.isRequired,
+  genres: PropTypes.string.isRequired,
+  tags: PropTypes.string.isRequired,
   published: PropTypes.string.isRequired
 };
 
