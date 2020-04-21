@@ -18,8 +18,8 @@ const MixDetails = ({
   description,
   plays,
   downloads,
-  bitrate,
-  filesize
+  quality,
+  fileSize
 }) => {
   const [posterRevealed, revealPoster] = useState(false);
 
@@ -74,30 +74,31 @@ const MixDetails = ({
         <div>{plays}</div>
         <div>Downloads</div>
         <div>{downloads}</div>
-        <div>Bit rate</div>
-        <div>{bitrate} <small>kbps</small></div>
+        <div>Quality</div>
+        <div>{quality} <small>kbps</small></div>
         <div>File size</div>
-        <div>{filesize} <small>MB</small></div>
+        <div>{fileSize} <small>MB</small></div>
       </div>
     </div>
   );
 };
 
 MixDetails.propTypes = {
-  slug: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
-  poster: PropTypes.string.isRequired,
-  published: PropTypes.string.isRequired,
-  artists: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  genres: PropTypes.string.isRequired,
-  tags: PropTypes.string.isRequired,
-  duration: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
-  plays: PropTypes.number.isRequired,
-  downloads: PropTypes.number.isRequired,
-  bitrate: PropTypes.number.isRequired,
-  filesize: PropTypes.number.isRequired
+  empty: PropTypes.bool,
+  slug: PropTypes.string,
+  thumbnail: PropTypes.string,
+  poster: PropTypes.string,
+  published: PropTypes.string,
+  artists: PropTypes.string,
+  title: PropTypes.string,
+  genres: PropTypes.string,
+  tags: PropTypes.string,
+  duration: PropTypes.string,
+  description: PropTypes.string,
+  plays: PropTypes.number,
+  downloads: PropTypes.number,
+  quality: PropTypes.number,
+  fileSize: PropTypes.number
 };
 
 export default MixDetails;
