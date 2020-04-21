@@ -1,5 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
+import { DRAWER_PROPTYPES } from '../../constants/drawers';
 import closeDrawer from '../../actions/closeDrawer';
 import styles from './CloseButton.module.css';
 
@@ -29,6 +30,10 @@ const CloseButton = ({ drawer }) => {
       {drawer.ALIGN === 'right' && <Icon className={styles.iconRight} />}
     </button>
   );
+};
+
+CloseButton.propTypes = {
+  drawer: DRAWER_PROPTYPES
 };
 
 export default CloseButton;

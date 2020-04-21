@@ -10,7 +10,7 @@ const Aside = ({ drawer, children }) =>
     : <Sidebar>{children}</Sidebar>;
 
 Aside.propTypes = {
-  drawer: PropTypes.shape(DRAWER_PROPTYPES),
+  drawer: DRAWER_PROPTYPES,
   children: PropTypes.node.isRequired
 };
 
