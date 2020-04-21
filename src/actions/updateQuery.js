@@ -20,8 +20,6 @@ const updateQuery = facettedSearch => async dispatch => {
   if (facettedSearch[GENRES.KEY].selected.length > 0) options[GENRES.TAXONOMY] = facettedSearch[GENRES.KEY].selected.map(({ id }) => id).join(',');
   if (facettedSearch[TAGS.KEY].selected.length > 0) options[TAGS.TAXONOMY] = facettedSearch[TAGS.KEY].selected.map(({ id }) => id).join(',');
 
-  console.log(options);
-
   const response = await fetchPage(ENDPOINTS.MIXES, 1, options);
 
   if (!response.ok) {
@@ -34,7 +32,7 @@ const updateQuery = facettedSearch => async dispatch => {
 
   dispatch(setQueryResults(mixes));
 
-  const nextPage = response.resources.pageCount > 1 ? 2 : null;
+  const nextPage = response.pageCount > 1 ? 2 : null;
 
   dispatch(doneFetching(nextPage));
   dispatch(completeTasks(SET_QUERY_RESULTS, 1));
