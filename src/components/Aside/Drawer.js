@@ -6,6 +6,7 @@ import styles from './Drawer.module.css';
 
 const Drawer = ({ drawerKey, align, children }) => {
   const timeout = useRef(null);
+  const ref = useRef(null);
 
   const [wasOpen, setOpen] = useState(false);
   const drawer = useSelector(selectDrawer);
@@ -18,7 +19,10 @@ const Drawer = ({ drawerKey, align, children }) => {
       timeout.current = setTimeout(() => setOpen(true), 10);
     } else if (!isOpen && wasOpen) {
       clearTimeout(timeout);
-      timeout.current = setTimeout(() => setOpen(false), 300);
+      timeout.current = setTimeout(() => {
+        ref.current.scrollTo(0, 0);
+        setOpen(false);
+      }, 300);
     }
   }, [isOpen, wasOpen]);
 
@@ -34,7 +38,7 @@ const Drawer = ({ drawerKey, align, children }) => {
         <div className={className} />
       )}
       <aside className={isOpen ? styles.open : styles[align]}>
-        <div className={styles.overflow}>
+        <div ref={ref} className={styles.overflow}>
           {children}
         </div>
       </aside>
