@@ -55,7 +55,7 @@ const MixDetails = ({
   return (
     <div className={styles.root}>
       <div className={posterRevealed ? styles.posterRevealed : styles.posterLoading}>
-        {!empty
+        {!empty && poster
           ? (
             <>
               <img src={thumbnail} alt={title} />
@@ -106,10 +106,18 @@ const MixDetails = ({
           <div>{title}</div>
           <div>Genres</div>
           <div>{genres}</div>
-          <div>Tags</div>
-          <div>{tags}</div>
-          <div>Duration</div>
-          <div>{duration}</div>
+          {tags && (
+            <>
+              <div>Tags</div>
+              <div>{tags}</div>
+            </>
+          )}
+          {duration && (
+            <>
+              <div>Duration</div>
+              <div>{duration}</div>
+            </>
+          )}
         </div>
       )}
       <div className={styles.description}>
@@ -124,14 +132,30 @@ const MixDetails = ({
       </div>
       {!empty && (
         <div className={styles.meta}>
-          <div>Plays</div>
-          <div>{plays}</div>
-          <div>Downloads</div>
-          <div>{downloads}</div>
-          <div>Quality</div>
-          <div>{quality} <small>kbps</small></div>
-          <div>File size</div>
-          <div>{fileSize} <small>MB</small></div>
+          {plays && (
+            <>
+              <div>Plays</div>
+              <div>{plays}</div>
+            </>
+          )}
+          {downloads && (
+            <>
+              <div>Downloads</div>
+              <div>{downloads}</div>
+            </>
+          )}
+          {quality && (
+            <>
+              <div>Quality</div>
+              <div>{quality} <small>kbps</small></div>
+            </>
+          )}
+          {fileSize && (
+            <>
+              <div>File size</div>
+              <div>{fileSize} <small>MB</small></div>
+            </>
+          )}
         </div>
       )}
     </div>

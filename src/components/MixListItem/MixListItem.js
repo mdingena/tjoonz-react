@@ -72,7 +72,16 @@ const MixListItem = ({
         <div className={styles.root} {...observedElementProps}>
           <div className={styles.controls}>
             <div className={styles.thumbnail}>
-              <img src={thumbnail} alt={`${title} by ${artists}`} loading='lazy' width={34} height={34} />
+              {thumbnail
+                ? <img src={thumbnail} alt={`${title} by ${artists}`} loading='lazy' width={34} height={34} />
+                : (
+                  <div className={styles.logo}>
+                    <div>
+                      <div />
+                      <div />
+                    </div>
+                  </div>
+                )}
             </div>
             <button className={styles.play} title='Play now' hidden={widthMatch < 3}>
               <Icon.Play className={styles.icon} />
@@ -117,7 +126,7 @@ const MixListItem = ({
 MixListItem.propTypes = {
   detailsInDrawer: PropTypes.bool,
   slug: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string,
   title: PropTypes.string.isRequired,
   artists: PropTypes.string.isRequired,
   genres: PropTypes.string.isRequired,

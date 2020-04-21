@@ -106,22 +106,5 @@ export const toMegabytes = bytes => {
  */
 export const extractArtworkSrc = (media, size = 'full') => {
   const url = (((((media || [])[0] || {}).media_details || {}).sizes || {})[size] || {}).source_url;
-  return url || fallbackArtworkSrc(size);
-};
-
-/**
- * Returns a URL of a blank placeholder image.
- * @param {String} size The size of the image to return.
- * @returns {String} The URL of the matched media.
- */
-const fallbackArtworkSrc = size => {
-  switch (size) {
-    case 'thumbnail':
-      return 'https://via.placeholder.com/54x54?text=NO+ARTWORK';
-    case 'medium':
-      return 'https://via.placeholder.com/280x280?text=NO+ARTWORK';
-    case 'full':
-    default:
-      return 'https://via.placeholder.com/960x960?text=NO+ARTWORK';
-  }
+  return url || null;
 };
