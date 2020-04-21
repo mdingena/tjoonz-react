@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Button from '../Button';
 import Icon from '../Icon';
@@ -24,6 +24,10 @@ const MixDetails = ({
   const [posterRevealed, revealPoster] = useState(false);
 
   const handlePosterLoaded = () => revealPoster(true);
+
+  useEffect(() => {
+    revealPoster(false);
+  }, [thumbnail]);
 
   return (
     <div className={styles.root}>
