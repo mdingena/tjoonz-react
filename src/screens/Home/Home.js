@@ -29,14 +29,16 @@ const Home = () => {
   const details = useSelector(selectDetails);
 
   useEffect(() => {
-    if (query.statusText === null && query.results.length === 0) {
+    if (!query.isFetching && query.statusText === null && query.results.length === 0) {
       const action = fetchNextPage();
       dispatch(action);
     }
-  }, [query.statusText, query.results.length, dispatch]);
+  }, [query, dispatch]);
 
   useEffect(() => {
-    if (!query.isFetching && (query.nextPage === 2 || query.nextPage === null)) {
+    const fetchError = query.statusText !== null;
+    const isNewQuery = query.nextPage === 2;
+    if (!query.isFetching && !fetchError && isNewQuery) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [query]);
