@@ -8,7 +8,7 @@ import {
 import { ARTISTS, GENRES, TAGS } from '../constants/facettedSearchFacets';
 import { AND, OR } from '../constants/facettedSearchRelations';
 
-const initialState = {
+export const initialState = {
   [ARTISTS.KEY]: {
     isFetching: false,
     lastUpdated: 0,
