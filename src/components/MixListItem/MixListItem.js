@@ -2,6 +2,7 @@ import React from 'react';
 import { Observe } from '@envato/react-breakpoints';
 import { useDispatch } from 'react-redux';
 import openDrawer from '../../actions/openDrawer';
+import setDetails from '../../actions/setDetails';
 import { RESULT_DETAILS_DRAWER } from '../../constants/drawers';
 import Icon from '../Icon';
 import PropTypes from 'prop-types';
@@ -16,7 +17,7 @@ const columns = {
 
 const MixListItem = ({
   detailsInDrawer = false,
-  slug,
+  id,
   thumbnail,
   title,
   artists,
@@ -31,6 +32,9 @@ const MixListItem = ({
       const drawerAction = openDrawer(RESULT_DETAILS_DRAWER);
       dispatch(drawerAction);
     }
+
+    const detailsAction = setDetails(id);
+    dispatch(detailsAction);
   };
 
   const labels = [genres, tags].join(', ');
