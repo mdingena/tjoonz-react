@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import selectPlayer from '../../selectors/selectPlayer';
+import appendPlaylistItems from '../../actions/appendPlaylistItems';
+import removePlaylistItems from '../../actions/removePlaylistItems';
 import { Link } from 'react-router-dom';
 import Button from '../Button';
 import Icon from '../Icon';
@@ -6,7 +10,8 @@ import PropTypes from 'prop-types';
 import styles from './MixDetails.module.css';
 
 const MixDetails = ({
-  empty,
+  empty = false,
+  id,
   slug,
   thumbnail,
   poster,
@@ -22,6 +27,23 @@ const MixDetails = ({
   quality,
   fileSize
 }) => {
+  const dispatch = useDispatch();
+  const { playlist } = useSelector(selectPlayer);
+
+  const isInPlaylist = !empty && playlist.find(item => item.id === id);
+
+  const handlePlaylistClick = () => {
+    let action;
+
+    if (isInPlaylist) {
+      action = removePlaylistItems([id]);
+    } else {
+      action = appendPlaylistItems([id]);
+    }
+
+    dispatch(action);
+  };
+
   const [posterRevealed, revealPoster] = useState(false);
 
   const handlePosterLoaded = () => revealPoster(true);
@@ -57,9 +79,9 @@ const MixDetails = ({
             Icon={Icon.Play}
           />
           <Button
-            onClick={() => console.log('queue')}
+            onClick={handlePlaylistClick}
             text='Queue'
-            Icon={Icon.Square}
+            Icon={isInPlaylist ? Icon.CheckSquare : Icon.Square}
           />
           <Button
             onClick={() => console.log('download')}
@@ -118,6 +140,7 @@ const MixDetails = ({
 
 MixDetails.propTypes = {
   empty: PropTypes.bool,
+  id: PropTypes.number,
   slug: PropTypes.string,
   thumbnail: PropTypes.string,
   poster: PropTypes.string,

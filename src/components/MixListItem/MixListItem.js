@@ -1,6 +1,9 @@
 import React from 'react';
 import { Observe } from '@envato/react-breakpoints';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import selectPlayer from '../../selectors/selectPlayer';
+import appendPlaylistItems from '../../actions/appendPlaylistItems';
+import removePlaylistItems from '../../actions/removePlaylistItems';
 import openDrawer from '../../actions/openDrawer';
 import setDetails from '../../actions/setDetails';
 import { RESULT_DETAILS_DRAWER } from '../../constants/drawers';
@@ -26,6 +29,21 @@ const MixListItem = ({
   published
 }) => {
   const dispatch = useDispatch();
+  const { playlist } = useSelector(selectPlayer);
+
+  const isInPlaylist = playlist.find(item => item.id === id);
+
+  const handlePlaylistClick = () => {
+    let action;
+
+    if (isInPlaylist) {
+      action = removePlaylistItems([id]);
+    } else {
+      action = appendPlaylistItems([id]);
+    }
+
+    dispatch(action);
+  };
 
   const handleOpenDrawer = () => {
     if (detailsInDrawer) {
@@ -59,8 +77,15 @@ const MixListItem = ({
             <button className={styles.play} title='Play now' hidden={widthMatch < 3}>
               <Icon.Play className={styles.icon} />
             </button>
-            <button className={styles.queue} title='Add to playlist' hidden={widthMatch < 3}>
-              <Icon.Square className={styles.icon} />
+            <button
+              className={styles.queue}
+              onClick={handlePlaylistClick}
+              title='Add to playlist'
+              hidden={widthMatch < 3}
+            >
+              {isInPlaylist
+                ? <Icon.CheckSquare className={styles.icon} />
+                : <Icon.Square className={styles.icon} />}
             </button>
           </div>
           <button
