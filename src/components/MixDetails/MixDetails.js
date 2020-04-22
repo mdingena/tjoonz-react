@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
 import appendPlaylistItems from '../../actions/appendPlaylistItems';
 import removePlaylistItems from '../../actions/removePlaylistItems';
+import playNow from '../../actions/playNow';
 import { Link } from 'react-router-dom';
 import Button from '../Button';
 import Icon from '../Icon';
@@ -28,9 +29,16 @@ const MixDetails = ({
   fileSize
 }) => {
   const dispatch = useDispatch();
-  const { playlist } = useSelector(selectPlayer);
+  const { playlist, playhead } = useSelector(selectPlayer);
 
   const isInPlaylist = !empty && playlist.find(item => item.id === id);
+
+  const handlePlayNowClick = () => {
+    if ((playlist[playhead] || {}).id !== id) {
+      const action = playNow(id);
+      dispatch(action);
+    }
+  };
 
   const handlePlaylistClick = () => {
     let action;
@@ -74,7 +82,7 @@ const MixDetails = ({
       {!empty && (
         <div className={styles.controls}>
           <Button
-            onClick={() => console.log('play')}
+            onClick={handlePlayNowClick}
             text='Play'
             Icon={Icon.Play}
           />

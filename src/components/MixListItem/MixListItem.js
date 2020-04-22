@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
 import appendPlaylistItems from '../../actions/appendPlaylistItems';
 import removePlaylistItems from '../../actions/removePlaylistItems';
+import playNow from '../../actions/playNow';
 import openDrawer from '../../actions/openDrawer';
 import setDetails from '../../actions/setDetails';
 import { RESULT_DETAILS_DRAWER } from '../../constants/drawers';
@@ -29,9 +30,16 @@ const MixListItem = ({
   published
 }) => {
   const dispatch = useDispatch();
-  const { playlist } = useSelector(selectPlayer);
+  const { playlist, playhead } = useSelector(selectPlayer);
 
   const isInPlaylist = playlist.find(item => item.id === id);
+
+  const handlePlayNowClick = () => {
+    if ((playlist[playhead] || {}).id !== id) {
+      const action = playNow(id);
+      dispatch(action);
+    }
+  };
 
   const handlePlaylistClick = () => {
     let action;
@@ -75,7 +83,12 @@ const MixListItem = ({
             <div className={styles.thumbnail}>
               <img src={thumbnail || fallbackThumbnail} alt={`${title} by ${artists}`} loading='lazy' width={34} height={34} />
             </div>
-            <button className={styles.play} title='Play now' hidden={widthMatch < 3}>
+            <button
+              className={styles.play}
+              onClick={handlePlayNowClick}
+              title='Play now'
+              hidden={widthMatch < 3}
+            >
               <Icon.Play className={styles.icon} />
             </button>
             <button

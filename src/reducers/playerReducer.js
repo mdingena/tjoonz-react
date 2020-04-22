@@ -12,6 +12,8 @@ const initialState = {
 };
 
 const playerReducer = (state = initialState, { type, payload }) => {
+  let playlist;
+
   switch (type) {
     case APPEND_PLAYLIST_ITEMS:
       return {
@@ -20,10 +22,11 @@ const playerReducer = (state = initialState, { type, payload }) => {
       };
 
     case PLAY_NOW:
+      playlist = [...state.playlist.filter(({ id }) => id !== payload.item.id), payload.item];
       return {
         ...state,
-        playlist: [...state.playlist, payload.item],
-        playhead: state.playlist.length
+        playlist,
+        playhead: playlist.length - 1
       };
 
     case REMOVE_PLAYLIST_ITEMS:
