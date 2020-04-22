@@ -1,9 +1,13 @@
 import store from '../store';
 import updateQuery from '../actions/updateQuery';
+import { checkLocalStorageAvailability } from '../utils';
+
+const isLocalStorageAvailable = checkLocalStorageAvailability();
 
 export default () => {
   const { facettedSearch, query } = store.getState();
 
+  /* Sync facettedSearch -> query. */
   if (!query.isFetching) {
     const isFetching = Object.values(facettedSearch).some(({ isFetching }) => isFetching);
 
@@ -22,5 +26,10 @@ export default () => {
         store.dispatch(action);
       }
     }
+  }
+
+  /* Sync localStorage. */
+  if (isLocalStorageAvailable && Object.values(facettedSearch).every(({ options }) => options.length)) {
+    window.localStorage.setItem('facettedSearch', JSON.stringify(facettedSearch));
   }
 };

@@ -7,8 +7,9 @@ import {
 } from '../constants/actionTypes';
 import { ARTISTS, GENRES, TAGS } from '../constants/facettedSearchFacets';
 import { AND, OR } from '../constants/facettedSearchRelations';
+import { checkLocalStorageAvailability } from '../utils';
 
-export const initialState = {
+const defaultState = {
   [ARTISTS.KEY]: {
     isFetching: false,
     lastUpdated: 0,
@@ -34,6 +35,13 @@ export const initialState = {
     selected: []
   }
 };
+
+const isLocalStorageAvailable = checkLocalStorageAvailability();
+const localStorage = isLocalStorageAvailable && window.localStorage.getItem('facettedSearch');
+
+export const initialState = localStorage
+  ? JSON.parse(localStorage)
+  : defaultState;
 
 const facettedSearchReducer = (state = initialState, { type, payload }) => {
   switch (type) {
