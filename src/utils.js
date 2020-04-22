@@ -8,3 +8,14 @@ export const debounce = (cb, wait) => {
     }, wait);
   };
 };
+
+export const checkLocalStorageAvailability = () => {
+  const t = 't';
+  try {
+    window.localStorage.setItem(t, t);
+    window.localStorage.removeItem(t);
+    return true;
+  } catch (e) {
+    return false;
+  }
+};
