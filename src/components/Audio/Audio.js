@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
 import { BASE_STREAM_URL } from '../../constants/api';
 
 const Audio = () => {
   const ref = useRef();
+  const loadedId = useRef(0);
 
   const { isPlaying, volumeLevel, playlist, playhead } = useSelector(selectPlayer);
   const trackAtPlayhead = playlist[playhead];
@@ -20,19 +21,29 @@ const Audio = () => {
     }
   };
 
-  if (ref.current) {
-    const wasPlaying =
-      ref.current.currentTime > 0 &&
-      !ref.current.paused &&
-      !ref.current.ended &&
-      ref.current.readyState > 2;
+  useEffect(() => {
+    if (ref.current) {
+      if (!trackAtPlayhead) {
+        ref.current.pause();
+      } else {
+        const wasPlaying =
+          ref.current.currentTime > 0 &&
+          !ref.current.paused &&
+          !ref.current.ended &&
+          ref.current.readyState > 2;
 
-    if (!isPlaying && wasPlaying) {
-      ref.current.pause();
-    } else if (!wasPlaying) {
-      ref.current.play();
+        if (!isPlaying && wasPlaying) {
+          ref.current.pause();
+        } else {
+          if (trackAtPlayhead.id !== loadedId.current) {
+            ref.current.load();
+            loadedId.current = trackAtPlayhead.id;
+          }
+          ref.current.play();
+        }
+      }
     }
-  }
+  }, [isPlaying, trackAtPlayhead]);
 
   return (
     <audio
