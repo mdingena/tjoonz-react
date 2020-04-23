@@ -1,5 +1,7 @@
 export const BASE_URL = 'https://www.tjoonz.com/wp-json/wp/v2';
 
+export const BASE_STREAM_URL = 'https://www.tjoonz.com/beta.php?id=';
+
 export const ENDPOINTS = {
   MIXES: '/posts'
 };
