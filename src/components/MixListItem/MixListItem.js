@@ -4,7 +4,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
 import appendPlaylistItems from '../../actions/appendPlaylistItems';
 import removePlaylistItems from '../../actions/removePlaylistItems';
-import playNow from '../../actions/playNow';
+import resumePlayback from '../../actions/resumePlayback';
+import pausePlayback from '../../actions/pausePlayback';
+import startPlayback from '../../actions/startPlayback';
 import openDrawer from '../../actions/openDrawer';
 import setDetails from '../../actions/setDetails';
 import { RESULT_DETAILS_DRAWER } from '../../constants/drawers';
@@ -30,15 +32,25 @@ const MixListItem = ({
   published
 }) => {
   const dispatch = useDispatch();
-  const { playlist, playhead } = useSelector(selectPlayer);
+  const { isPlaying, playlist, playhead } = useSelector(selectPlayer);
 
   const isInPlaylist = playlist.find(item => item.id === id);
+  const isTrackAtPlayhead = (playlist[playhead] || {}).id === id;
 
-  const handlePlayNowClick = () => {
-    if ((playlist[playhead] || {}).id !== id) {
-      const action = playNow(id);
-      dispatch(action);
+  const handlePlaybackClick = () => {
+    let action;
+
+    if (isTrackAtPlayhead) {
+      if (isPlaying) {
+        action = pausePlayback();
+      } else {
+        action = resumePlayback();
+      }
+    } else {
+      action = startPlayback(id);
     }
+
+    dispatch(action);
   };
 
   const handlePlaylistClick = () => {
@@ -85,11 +97,13 @@ const MixListItem = ({
             </div>
             <button
               className={styles.play}
-              onClick={handlePlayNowClick}
-              title='Play now'
+              onClick={handlePlaybackClick}
+              title={isTrackAtPlayhead && isPlaying ? 'Pause' : 'Play now'}
               hidden={widthMatch < 3}
             >
-              <Icon.Play className={styles.icon} />
+              {isTrackAtPlayhead && isPlaying
+                ? <Icon.Pause className={styles.icon} />
+                : <Icon.Play className={styles.icon} />}
             </button>
             <button
               className={styles.queue}
