@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Screens from './screens';
 import Wrap from './components/Wrap';
 import Navigation from './components/Navigation';
+import Audio from './components/Audio';
 import Home from './screens/Home';
 import styles from './App.module.css';
 
@@ -38,7 +39,11 @@ const App = () => (
           </Wrap>
         </div>
 
-        <div className={styles.player}>Player</div>
+        <div className={styles.player}>
+          <Wrap>
+            <Audio />
+          </Wrap>
+        </div>
 
       </Router>
     </ResizeObserverProvider>
