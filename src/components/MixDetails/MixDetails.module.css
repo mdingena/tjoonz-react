@@ -1,7 +1,7 @@
 .root {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 2px;
+  gap: 2px;
   width: 100%;
   max-width: 386px;
   margin-left: auto;
@@ -47,7 +47,7 @@
 .controls {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 2px;
+  gap: 2px;
 }
 
 .link {
@@ -94,7 +94,7 @@
 .meta {
   display: grid;
   grid-template-columns: max-content 1fr;
-  grid-gap: 2px 0;
+  gap: 2px 0;
 }
 
 .details div,

@@ -1,6 +1,6 @@
 .root {
   display: grid;
-  grid-gap: 30px;
+  gap: 30px;
 }
 
 .oneColumn {
@@ -21,7 +21,7 @@
 .search {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 16px;
+  gap: 16px;
   align-content: flex-start;
   background-color: var(--colour-blue-900);
 }
@@ -29,7 +29,7 @@
 .results {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 2px;
+  gap: 2px;
   align-content: flex-start;
 }
 

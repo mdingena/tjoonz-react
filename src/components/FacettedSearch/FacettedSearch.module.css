@@ -1,14 +1,14 @@
 .root {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 2px;
+  gap: 2px;
   background-color: var(--colour-blue-900);
 }
 
 .loading {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 24px;
+  gap: 24px;
   width: 100%;
   max-width: 150px;
   margin: 0 auto;

@@ -1,7 +1,7 @@
 .root {
   display: grid;
   grid-template-columns: max-content 1fr;
-  grid-gap: 8px;
+  gap: 8px;
   height: 34px;
   background-color: var(--colour-blue-800);
   line-height: 30px;
@@ -75,7 +75,7 @@
 
 .meta {
   display: grid;
-  grid-gap: 10px;
+  gap: 10px;
   padding: 2px 8px 2px 0;
 }
 
