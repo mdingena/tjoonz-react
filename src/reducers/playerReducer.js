@@ -30,9 +30,11 @@ const playerReducer = (state = initialState, { type, payload }) => {
       };
 
     case REMOVE_PLAYLIST_ITEMS:
+      playlist = state.playlist.filter(({ id }) => !payload.items.includes(id));
       return {
         ...state,
-        playlist: state.playlist.filter(({ id }) => !payload.items.includes(id))
+        playlist,
+        playhead: playlist.length ? Math.min(playlist.length - 1, state.playhead) : null
       };
 
     default:
