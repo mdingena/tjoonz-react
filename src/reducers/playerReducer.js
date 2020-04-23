@@ -1,6 +1,6 @@
 import {
   APPEND_PLAYLIST_ITEMS,
-  PLAY_NOW,
+  START_PLAYBACK,
   REMOVE_PLAYLIST_ITEMS
 } from '../constants/actionTypes';
 
@@ -21,7 +21,7 @@ const playerReducer = (state = initialState, { type, payload }) => {
         playlist: [...state.playlist, ...payload.items]
       };
 
-    case PLAY_NOW:
+    case START_PLAYBACK:
       playlist = [...state.playlist.filter(({ id }) => id !== payload.item.id), payload.item];
       return {
         ...state,
