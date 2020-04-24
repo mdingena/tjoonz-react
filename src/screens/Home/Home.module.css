@@ -38,9 +38,5 @@
 }
 
 .footer {
-  height: 100px;
-}
-
-.footer > div {
   padding-top: 16px;
 }
