@@ -48,7 +48,7 @@ const Audio = () => {
   return (
     <audio
       ref={ref}
-      preload='metadata'
+      preload='none'
       onPlay={() => console.log('onPlay event')}
       onPause={() => console.log('onPause event')}
       onProgress={handleBuffering}
