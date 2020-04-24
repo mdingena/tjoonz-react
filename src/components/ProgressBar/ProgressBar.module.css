@@ -1,7 +1,7 @@
 .root {
   width: 100%;
   background-color: var(--colour-blue-920);
-  border-left: 1px solid var(--colour-grey-100);
+  border-left: 4px solid var(--colour-grey-100);
   transition: opacity 500ms cubic-bezier(0.165, 0.84, 0.44, 1) 200ms;
 }
 
