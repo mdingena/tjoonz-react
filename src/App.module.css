@@ -20,5 +20,5 @@
 .player {
   composes: fixedBar;
   bottom: 0;
-  height: var(--size-player-bar);
+  height: calc(var(--size-player-bar) - 2px);
 }
