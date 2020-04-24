@@ -152,25 +152,17 @@ const MixDetails = ({
       </div>
       {!empty && (
         <div className={styles.meta}>
-          {plays && (
-            <>
-              <div>Plays</div>
-              <div>{plays}</div>
-            </>
-          )}
-          {downloads && (
-            <>
-              <div>Downloads</div>
-              <div>{downloads}</div>
-            </>
-          )}
-          {quality && (
+          <div>Plays</div>
+          <div>{plays}</div>
+          <div>Downloads</div>
+          <div>{downloads}</div>
+          {quality > 0 && (
             <>
               <div>Quality</div>
               <div>{quality} <small>kbps</small></div>
             </>
           )}
-          {fileSize && (
+          {fileSize > 0 && (
             <>
               <div>File size</div>
               <div>{fileSize} <small>MB</small></div>
