@@ -73,6 +73,7 @@ export const toPublishDate = dateGmt => {
  * @returns {String} The duration in hh:mm:ss format.
  */
 export const toDuration = seconds => {
+  if (!seconds) return null;
   const hours = Math.floor(seconds / 3600);
   seconds = seconds - (hours * 3600);
   const minutes = Math.floor(seconds / 60);
