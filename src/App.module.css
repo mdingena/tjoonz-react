@@ -3,6 +3,7 @@
   position: fixed;
   width: 100%;
   background-color: var(--colour-blue-910);
+  box-shadow: 0 0 8px var(--colour-blue-920);
 }
 
 .navigation {
