@@ -34,7 +34,7 @@ const Audio = () => {
 
         if (!isPlaying && wasPlaying) {
           ref.current.pause();
-        } else {
+        } else if (isPlaying) {
           if (trackAtPlayhead.id !== loadedId.current) {
             ref.current.load();
             loadedId.current = trackAtPlayhead.id;
