@@ -19,3 +19,6 @@ export const checkLocalStorageAvailability = () => {
     return false;
   }
 };
+
+export const clamp = (value, lowerBound, upperBound) =>
+  Math.min(Math.max(value, lowerBound), upperBound);
