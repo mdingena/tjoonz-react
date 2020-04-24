@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Screens from './screens';
 import Wrap from './components/Wrap';
 import Navigation from './components/Navigation';
-import Audio from './components/Audio';
+import Player from './components/Player';
 import Home from './screens/Home';
 import styles from './App.module.css';
 
@@ -41,7 +41,7 @@ const App = () => (
 
         <div className={styles.player}>
           <Wrap>
-            <Audio />
+            <Player />
           </Wrap>
         </div>
 
