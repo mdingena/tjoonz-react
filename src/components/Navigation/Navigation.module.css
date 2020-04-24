@@ -68,7 +68,7 @@
   padding: 0 16px;
   background-color: var(--colour-blue-910);
   border-bottom: 3px solid var(--colour-blue-910);
-  transition: opacity var(--duration-medium) var(--timing-function-ease-out-cubic);
+  transition: opacity var(--duration-medium) var(--timing-function-ease-out-sine);
 }
 
 @media (min-width: 426px) {
@@ -84,5 +84,6 @@
 
 .reveal {
   composes: sidebar;
+  transition-timing-function: var(--timing-function-ease-out-cubic);
   opacity: 1;
 }

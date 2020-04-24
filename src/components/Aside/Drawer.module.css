@@ -6,12 +6,13 @@
   height: 100%;
   padding-top: var(--size-navigation-bar);
   padding-bottom: var(--size-player-bar);
-  transition: transform var(--duration-medium) var(--timing-function-ease-out-cubic);
+  transition: transform var(--duration-medium) var(--timing-function-ease-out-sine);
   will-change: transform;
 }
 
 .open {
   composes: root;
+  transition-timing-function: var(--timing-function-ease-out-cubic);
   transform: translateX(0);
 }
 
