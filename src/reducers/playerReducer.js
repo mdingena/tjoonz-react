@@ -3,6 +3,8 @@ import {
   PAUSE_PLAYBACK,
   REMOVE_PLAYLIST_ITEMS,
   RESUME_PLAYBACK,
+  SKIP_BACKWARD,
+  SKIP_FORWARD,
   START_PLAYBACK
 } from '../constants/actionTypes';
 
@@ -20,7 +22,8 @@ const playerReducer = (state = initialState, { type, payload }) => {
     case APPEND_PLAYLIST_ITEMS:
       return {
         ...state,
-        playlist: [...state.playlist, ...payload.items]
+        playlist: [...state.playlist, ...payload.items],
+        playhead: state.playlist.length > 0 ? state.playhead : 0
       };
 
     case PAUSE_PLAYBACK:
@@ -41,6 +44,18 @@ const playerReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isPlaying: true
+      };
+
+    case SKIP_BACKWARD:
+      return {
+        ...state,
+        playhead: state.playlist.length ? Math.max(0, state.playhead - 1) : state.playhead
+      };
+
+    case SKIP_FORWARD:
+      return {
+        ...state,
+        playhead: state.playlist.length ? Math.min(state.playlist.length - 1, state.playhead + 1) : state.playhead
       };
 
     case START_PLAYBACK:
