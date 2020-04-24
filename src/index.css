@@ -25,7 +25,7 @@ html {
   --duration-medium: 300ms;
 
   --size-navigation-bar: 46px;
-  --size-player-bar: 120px;
+  --size-player-bar: 72px;
   
   --timing-function-ease-out-sine: cubic-bezier(0.39, 0.575, 0.565, 1);
   --timing-function-ease-out-cubic: cubic-bezier(0.215, 0.610, 0.355, 1);
