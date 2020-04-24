@@ -14,11 +14,18 @@ import Icon from '../Icon';
 import PropTypes from 'prop-types';
 import styles from './MixListItem.module.css';
 
-const columns = {
+export const columns = {
   1: styles.oneColumn,
   2: styles.twoColumns,
   3: styles.threeColumns,
   4: styles.fourColumns
+};
+
+export const breakpoints = {
+  0: 1,
+  360: 2,
+  460: 3,
+  630: 4
 };
 
 const MixListItem = ({
@@ -81,14 +88,7 @@ const MixListItem = ({
   return (
     <Observe
       box='content-box'
-      breakpoints={{
-        widths: {
-          0: 1,
-          360: 2,
-          460: 3,
-          630: 4
-        }
-      }}
+      breakpoints={{ widths: breakpoints }}
       render={({ observedElementProps, widthMatch = 1 }) => (
         <div className={styles.root} {...observedElementProps}>
           <div className={styles.controls}>
