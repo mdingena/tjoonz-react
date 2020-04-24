@@ -12,6 +12,7 @@ import Aside from '../../components/Aside';
 import Icon from '../../components/Icon';
 import FacettedSearch from '../../components/FacettedSearch';
 import Button from '../../components/Button';
+import MixListHeader from '../../components/MixListHeader';
 import MixListItem from '../../components/MixListItem';
 import MixDetails from '../../components/MixDetails';
 import styles from './Home.module.css';
@@ -79,6 +80,7 @@ const Home = () => {
                 />
               </div>
             )}
+            {query.results.length > 0 && <MixListHeader />}
             {query.results.length === 0
               ? query.statusText
               : query.results.map((result, index) => (
