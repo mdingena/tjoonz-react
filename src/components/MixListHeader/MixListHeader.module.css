@@ -1,0 +1,17 @@
+.root {
+  composes: root from '../MixListItem/MixListItem.module.css';
+  align-items: flex-end;
+  background-color: transparent;
+  font-size: .9rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.noControls {
+  width: 34px;
+}
+
+.controls {
+  width: 98px;
+}
