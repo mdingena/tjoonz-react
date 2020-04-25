@@ -6,6 +6,48 @@
   padding: 8px 0;
 }
 
+.details {
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .root {
+    grid-template-columns: 54px 1fr 178px 54px;
+  }
+
+  .details {
+    display: inherit;
+    justify-self: flex-start;
+    align-self: center;
+    width: 100%;
+    height: 54px;
+  }
+
+  .details > div {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}
+
+.title {
+  font-size: 1.125rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.artists {
+  font-size: .9rem;
+  line-height: 1;
+}
+
+.labels {
+  font-size: .75rem;
+  line-height: 1;
+  color: var(--colour-grey-400);
+}
+
 .controls {
   display: grid;
   grid-template-columns: min-content min-content min-content;

@@ -13,6 +13,7 @@ import { PLAYLIST_DRAWER } from '../../constants/drawers';
 import Icon from '../Icon';
 import Audio from '../Audio';
 import { clamp } from '../../utils';
+import he from 'he';
 import styles from './Player.module.css';
 
 const getDragPosition = event => {
@@ -53,7 +54,10 @@ const Player = () => {
     slug,
     thumbnail,
     poster,
-    title
+    title,
+    artists,
+    genres,
+    tags
   } = (playlist[playhead] || {});
 
   const handlePosterLoaded = () => revealPoster(true);
@@ -157,6 +161,24 @@ const Player = () => {
               )}
           </div>
         </button>
+        <div className={styles.details}>
+          <div className={styles.title}>
+            {title}
+          </div>
+          {slug && (
+            <div className={styles.artists}>
+              {he.decode(artists.map(({ name }) => name).join(', '))}
+            </div>
+          )}
+          {slug && (
+            <div className={styles.labels}>
+              {he.decode([
+                ...genres.map(({ name }) => name),
+                ...tags.map(({ name }) => name)
+              ].join(', '))}
+            </div>
+          )}
+        </div>
         <div className={styles.controls}>
           <div
             ref={scrubberRef}
