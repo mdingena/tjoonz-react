@@ -1,0 +1,6 @@
+.root {
+  max-width: 360px;
+  min-height: calc(100vh - var(--size-navigation-bar) - var(--size-player-bar) - 32px);
+  margin-left: auto;
+  background-color: var(--colour-blue-900);
+}
