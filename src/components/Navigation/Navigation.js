@@ -21,6 +21,8 @@ const Navigation = ({ links = [] }) => {
     } else if (drawerData === null && staleDrawerData !== null) {
       clearTimeout(timeout);
       timeout.current = setTimeout(() => setStaleDrawerData(null), 300);
+    } else if (drawerData !== null && staleDrawerData !== null && drawerData.KEY !== staleDrawerData.KEY) {
+      setStaleDrawerData(drawerData);
     }
   }, [drawerData, staleDrawerData]);
 
