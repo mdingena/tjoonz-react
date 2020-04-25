@@ -9,6 +9,7 @@ import startPlayback from '../../actions/startPlayback';
 import { Link } from 'react-router-dom';
 import Button from '../Button';
 import Icon from '../Icon';
+import he from 'he';
 import PropTypes from 'prop-types';
 import styles from './MixDetails.module.css';
 
@@ -121,15 +122,15 @@ const MixDetails = ({
           <div>Published</div>
           <div>{published}</div>
           <div>Artists</div>
-          <div>{artists}</div>
+          <div>{he.decode(artists.map(({ name }) => name).join(', '))}</div>
           <div>Title</div>
           <div>{title}</div>
           <div>Genres</div>
-          <div>{genres}</div>
-          {tags && (
+          <div>{he.decode(genres.map(({ name }) => name).join(', '))}</div>
+          {tags.length > 0 && (
             <>
               <div>Tags</div>
-              <div>{tags}</div>
+              <div>{he.decode(tags.map(({ name }) => name).join(', '))}</div>
             </>
           )}
           {duration && (
@@ -181,10 +182,22 @@ MixDetails.propTypes = {
   thumbnail: PropTypes.string,
   poster: PropTypes.string,
   published: PropTypes.string,
-  artists: PropTypes.string,
+  artists: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired
+  })),
   title: PropTypes.string,
-  genres: PropTypes.string,
-  tags: PropTypes.string,
+  genres: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired
+  })),
+  tags: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired
+  })),
   duration: PropTypes.string,
   description: PropTypes.string,
   plays: PropTypes.number,
