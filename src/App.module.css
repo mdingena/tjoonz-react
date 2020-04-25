@@ -14,7 +14,7 @@
 
 .screens {
   padding-top: calc(var(--size-navigation-bar) + 16px);
-  padding-bottom: calc(var(--size-player-bar) + 16px);
+  padding-bottom: calc(var(--size-player-bar) + 24px);
 }
 
 .player {

@@ -8,7 +8,7 @@ const Sidebar = ({ children }) => (
     <StickyBox
       className={styles.root}
       offsetTop={65}
-      offsetBottom={136}
+      offsetBottom={96}
     >
       {children}
     </StickyBox>
