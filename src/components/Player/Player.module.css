@@ -55,6 +55,22 @@
   box-shadow: 0 0 5px var(--colour-blue-600);
 }
 
+.poster {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+}
+
+.poster[disabled] {
+  cursor: default;
+}
+
 .posterRevealed {
   composes: posterRevealed from '../MixDetails/MixDetails.module.css';
 }

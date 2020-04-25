@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useHistory, useRouteMatch } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
 import selectDrawer from '../../selectors/selectDrawer';
@@ -40,6 +41,7 @@ const Player = () => {
   const [isDragging, setDragging] = useState(false);
   const [scrubPosition, setScrubPosition] = useState(false);
 
+  const history = useHistory();
   const dispatch = useDispatch();
   const { isPlaying, playlist, playhead } = useSelector(selectPlayer);
   const drawer = useSelector(selectDrawer);
@@ -48,12 +50,14 @@ const Player = () => {
   const isPlaylistDrawer = drawer && drawer.KEY === PLAYLIST_DRAWER.KEY;
 
   const {
+    slug,
     thumbnail,
     poster,
     title
   } = (playlist[playhead] || {});
 
   const handlePosterLoaded = () => revealPoster(true);
+  const routeMatch = useRouteMatch({ path: `/mix/${slug}/` });
 
   useEffect(() => {
     revealPoster(false);
@@ -123,26 +127,36 @@ const Player = () => {
     dispatch(action);
   };
 
+  const handleNavigate = () => {
+    history.push(`/mix/${slug}/`);
+  };
+
   return (
     <>
       <div className={styles.root}>
-        <div className={posterRevealed ? styles.posterRevealed : styles.posterLoading}>
-          {poster
-            ? (
-              <>
-                <img src={thumbnail} alt={title} />
-                <img src={poster} alt={title} onLoad={handlePosterLoaded} />
-              </>
-            )
-            : (
-              <div className={styles.logo}>
-                <div>
-                  <div />
-                  <div />
+        <button
+          className={styles.poster}
+          onClick={handleNavigate}
+          disabled={!slug || routeMatch}
+        >
+          <div className={posterRevealed ? styles.posterRevealed : styles.posterLoading}>
+            {poster
+              ? (
+                <>
+                  <img src={thumbnail} alt={title} />
+                  <img src={poster} alt={title} onLoad={handlePosterLoaded} />
+                </>
+              )
+              : (
+                <div className={styles.logo}>
+                  <div>
+                    <div />
+                    <div />
+                  </div>
                 </div>
-              </div>
-            )}
-        </div>
+              )}
+          </div>
+        </button>
         <div className={styles.controls}>
           <div
             ref={scrubberRef}
