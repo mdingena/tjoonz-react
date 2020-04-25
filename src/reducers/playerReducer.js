@@ -36,6 +36,7 @@ const playerReducer = (state = initialState, { type, payload }) => {
       playlist = state.playlist.filter(({ id }) => !payload.items.includes(id));
       return {
         ...state,
+        isPlaying: playlist.length ? state.isPlaying : false,
         playlist,
         playhead: playlist.length ? Math.min(playlist.length - 1, state.playhead) : null
       };
