@@ -1,6 +1,20 @@
 .root {
-  max-width: 360px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  align-content: flex-start;
+  max-width: 960px;
   min-height: calc(100vh - var(--size-navigation-bar) - var(--size-player-bar) - 32px);
   margin-left: auto;
   background-color: var(--colour-blue-900);
+}
+
+.item {
+  margin-right: -4px;
+  border-right: 4px solid transparent;
+}
+
+.active {
+  composes: item;
+  border-right-color: var(--colour-blue-400);
 }
