@@ -14,11 +14,11 @@
 
 .screens {
   padding-top: calc(var(--size-navigation-bar) + 16px);
-  padding-bottom: calc(var(--size-player-bar) + 24px);
+  padding-bottom: calc(var(--size-player-bar) + 26px);
 }
 
 .player {
   composes: fixedBar;
   bottom: 0;
-  height: calc(var(--size-player-bar) - 2px);
+  height: calc(var(--size-player-bar));
 }
