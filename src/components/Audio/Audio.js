@@ -51,7 +51,7 @@ const Audio = ({ isDragging, scrubTo, onBufferProgress, onPlaybackProgress }) =>
     dispatch(action);
   };
 
-  const handleLoadStart = () => showSpinner();
+  const handleLoadStart = () => isPlaying && showSpinner();
 
   const handleLoadedData = () => hideSpinner();
 
