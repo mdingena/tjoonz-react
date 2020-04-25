@@ -93,7 +93,7 @@ const MixListItem = ({
         <div className={styles.root} {...observedElementProps}>
           <div className={styles.controls}>
             <div className={styles.thumbnail}>
-              <img src={thumbnail || fallbackThumbnail} alt={`${title} by ${artists}`} loading='lazy' width={34} height={34} />
+              <img src={thumbnail || fallbackThumbnail} alt='' loading='lazy' width={34} height={34} />
             </div>
             <button
               className={styles.play}
