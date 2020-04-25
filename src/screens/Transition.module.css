@@ -8,5 +8,6 @@
 
 .transparent {
   composes: root;
+  transition-timing-function: var(--timing-function-ease-out-sine);
   opacity: 0;
 }
