@@ -3,6 +3,7 @@ import {
   PAUSE_PLAYBACK,
   REMOVE_PLAYLIST_ITEMS,
   RESUME_PLAYBACK,
+  SET_PLAYHEAD,
   SKIP_BACKWARD,
   SKIP_FORWARD,
   START_PLAYBACK
@@ -45,6 +46,12 @@ const playerReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isPlaying: true
+      };
+
+    case SET_PLAYHEAD:
+      return {
+        ...state,
+        playhead: payload.index
       };
 
     case SKIP_BACKWARD:
