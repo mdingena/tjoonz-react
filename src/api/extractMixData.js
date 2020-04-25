@@ -28,9 +28,9 @@ const extractMixData = ({
   content: he.decode(content),
   description: he.decode(description),
   title: he.decode(title),
-  artists: he.decode(extractTermsByTaxonomy(terms, 'artist').map(({ name }) => name).join(', ')),
-  genres: he.decode(extractTermsByTaxonomy(terms, 'genre').map(({ name }) => name).join(', ')),
-  tags: he.decode(extractTermsByTaxonomy(terms, 'post_tag').map(({ name }) => name).join(', ')),
+  artists: extractTermsByTaxonomy(terms, 'artist'),
+  genres: extractTermsByTaxonomy(terms, 'genre'),
+  tags: extractTermsByTaxonomy(terms, 'post_tag'),
   published: toPublishDate(published),
   poster: extractArtworkSrc(featuredImage, 'full'),
   thumbnail: extractArtworkSrc(featuredImage, 'thumbnail'),
@@ -52,9 +52,10 @@ export default extractMixData;
 export const extractTermsByTaxonomy = (wpTerms, taxonomy) => {
   // Filters the wpTerms array to only contain the child array where its elements are objects with the needed taxonomy.
   // The filter function handles empty arrays as well as objects without a `taxonomy` property.
-  const terms = wpTerms.filter(terms => ((terms || [])[0] || {}).taxonomy === taxonomy);
+  const filtered = wpTerms.filter(terms => ((terms || [])[0] || {}).taxonomy === taxonomy);
   // Flatten Array.Array -> Array
-  return [...(terms[0] || [])];
+  const terms = [...(filtered[0] || [])];
+  return terms.map(({ id, name, slug }) => ({ id, name, slug }));
 };
 
 /**
