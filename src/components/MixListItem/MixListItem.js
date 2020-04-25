@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { Observe } from '@envato/react-breakpoints';
 import { useDispatch, useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
@@ -7,7 +8,9 @@ import removePlaylistItems from '../../actions/removePlaylistItems';
 import resumePlayback from '../../actions/resumePlayback';
 import pausePlayback from '../../actions/pausePlayback';
 import startPlayback from '../../actions/startPlayback';
+import setPlayhead from '../../actions/setPlayhead';
 import openDrawer from '../../actions/openDrawer';
+import closeDrawer from '../../actions/closeDrawer';
 import setDetails from '../../actions/setDetails';
 import { RESULT_DETAILS_DRAWER } from '../../constants/drawers';
 import Icon from '../Icon';
@@ -30,8 +33,10 @@ export const breakpoints = {
 };
 
 const MixListItem = ({
+  shownInPlaylist = false,
   detailsInDrawer = false,
   id,
+  slug,
   thumbnail,
   title,
   artists,
@@ -39,10 +44,11 @@ const MixListItem = ({
   tags,
   published
 }) => {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { isPlaying, playlist, playhead } = useSelector(selectPlayer);
 
-  const isInPlaylist = playlist.find(item => item.id === id);
+  const playlistIndex = playlist.findIndex(item => item.id === id);
   const isTrackAtPlayhead = (playlist[playhead] || {}).id === id;
 
   const handlePlaybackClick = () => {
@@ -55,7 +61,11 @@ const MixListItem = ({
         action = resumePlayback();
       }
     } else {
-      action = startPlayback(id);
+      if (playlistIndex === -1) {
+        action = startPlayback(id);
+      } else {
+        action = setPlayhead(playlistIndex);
+      }
     }
 
     dispatch(action);
@@ -64,23 +74,34 @@ const MixListItem = ({
   const handlePlaylistClick = () => {
     let action;
 
-    if (isInPlaylist) {
-      action = removePlaylistItems([id]);
-    } else {
+    if (playlistIndex === -1) {
       action = appendPlaylistItems([id]);
+    } else {
+      action = removePlaylistItems([id]);
     }
 
     dispatch(action);
   };
 
-  const handleOpenDrawer = () => {
-    if (detailsInDrawer) {
-      const drawerAction = openDrawer(RESULT_DETAILS_DRAWER);
-      dispatch(drawerAction);
-    }
+  const handleClick = columns => {
+    if (shownInPlaylist) {
+      if (columns < 3) {
+        const action = setPlayhead(playlistIndex);
+        dispatch(action);
+      } else {
+        const action = closeDrawer();
+        dispatch(action);
+        history.push(`/mix/${slug}/`);
+      }
+    } else {
+      if (detailsInDrawer) {
+        const drawerAction = openDrawer(RESULT_DETAILS_DRAWER);
+        dispatch(drawerAction);
+      }
 
-    const detailsAction = setDetails(id);
-    dispatch(detailsAction);
+      const detailsAction = setDetails(id);
+      dispatch(detailsAction);
+    }
   };
 
   const fallbackThumbnail = 'data:image/gif;base64,R0lGODlhRABEAKUyAB4iKB4jKB4jKR8jKR8kKR8kKiAkKiAlKyElKyElLCEmKyEmLCEmLSImLCImLSInLCInLSInLiMnLSMnLiMoLiMoLyQoLyQpLyQpMCUpMCUqMCUqMTxDSz1DTD1ETD1ETVRdZ1RdaFReZ1ReaFVeaFVeaVVfaVZfalZgalZga1dga1dha297h297iHB8iHB8iYuZp4uZqP///////////////////////////////////////////////////////yH5BAEKAD8ALAAAAABEAEQAAAb+wI1wSCwaj8ikcslsOp/QqHRKrVqv2Kx2y+16v+CweEwum8/otHrNbrvf8Lh8Tq9TM5i8fo/RHPF8fH5ggReGhnwZQ4WHF4ldGnoXFZQUlpaUFo55kXmTlZcUmZsYW50rMamqq6kwKhZ5sKistDGveYpZnrW0MBEUFhYVF7y0v7ClWJEXH8WrLhATFaIezqov0cN9WHkVKtYxMCULEBITEyjgMSbkwHlXyxTqMAYJENER6jH1EO7JVd2+gSNhAIEDBxLSDSzoYAKyKxgmKXQGI0RBcg5OqCOIoB+sXHcwWJAHDsaAeuQg6Dtpj4KjQVS6pSgJ4uSCBRnVhbAJocL+uyrxJhaDAYLAAYMMNIILYbSBtJ8xMVSYMC/AxQcN9Fnt6A7mlG5CeRE9qQCnUms7DZDz+W9KvHkAjCZwwEBf3AMN2Vrp1kEdCwEoH3BQ1wJwy5d7pYatNfaAAgY5lw44sCCCXqARSVqDEaAAgrkOtHpu+DGxN3U11S54sLhW2naIAUqdCU5EAcoMIJx1NuJ25cuyK8xj+QBCaHUsPWIAGVWgNYKUIUSg/dwAZctQg0+AsOCAgQEDAogPMICAdXLmtnP3Dn48efPR/XETSSGCg+7eDejXf5TcBFGW2Ifffvv1lw0nynRTH3c3JYDAZzc50M8wFQiz4E0LOAghThNdOsJcYpNQMEEE95R4TwT/aQNLiCOaWCKKomzChSSUTBNKjaRsQCMol+Cohxd8NILIHiAFKeQjX2gASCB6eCWEkkzu4aQdVFZp5ZVYZqnlllx26eWXYIYp5phkshEEADs=';
@@ -112,14 +133,14 @@ const MixListItem = ({
               title='Add to playlist'
               hidden={widthMatch < 3}
             >
-              {isInPlaylist
-                ? <Icon.CheckSquare className={styles.icon} />
-                : <Icon.Square className={styles.icon} />}
+              {playlistIndex === -1
+                ? <Icon.Square className={styles.icon} />
+                : <Icon.CheckSquare className={styles.icon} />}
             </button>
           </div>
           <button
             className={styles.details}
-            onClick={handleOpenDrawer}
+            onClick={() => handleClick(widthMatch)}
             type='button'
           >
             <div className={columns[widthMatch]}>
@@ -144,7 +165,9 @@ const MixListItem = ({
 };
 
 MixListItem.propTypes = {
+  shownInPlaylist: PropTypes.bool,
   detailsInDrawer: PropTypes.bool,
+  id: PropTypes.number.isRequired,
   slug: PropTypes.string.isRequired,
   thumbnail: PropTypes.string,
   title: PropTypes.string.isRequired,
