@@ -1,10 +1,14 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
+import selectDrawer from '../../selectors/selectDrawer';
 import resumePlayback from '../../actions/resumePlayback';
 import pausePlayback from '../../actions/pausePlayback';
 import skipBackward from '../../actions/skipBackward';
 import skipForward from '../../actions/skipForward';
+import openDrawer from '../../actions/openDrawer';
+import closeDrawer from '../../actions/closeDrawer';
+import { PLAYLIST_DRAWER } from '../../constants/drawers';
 import Icon from '../Icon';
 import Audio from '../Audio';
 import { clamp } from '../../utils';
@@ -38,8 +42,10 @@ const Player = () => {
 
   const dispatch = useDispatch();
   const { isPlaying, playlist, playhead } = useSelector(selectPlayer);
+  const drawer = useSelector(selectDrawer);
 
   const hasTrackAtPlayhead = playlist[playhead];
+  const isPlaylistDrawer = drawer && drawer.KEY === PLAYLIST_DRAWER.KEY;
 
   const {
     thumbnail,
@@ -107,6 +113,16 @@ const Player = () => {
     event.stopPropagation();
   };
 
+  const handleOpenDrawer = () => {
+    const drawerAction = openDrawer(PLAYLIST_DRAWER);
+    dispatch(drawerAction);
+  };
+
+  const handleCloseDrawer = () => {
+    const action = closeDrawer();
+    dispatch(action);
+  };
+
   return (
     <>
       <div className={styles.root}>
@@ -170,7 +186,7 @@ const Player = () => {
         </div>
         <button
           className={styles.button}
-          onClick={handlePlaybackClick}
+          onClick={isPlaylistDrawer ? handleCloseDrawer : handleOpenDrawer}
           title='Playlist'
         >
           <Icon.ListMusic className={styles.icon} />

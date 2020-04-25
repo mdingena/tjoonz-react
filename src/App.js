@@ -6,6 +6,7 @@ import Screens from './screens';
 import Wrap from './components/Wrap';
 import Navigation from './components/Navigation';
 import Player from './components/Player';
+import Playlist from './components/Playlist';
 import Home from './screens/Home';
 import styles from './App.module.css';
 
@@ -37,6 +38,7 @@ const App = () => (
               <Route exact path='/' component={Home} />
             </Screens>
           </Wrap>
+          <Playlist />
         </div>
 
         <div className={styles.player}>
