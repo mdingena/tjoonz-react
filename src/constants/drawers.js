@@ -25,3 +25,12 @@ export const RESULT_DETAILS_DRAWER = {
   CLOSE_ICON: Icon.ArrowRightBold,
   TRANSPARENT_OVERLAY: true
 };
+
+export const PLAYLIST_DRAWER = {
+  KEY: 'PLAYLIST_DRAWER',
+  ALIGN: 'right',
+  CLOSE_TEXT: 'Close playlist',
+  CLOSE_ICON: Icon.ArrowRightBold,
+  SHOW_PROGRESS: true,
+  TRANSPARENT_OVERLAY: true
+};
