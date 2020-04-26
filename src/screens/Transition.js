@@ -14,6 +14,7 @@ const Transition = ({ location, duration = 300, children }) => {
   });
 
   const transitionIn = useCallback(() => {
+    window.scrollTo(0, 0);
     setState(previousState => ({
       ...previousState,
       className: styles.root,
