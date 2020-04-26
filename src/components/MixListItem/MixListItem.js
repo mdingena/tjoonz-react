@@ -145,7 +145,7 @@ const MixListItem = ({
           >
             <div className={columns[widthMatch]}>
               <div className={styles.artists} hidden={widthMatch < 2}>
-                {artists.map(({ name }) => name).join(', ')}
+                {he.decode(artists.map(({ name }) => name).join(', '))}
               </div>
               <div className={styles.title}>
                 {title}
