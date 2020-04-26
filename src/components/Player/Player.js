@@ -135,6 +135,22 @@ const Player = () => {
   return (
     <>
       <div className={styles.root}>
+        <div
+          ref={scrubberRef}
+          className={hasTrackAtPlayhead ? styles.scrubber : styles.noScrubber}
+          onMouseDown={handleDragStart}
+          onMouseMove={handleDrag}
+          onMouseUp={handleDragEnd}
+          onTouchStart={handleDragStart}
+          onTouchMove={handleDrag}
+          onTouchEnd={handleDragEnd}
+          onContextMenu={handleContextMenu}
+        >
+          <div
+            className={styles.progress}
+            style={{ width: `${playbackProgress * 100}%` }}
+          />
+        </div>
         <button
           className={styles.poster}
           onClick={handleNavigate}
@@ -177,22 +193,6 @@ const Player = () => {
           )}
         </div>
         <div className={styles.controls}>
-          <div
-            ref={scrubberRef}
-            className={hasTrackAtPlayhead ? styles.scrubber : styles.noScrubber}
-            onMouseDown={handleDragStart}
-            onMouseMove={handleDrag}
-            onMouseUp={handleDragEnd}
-            onTouchStart={handleDragStart}
-            onTouchMove={handleDrag}
-            onTouchEnd={handleDragEnd}
-            onContextMenu={handleContextMenu}
-          >
-            <div
-              className={styles.progress}
-              style={{ width: `${playbackProgress * 100}%` }}
-            />
-          </div>
           <button
             className={styles.button}
             onClick={handleSkipBackwardClick}
