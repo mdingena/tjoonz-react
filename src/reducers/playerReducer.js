@@ -4,6 +4,7 @@ import {
   REMOVE_PLAYLIST_ITEMS,
   RESUME_PLAYBACK,
   SET_PLAYHEAD,
+  SET_VOLUME,
   SKIP_BACKWARD,
   SKIP_FORWARD,
   START_PLAYBACK
@@ -11,7 +12,7 @@ import {
 
 const initialState = {
   isPlaying: false,
-  volumeLevel: 0.8,
+  volumeLevel: 0.512, /* 0.8 ^ 3 */
   playlist: [],
   playhead: null
 };
@@ -52,6 +53,12 @@ const playerReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         playhead: payload.index
+      };
+
+    case SET_VOLUME:
+      return {
+        ...state,
+        volumeLevel: payload.volume
       };
 
     case SKIP_BACKWARD:
