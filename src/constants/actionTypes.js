@@ -32,6 +32,8 @@ export const SET_QUERY_RESULTS = 'SET_QUERY_RESULTS';
 
 export const SET_PLAYHEAD = 'SET_PLAYHEAD';
 
+export const SET_VOLUME = 'SET_VOLUME';
+
 export const SKIP_BACKWARD = 'SKIP_BACKWARD';
 
 export const SKIP_FORWARD = 'SKIP_FORWARD';
