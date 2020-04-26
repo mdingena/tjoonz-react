@@ -13,7 +13,7 @@ const Audio = ({ isDragging, scrubTo, onPlaybackProgress }) => {
   const isPlayingRef = useRef(false);
   const loadedId = useRef(0);
 
-  const { isPlaying, playlist, playhead } = useSelector(selectPlayer);
+  const { isPlaying, volumeLevel, playlist, playhead } = useSelector(selectPlayer);
   const trackAtPlayhead = playlist[playhead];
 
   const handlePlay = () => {
@@ -60,6 +60,12 @@ const Audio = ({ isDragging, scrubTo, onPlaybackProgress }) => {
       audioRef.current.currentTime = scrubTo * audioRef.current.duration;
     }
   }, [scrubTo]);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volumeLevel;
+    }
+  }, [volumeLevel]);
 
   useEffect(() => {
     if (audioRef.current) {
