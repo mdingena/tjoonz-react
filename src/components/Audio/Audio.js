@@ -5,7 +5,7 @@ import completeTasks from '../../actions/completeTasks';
 import selectPlayer from '../../selectors/selectPlayer';
 import { BASE_STREAM_URL } from '../../constants/api';
 
-const Audio = ({ isDragging, scrubTo, onBufferProgress, onPlaybackProgress }) => {
+const Audio = ({ isDragging, scrubTo, onPlaybackProgress }) => {
   const dispatch = useDispatch();
 
   const audioRef = useRef();
@@ -15,14 +15,6 @@ const Audio = ({ isDragging, scrubTo, onBufferProgress, onPlaybackProgress }) =>
 
   const { isPlaying, playlist, playhead } = useSelector(selectPlayer);
   const trackAtPlayhead = playlist[playhead];
-
-  const handleBuffering = () => {
-    if (audioRef.current.buffered.length > 0 && audioRef.current.duration) {
-      let progress = audioRef.current.buffered.end(audioRef.current.buffered.length - 1) / audioRef.current.duration;
-      progress = progress > 1 ? 1 : progress;
-      onBufferProgress(progress);
-    }
-  };
 
   const handlePlay = () => {
     if (audioRef.current) {
@@ -102,7 +94,6 @@ const Audio = ({ isDragging, scrubTo, onBufferProgress, onPlaybackProgress }) =>
       ref={audioRef}
       preload='none'
       onPlay={handlePlay}
-      onProgress={handleBuffering}
       onLoadStart={handleLoadStart}
       onLoadedData={handleLoadedData}
       onAbort={handleAbort}

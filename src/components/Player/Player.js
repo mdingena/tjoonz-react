@@ -37,7 +37,6 @@ const Player = () => {
   const scrubberRef = useRef(null);
 
   const [posterRevealed, revealPoster] = useState(false);
-  const [bufferProgress, setBufferProgress] = useState(0);
   const [playbackProgress, setPlaybackProgress] = useState(0);
   const [isDragging, setDragging] = useState(false);
   const [scrubPosition, setScrubPosition] = useState(false);
@@ -90,8 +89,6 @@ const Player = () => {
     const action = skipForward();
     dispatch(action);
   };
-
-  const handleBufferProgress = progress => setBufferProgress(progress);
 
   const handlePlaybackProgress = progress => setPlaybackProgress(progress);
 
@@ -231,7 +228,6 @@ const Player = () => {
       <Audio
         isDragging={isDragging}
         scrubTo={scrubPosition}
-        onBufferProgress={handleBufferProgress}
         onPlaybackProgress={handlePlaybackProgress}
       />
     </>
