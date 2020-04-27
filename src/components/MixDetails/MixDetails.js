@@ -79,8 +79,8 @@ const MixDetails = ({
         {!empty && poster
           ? (
             <>
-              <img src={thumbnail} alt={title} />
-              <img src={poster} alt={title} onLoad={handlePosterLoaded} />
+              <img key={thumbnail} src={thumbnail} alt={title} />
+              <img key={poster} src={poster} alt={title} onLoad={handlePosterLoaded} />
             </>
           )
           : (
