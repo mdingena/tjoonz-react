@@ -11,6 +11,7 @@ import openDrawer from '../../actions/openDrawer';
 import closeDrawer from '../../actions/closeDrawer';
 import { PLAYLIST_DRAWER } from '../../constants/drawers';
 import Icon from '../Icon';
+import VolumeControl from '../VolumeControl';
 import Audio from '../Audio';
 import { clamp } from '../../utils';
 import he from 'he';
@@ -216,6 +217,9 @@ const Player = () => {
           >
             <Icon.Forward className={styles.icon} />
           </button>
+          <div className={styles.volume}>
+            <VolumeControl />
+          </div>
         </div>
         <button
           className={styles.button}
