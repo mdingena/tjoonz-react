@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Observe } from '@envato/react-breakpoints';
+import { useBreakpoints } from '@envato/react-breakpoints';
 import { useDispatch, useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
 import appendPlaylistItems from '../../actions/appendPlaylistItems';
@@ -18,7 +18,7 @@ import he from 'he';
 import PropTypes from 'prop-types';
 import styles from './MixListItem.module.css';
 
-export const columns = {
+export const grid = {
   1: styles.oneColumn,
   2: styles.twoColumns,
   3: styles.threeColumns,
@@ -115,69 +115,70 @@ const MixListItem = ({
     revealThumbnail(false);
   }, [thumbnail]);
 
+  const [columns] = useBreakpoints({
+    box: 'content-box',
+    widths: breakpoints
+  });
+
+  if (!columns) return null;
+
   return (
-    <Observe
-      box='content-box'
-      breakpoints={{ widths: breakpoints }}
-      render={({ observedElementProps, widthMatch = 1 }) => (
-        <div className={styles.root} {...observedElementProps}>
-          <div className={styles.controls}>
-            <div className={styles.thumbnail}>
-              <img
-                key={thumbnail || fallbackThumbnail}
-                className={thumbnailRevealed ? styles.thumbnailRevealed : styles.thumbnailLoading}
-                src={thumbnail || fallbackThumbnail}
-                alt=''
-                loading='lazy'
-                onLoad={handleThumbnailLoaded}
-                width={34}
-                height={34}
-              />
-            </div>
-            <button
-              className={styles.play}
-              onClick={handlePlaybackClick}
-              title={isTrackAtPlayhead && isPlaying ? 'Pause' : 'Play now'}
-              hidden={widthMatch < 3}
-            >
-              {isTrackAtPlayhead && isPlaying
-                ? <Icon.Pause className={styles.icon} />
-                : <Icon.Play className={styles.icon} />}
-            </button>
-            <button
-              className={styles.queue}
-              onClick={handlePlaylistClick}
-              title='Add to playlist'
-              hidden={widthMatch < 3}
-            >
-              {playlistIndex === -1
-                ? <Icon.Square className={styles.icon} />
-                : <Icon.CheckSquare className={styles.icon} />}
-            </button>
-          </div>
-          <button
-            className={styles.details}
-            onClick={() => handleClick(widthMatch)}
-            type='button'
-          >
-            <div className={columns[widthMatch]}>
-              <div className={styles.artists} hidden={widthMatch < 2}>
-                {he.decode(artists.map(({ name }) => name).join(', '))}
-              </div>
-              <div className={styles.title}>
-                {title}
-              </div>
-              <div className={styles.labels} hidden={widthMatch < 4}>
-                {labels}
-              </div>
-              <div className={styles.published} hidden={widthMatch < 3}>
-                {published}
-              </div>
-            </div>
-          </button>
+    <div className={styles.root}>
+      <div className={styles.controls}>
+        <div className={styles.thumbnail}>
+          <img
+            key={thumbnail || fallbackThumbnail}
+            className={thumbnailRevealed ? styles.thumbnailRevealed : styles.thumbnailLoading}
+            src={thumbnail || fallbackThumbnail}
+            alt=''
+            loading='lazy'
+            onLoad={handleThumbnailLoaded}
+            width={34}
+            height={34}
+          />
         </div>
-      )}
-    />
+        <button
+          className={styles.play}
+          onClick={handlePlaybackClick}
+          title={isTrackAtPlayhead && isPlaying ? 'Pause' : 'Play now'}
+          hidden={columns < 3}
+        >
+          {isTrackAtPlayhead && isPlaying
+            ? <Icon.Pause className={styles.icon} />
+            : <Icon.Play className={styles.icon} />}
+        </button>
+        <button
+          className={styles.queue}
+          onClick={handlePlaylistClick}
+          title='Add to playlist'
+          hidden={columns < 3}
+        >
+          {playlistIndex === -1
+            ? <Icon.Square className={styles.icon} />
+            : <Icon.CheckSquare className={styles.icon} />}
+        </button>
+      </div>
+      <button
+        className={styles.details}
+        onClick={() => handleClick(columns)}
+        type='button'
+      >
+        <div className={grid[columns]}>
+          <div className={styles.artists} hidden={columns < 2}>
+            {he.decode(artists.map(({ name }) => name).join(', '))}
+          </div>
+          <div className={styles.title}>
+            {title}
+          </div>
+          <div className={styles.labels} hidden={columns < 4}>
+            {labels}
+          </div>
+          <div className={styles.published} hidden={columns < 3}>
+            {published}
+          </div>
+        </div>
+      </button>
+    </div>
   );
 };
 

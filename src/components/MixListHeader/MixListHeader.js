@@ -1,33 +1,34 @@
 import React from 'react';
-import { Observe } from '@envato/react-breakpoints';
-import { columns, breakpoints } from '../MixListItem/MixListItem';
+import { useBreakpoints } from '@envato/react-breakpoints';
+import { grid, breakpoints } from '../MixListItem/MixListItem';
 import styles from './MixListHeader.module.css';
 
 const MixListHeader = () => {
+  const [columns] = useBreakpoints({
+    box: 'content-box',
+    widths: breakpoints
+  });
+
+  if (!columns) return null;
+
   return (
-    <Observe
-      box='content-box'
-      breakpoints={{ widths: breakpoints }}
-      render={({ observedElementProps, widthMatch = 1 }) => (
-        <div className={styles.root} {...observedElementProps}>
-          <div className={widthMatch < 3 ? styles.noControls : styles.controls} />
-          <div className={columns[widthMatch]}>
-            <div hidden={widthMatch < 2}>
-              Artists
-            </div>
-            <div>
-              Title
-            </div>
-            <div hidden={widthMatch < 4}>
-              Labels
-            </div>
-            <div hidden={widthMatch < 3}>
-              Published
-            </div>
-          </div>
+    <div className={styles.root}>
+      <div className={columns < 3 ? styles.noControls : styles.controls} />
+      <div className={grid[columns]}>
+        <div hidden={columns < 2}>
+          Artists
         </div>
-      )}
-    />
+        <div>
+          Title
+        </div>
+        <div hidden={columns < 4}>
+          Labels
+        </div>
+        <div hidden={columns < 3}>
+          Published
+        </div>
+      </div>
+    </div>
   );
 };
 
