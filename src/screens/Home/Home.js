@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Observe } from '@envato/react-breakpoints';
+import { Observe, useBreakpoints } from '@envato/react-breakpoints';
 import { useDispatch, useSelector } from 'react-redux';
 import selectDrawer from '../../selectors/selectDrawer';
 import selectQuery from '../../selectors/selectQuery';
@@ -17,7 +17,7 @@ import MixListItem from '../../components/MixListItem';
 import MixDetails from '../../components/MixDetails';
 import styles from './Home.module.css';
 
-const columns = {
+const grid = {
   1: styles.oneColumn,
   2: styles.twoColumns,
   3: styles.threeColumns
@@ -49,28 +49,31 @@ const Home = () => {
     dispatch(action);
   };
 
+  const [columns = 1] = useBreakpoints({
+    box: 'content-box',
+    widths: {
+      0: 1,
+      621: 2,
+      1025: 3
+    }
+  });
+
+  if (!columns) return null;
+
   return (
-    <Observe
-      box='content-box'
-      breakpoints={{
-        box: 'content-box',
-        widths: {
-          0: 1,
-          620: 2,
-          1024: 3
-        }
-      }}
-      render={({ observedElementProps, widthMatch = styles.oneColumn }) => (
-        <div {...observedElementProps} className={columns[widthMatch]}>
-          <Aside drawer={widthMatch < 2 ? SEARCH_DRAWER : undefined}>
-            <div className={styles.search}>
-              <FacettedSearch facet={ARTISTS} showCombobox />
-              <FacettedSearch facet={TAGS} showCombobox />
-              <FacettedSearch facet={GENRES} previewCount={10} />
-            </div>
-          </Aside>
-          <div className={styles.results}>
-            {widthMatch < 2 && (
+    <div className={grid[columns]}>
+      <Aside drawer={columns < 2 ? SEARCH_DRAWER : undefined}>
+        <div className={styles.search}>
+          <FacettedSearch facet={ARTISTS} showCombobox />
+          <FacettedSearch facet={TAGS} showCombobox />
+          <FacettedSearch facet={GENRES} previewCount={10} />
+        </div>
+      </Aside>
+      <Observe
+        box='content-box'
+        render={({ observedElementProps }) => (
+          <div className={styles.results} {...observedElementProps}>
+            {columns < 2 && (
               <div className={styles.searchButton}>
                 <Button
                   onClick={handleOpenDrawer}
@@ -86,7 +89,7 @@ const Home = () => {
               : query.results.map((result, index) => (
                 <MixListItem
                   key={`result-${index}`}
-                  detailsInDrawer={widthMatch < 3}
+                  detailsInDrawer={columns < 3}
                   {...result}
                 />
               ))}
@@ -110,14 +113,14 @@ const Home = () => {
                 )}
             </div>
           </div>
-          <Aside drawer={widthMatch < 3 ? RESULT_DETAILS_DRAWER : undefined}>
-            {details
-              ? <MixDetails {...details} />
-              : <MixDetails empty />}
-          </Aside>
-        </div>
-      )}
-    />
+        )}
+      />
+      <Aside drawer={columns < 3 ? RESULT_DETAILS_DRAWER : undefined}>
+        {details
+          ? <MixDetails {...details} />
+          : <MixDetails empty />}
+      </Aside>
+    </div>
   );
 };
 
