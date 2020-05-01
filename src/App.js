@@ -2,12 +2,13 @@ import React from 'react';
 import StoreProvider from './providers/StoreProvider';
 import ResizeObserverProvider from './providers/ResizeObserverProvider';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import Screens from './screens';
 import Wrap from './components/Wrap';
 import Navigation from './components/Navigation';
 import Player from './components/Player';
 import Playlist from './components/Playlist';
+import Screens from './screens';
 import Home from './screens/Home';
+import Mix from './screens/Mix';
 import styles from './App.module.css';
 
 const App = () => (
@@ -36,6 +37,7 @@ const App = () => (
           <Wrap>
             <Screens>
               <Route exact path='/' component={Home} />
+              <Route path='/mix/:slug/' component={Mix} />
             </Screens>
           </Wrap>
           <Playlist />
