@@ -1,0 +1,38 @@
+.root ul,
+.root ol {
+  display: grid;
+  gap: 2px;
+  margin: 0 0 0 32px;
+  padding: 0;
+  list-style-position: outside;
+}
+
+.root ul > li,
+.root ol > li {
+  position: relative;
+  min-height: 34px;
+  padding: 6px 8px;
+  background-color: var(--colour-blue-800);
+  line-height: 1.5;
+}
+
+.root ul > li::before,
+.root ol > li::before {
+  content: '';
+  z-index:-1;
+  position: absolute;
+  top: 0;
+  left: -32px;
+  display: block;
+  width: 34px;
+  height: 100%;
+  background-color: var(--colour-blue-800);
+}
+
+.root ol:first-of-type::before {
+  content: 'Tracklist';
+  padding: 2px 8px;
+  text-transform: uppercase;
+  font-size: .9rem;
+  font-weight: 500;
+}
