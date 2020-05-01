@@ -34,7 +34,7 @@ const App = () => (
         </div>
 
         <div className={styles.screens}>
-          <Wrap>
+          <Wrap observe>
             <Screens>
               <Route exact path='/' component={Home} />
               <Route path='/mix/:slug/' component={Mix} />
