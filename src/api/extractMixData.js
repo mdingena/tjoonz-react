@@ -20,7 +20,8 @@ const extractMixData = ({
   },
   _embedded: {
     'wp:term': terms,
-    'wp:featuredmedia': featuredImage
+    'wp:featuredmedia': featuredImage,
+    replies: comments
   }
 }) => ({
   id,
@@ -38,7 +39,8 @@ const extractMixData = ({
   downloads,
   duration: toDuration(duration),
   quality: toKbps(quality),
-  fileSize: toMegabytes(fileSize)
+  fileSize: toMegabytes(fileSize),
+  comments: extractComments(comments)
 });
 
 export default extractMixData;
@@ -109,4 +111,23 @@ export const toMegabytes = bytes => {
 export const extractArtworkSrc = (media, size = 'full') => {
   const url = (((((media || [])[0] || {}).media_details || {}).sizes || {})[size] || {}).source_url;
   return url || null;
+};
+
+export const extractComments = wpReplies => {
+  const comments = (wpReplies || [])[0] || [];
+  return comments.map(({
+    id,
+    author_name: authorName,
+    author_url: authorUrl,
+    author_avatar_urls: { 96: authorAvatar },
+    date: published,
+    content: { rendered: content }
+  }) => ({
+    id,
+    authorName: he.decode(authorName),
+    authorUrl,
+    authorAvatar,
+    published: toPublishDate(published),
+    content: he.decode(content)
+  }));
 };
