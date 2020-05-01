@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useRouteMatch, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
 import appendPlaylistItems from '../../actions/appendPlaylistItems';
@@ -6,7 +7,7 @@ import removePlaylistItems from '../../actions/removePlaylistItems';
 import resumePlayback from '../../actions/resumePlayback';
 import pausePlayback from '../../actions/pausePlayback';
 import startPlayback from '../../actions/startPlayback';
-import { Link } from 'react-router-dom';
+import closeDrawer from '../../actions/closeDrawer';
 import Button from '../Button';
 import Icon from '../Icon';
 import he from 'he';
@@ -31,6 +32,7 @@ const MixDetails = ({
   quality,
   fileSize
 }) => {
+  const routeMatch = useRouteMatch({ path: `/mix/${slug}/` });
   const dispatch = useDispatch();
   const { isPlaying, playlist, playhead } = useSelector(selectPlayer);
 
@@ -65,6 +67,11 @@ const MixDetails = ({
     dispatch(action);
   };
 
+  const handleTracklistClick = () => {
+    const action = closeDrawer();
+    dispatch(action);
+  };
+
   const [posterRevealed, revealPoster] = useState(false);
 
   const handlePosterLoaded = () => revealPoster(true);
@@ -74,7 +81,7 @@ const MixDetails = ({
   }, [thumbnail]);
 
   return (
-    <div className={styles.root}>
+    <div className={routeMatch ? styles.root : styles.drawer}>
       <div className={posterRevealed ? styles.posterRevealed : styles.posterLoading}>
         {!empty && poster
           ? (
@@ -111,8 +118,8 @@ const MixDetails = ({
           />
         </div>
       )}
-      {!empty && (
-        <Link to={`/mix/${slug}/`} className={styles.link}>
+      {!empty && !routeMatch && (
+        <Link to={`/mix/${slug}/`} className={styles.link} onClick={handleTracklistClick}>
           <Icon.ListOl className={styles.icon} />
           <span className={styles.text}>Tracklist and comments</span>
         </Link>

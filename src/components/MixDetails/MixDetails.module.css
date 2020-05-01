@@ -3,10 +3,14 @@
   grid-template-columns: 1fr;
   gap: 2px;
   width: 100%;
-  max-width: 386px;
-  margin-left: auto;
   background-color: var(--colour-blue-900);
   color: var(--colour-grey-200);
+}
+
+.drawer {
+  composes: root;
+  max-width: 386px;
+  margin-left: auto;
 }
 
 .poster {
