@@ -134,7 +134,7 @@
   line-height: 54px;
 }
 
-@media (min-width: 640px) {
+@media (min-width: 650px) {
   .root {
     grid-template-columns: 54px 1fr 240px 54px;
   }

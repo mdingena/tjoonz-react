@@ -2,8 +2,10 @@
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  align-items: flex-end;
+  height: 34px;
   padding: 2px 5px;
-  color: var(--colour-grey-100);
+  color: var(--colour-grey-200);
   line-height: 1.5;
 }
 
