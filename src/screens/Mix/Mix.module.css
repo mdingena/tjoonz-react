@@ -1,0 +1,18 @@
+.root {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+@media (min-width: 650px) {
+  .root {
+    grid-template-columns: 280px 1fr;
+    gap: 30px;
+  }
+}
+
+@media (min-width: 1025px) {
+  .root {
+    grid-template-columns: 280px 1fr 1fr;
+  }
+}
