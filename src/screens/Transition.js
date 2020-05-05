@@ -2,7 +2,7 @@ import React, { useRef, useState, useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Transition.module.css';
 
-const Transition = ({ location, duration = 300, children }) => {
+const Transition = ({ location, duration = 100, children }) => {
   const timeout = useRef(null);
 
   const [state, setState] = useState({
