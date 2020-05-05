@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
@@ -72,6 +72,7 @@ const MixDetails = ({
     dispatch(action);
   };
 
+  const posterRef = useRef();
   const [posterRevealed, revealPoster] = useState(false);
 
   const handlePosterLoaded = () => revealPoster(true);
@@ -80,6 +81,10 @@ const MixDetails = ({
     revealPoster(false);
   }, [thumbnail]);
 
+  useEffect(() => {
+    if (!posterRevealed && posterRef.current && posterRef.current.complete) handlePosterLoaded();
+  });
+
   return (
     <div className={routeMatch ? styles.root : styles.drawer}>
       <div className={posterRevealed ? styles.posterRevealed : styles.posterLoading}>
@@ -87,7 +92,7 @@ const MixDetails = ({
           ? (
             <>
               <img key={thumbnail} src={thumbnail} alt={title} />
-              <img key={poster} src={poster} alt={title} onLoad={handlePosterLoaded} />
+              <img ref={posterRef} key={poster} src={poster} alt={title} onLoad={handlePosterLoaded} />
             </>
           )
           : (

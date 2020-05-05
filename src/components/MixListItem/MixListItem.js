@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useBreakpoints } from '@envato/react-breakpoints';
 import { useDispatch, useSelector } from 'react-redux';
@@ -107,6 +107,7 @@ const MixListItem = ({
   const fallbackThumbnail = 'data:image/gif;base64,R0lGODlhRABEAKUyAB4iKB4jKB4jKR8jKR8kKR8kKiAkKiAlKyElKyElLCEmKyEmLCEmLSImLCImLSInLCInLSInLiMnLSMnLiMoLiMoLyQoLyQpLyQpMCUpMCUqMCUqMTxDSz1DTD1ETD1ETVRdZ1RdaFReZ1ReaFVeaFVeaVVfaVZfalZgalZga1dga1dha297h297iHB8iHB8iYuZp4uZqP///////////////////////////////////////////////////////yH5BAEKAD8ALAAAAABEAEQAAAb+wI1wSCwaj8ikcslsOp/QqHRKrVqv2Kx2y+16v+CweEwum8/otHrNbrvf8Lh8Tq9TM5i8fo/RHPF8fH5ggReGhnwZQ4WHF4ldGnoXFZQUlpaUFo55kXmTlZcUmZsYW50rMamqq6kwKhZ5sKistDGveYpZnrW0MBEUFhYVF7y0v7ClWJEXH8WrLhATFaIezqov0cN9WHkVKtYxMCULEBITEyjgMSbkwHlXyxTqMAYJENER6jH1EO7JVd2+gSNhAIEDBxLSDSzoYAKyKxgmKXQGI0RBcg5OqCOIoB+sXHcwWJAHDsaAeuQg6Dtpj4KjQVS6pSgJ4uSCBRnVhbAJocL+uyrxJhaDAYLAAYMMNIILYbSBtJ8xMVSYMC/AxQcN9Fnt6A7mlG5CeRE9qQCnUms7DZDz+W9KvHkAjCZwwEBf3AMN2Vrp1kEdCwEoH3BQ1wJwy5d7pYatNfaAAgY5lw44sCCCXqARSVqDEaAAgrkOtHpu+DGxN3U11S54sLhW2naIAUqdCU5EAcoMIJx1NuJ25cuyK8xj+QBCaHUsPWIAGVWgNYKUIUSg/dwAZctQg0+AsOCAgQEDAogPMICAdXLmtnP3Dn48efPR/XETSSGCg+7eDejXf5TcBFGW2Ifffvv1lw0nynRTH3c3JYDAZzc50M8wFQiz4E0LOAghThNdOsJcYpNQMEEE95R4TwT/aQNLiCOaWCKKomzChSSUTBNKjaRsQCMol+Cohxd8NILIHiAFKeQjX2gASCB6eCWEkkzu4aQdVFZp5ZVYZqnlllx26eWXYIYp5phkshEEADs=';
   const labels = he.decode([...genres.map(({ name }) => name), ...tags.map(({ name }) => name)].join(', '));
 
+  const thumbnailRef = useRef();
   const [thumbnailRevealed, revealThumbnail] = useState(false);
 
   const handleThumbnailLoaded = () => revealThumbnail(true);
@@ -114,6 +115,10 @@ const MixListItem = ({
   useEffect(() => {
     revealThumbnail(false);
   }, [thumbnail]);
+
+  useEffect(() => {
+    if (!thumbnailRevealed && thumbnailRef.current && thumbnailRef.current.complete) handleThumbnailLoaded();
+  });
 
   const [columns] = useBreakpoints({
     box: 'content-box',
@@ -127,6 +132,7 @@ const MixListItem = ({
       <div className={styles.controls}>
         <div className={styles.thumbnail}>
           <img
+            ref={thumbnailRef}
             key={thumbnail || fallbackThumbnail}
             className={thumbnailRevealed ? styles.thumbnailRevealed : styles.thumbnailLoading}
             src={thumbnail || fallbackThumbnail}
