@@ -7,6 +7,7 @@ import fetchMix from '../../actions/fetchMix';
 import Aside from '../../components/Aside';
 import MixDetails from '../../components/MixDetails';
 import MixBody from '../../components/MixBody';
+import MixComments from '../../components/MixComments';
 import styles from './Mix.module.css';
 
 const Mix = () => {
@@ -66,21 +67,10 @@ const Mix = () => {
             />
           )}
       </Aside>
-      <div className={styles.body}>
+      <Aside>
         <MixBody content={content} />
-        {!id
-          ? <div>Loading&hellip;</div>
-          : (
-            <div className={styles.comments}>
-              <div>Add comment</div>
-              {comments.map(({ authorName, content }, index) => (
-                <div key={`comment-${index}`}>
-                  <div>{authorName}</div>
-                  <div dangerouslySetInnerHTML={{ __html: content }} />
-                </div>
-              ))}
-            </div>)}
-      </div>
+      </Aside>
+      <MixComments comments={comments} />
     </div>
   );
 };

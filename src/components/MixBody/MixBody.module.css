@@ -1,3 +1,17 @@
+.root > :not(:last-child) {
+  margin-bottom: 30px;
+}
+
+.root > blockquote {
+  padding: 6px 8px;
+  background-color: var(--colour-blue-800);
+  line-height: 1.5;
+}
+
+.root > blockquote p:not(:last-of-type) {
+  margin-bottom: .75em;
+}
+
 .root ul,
 .root ol {
   display: grid;
