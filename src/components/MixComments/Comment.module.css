@@ -7,11 +7,20 @@
 .avatar {
   width: 48px;
   height: 48px;
+  transition: opacity var(--duration-short) var(--timing-function-ease-out-cubic);
 }
 
 .avatarLoading,
 .avatarRevealed {
   composes: avatar;
+}
+
+.avatarLoading {
+  opacity: 0;
+}
+
+.avatarRevealed {
+  opacity: 1;
 }
 
 .comment {
