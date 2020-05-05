@@ -1,0 +1,51 @@
+.root {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 8px;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+}
+
+.avatarLoading,
+.avatarRevealed {
+  composes: avatar;
+}
+
+.comment {
+  padding: 6px 8px;
+  background-color: var(--colour-blue-800);
+  line-height: 1.5;
+}
+
+.heading {
+  padding-bottom: .25em;
+  font-size: .9rem;
+  font-weight: 500;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+.date {
+  color: var(--colour-grey-400);
+  margin-right: 1.5ch;
+}
+
+.body p:not(:last-child) {
+  margin-bottom: .25em;
+}
+
+.body a {
+  color: var(--colour-grey-400);
+  text-decoration: none;
+}
+
+.body a:hover{
+  color: var(--colour-grey-100);
+}
+
+.body a:active {
+  color: var(--colour-grey-200);
+}
