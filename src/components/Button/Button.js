@@ -7,17 +7,17 @@ const Button = ({
   text,
   Icon = () => null,
   disabled = false,
-  type = 'normal',
-  align = 'center'
+  align = 'center',
+  type = 'button'
 }) => {
-  const className = [styles.root, styles[type], styles[align]].join(' ');
+  const className = [styles.root, styles[align]].join(' ');
 
   return (
     <button
       className={className}
       onClick={onClick}
       disabled={disabled}
-      type='button'
+      type={type}
     >
       {align !== 'right' && <Icon className={styles.iconLeft} />}
       {text && (
@@ -31,12 +31,12 @@ const Button = ({
 };
 
 Button.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   text: PropTypes.string,
   Icon: PropTypes.func,
   disabled: PropTypes.bool,
-  type: PropTypes.oneOf(['normal', 'navigation']),
-  align: PropTypes.oneOf(['left', 'center', 'right'])
+  align: PropTypes.oneOf(['left', 'center', 'right']),
+  type: PropTypes.oneOf(['button', 'submit'])
 };
 
 export default Button;
