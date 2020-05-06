@@ -32,9 +32,9 @@ export const SET_FACETTED_SEARCH_OPTIONS = 'SET_FACETTED_SEARCH_OPTIONS';
 
 export const SET_MIX = 'SET_MIX';
 
-export const SET_QUERY_RESULTS = 'SET_QUERY_RESULTS';
-
 export const SET_PLAYHEAD = 'SET_PLAYHEAD';
+
+export const SET_QUERY_RESULTS = 'SET_QUERY_RESULTS';
 
 export const SET_VOLUME = 'SET_VOLUME';
 
