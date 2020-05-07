@@ -6,6 +6,7 @@ import styles from './MixComments.module.css';
 const MixComments = ({ comments }) => comments
   ? (
     <div className={styles.root}>
+      <div className={styles.heading}>Comments</div>
       {comments.map(comment => <Comment key={`comment-${comment.id}`} {...comment} />)}
     </div>
   )
