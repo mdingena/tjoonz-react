@@ -3,6 +3,7 @@
   gap: 2px;
   max-width: 360px;
   margin: 0 auto;
+  padding-bottom: 16px;
 }
 
 .input {
@@ -32,6 +33,35 @@
   color: var(--colour-grey-400);
 }
 
+.statusText {
+  min-height: 34px;
+  padding: 6px 8px;
+  font-size: .9rem;
+  line-height: 1.5;
+  font-weight: 500;
+  text-align: center;
+  background-color: var(--colour-blue-800);
+}
+
 .submit {
   padding-top: 16px;
+}
+
+.link {
+  display: block;
+  font-size: .8rem;
+  line-height: 2;
+  font-weight: 500;
+  color: var(--colour-grey-400);
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: var(--colour-grey-100);
+}
+
+.link:active {
+  color: var(--colour-grey-200);
 }

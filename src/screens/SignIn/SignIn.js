@@ -3,6 +3,7 @@ import { useLocation, Redirect } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import selectAuth from '../../selectors/selectAuth';
 import signIn from '../../actions/signIn';
+import he from 'he';
 import Button from '../../components/Button';
 import Icon from '../../components/Icon';
 import styles from './SignIn.module.css';
@@ -26,33 +27,40 @@ const SignIn = () => {
   if (auth.token) return <Redirect to={redirectTo} />;
 
   return (
-    <form className={styles.root} onSubmit={handleSubmit}>
-      <input
-        className={styles.input}
-        id='username'
-        type='text'
-        placeholder='Username'
-        autoComplete='username'
-        autoFocus
-        aria-label='Username'
-      />
-      <input
-        className={styles.input}
-        id='password'
-        type='password'
-        placeholder='Password'
-        autoComplete='current-password'
-        aria-label='Password'
-      />
-      <div className={styles.submit}>
-        <Button
-          text={auth.isAuthenticating ? 'Signing in' : 'Sign in'}
-          Icon={auth.isAuthenticating ? Icon.Snooze : Icon.ShieldCheck}
-          type='submit'
-          disabled={auth.isAuthenticating}
+    <>
+      <form className={styles.root} onSubmit={handleSubmit}>
+        <input
+          className={styles.input}
+          id='username'
+          type='text'
+          placeholder='Username'
+          autoComplete='username'
+          autoFocus
+          aria-label='Username'
         />
-      </div>
-    </form>
+        <input
+          className={styles.input}
+          id='password'
+          type='password'
+          placeholder='Password'
+          autoComplete='current-password'
+          aria-label='Password'
+        />
+        {auth.statusText && (
+          <div className={styles.statusText}>{he.decode(auth.statusText)}</div>
+        )}
+        <div className={styles.submit}>
+          <Button
+            text={auth.isAuthenticating ? 'Signing in' : 'Sign in'}
+            Icon={auth.isAuthenticating ? Icon.Snooze : Icon.ShieldCheck}
+            type='submit'
+            disabled={auth.isAuthenticating}
+          />
+        </div>
+      </form>
+      <a className={styles.link} href='https://www.tjoonz.com/wp-login.php?action=lostpassword' rel='noopener referrer' target='_blank'>Lost your password?</a>
+      <a className={styles.link} href='https://www.tjoonz.com/wp-login.php?action=register' rel='noopener referrer' target='_blank'>Register</a>
+    </>
   );
 };
 
