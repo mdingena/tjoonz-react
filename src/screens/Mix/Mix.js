@@ -5,12 +5,15 @@ import selectMix from '../../selectors/selectMix';
 import selectMixStatus from '../../selectors/selectMixStatus';
 import selectMixFromQuery from '../../selectors/selectMixFromQuery';
 import fetchMix from '../../actions/fetchMix';
+import { Helmet } from 'react-helmet';
+import he from 'he';
 import Aside from '../../components/Aside';
 import MixDetails from '../../components/MixDetails';
 import MixBody from '../../components/MixBody';
 import MixComments from '../../components/MixComments';
 import NotFound from '../../screens/NotFound';
 import styles from './Mix.module.css';
+import MetaTags from '../../components/MetaTags';
 
 const Mix = () => {
   const { slug } = useParams();
@@ -51,6 +54,11 @@ const Mix = () => {
 
   return (
     <div className={styles.root}>
+      <MetaTags
+        title={`${he.decode(artists.map(({ name }) => name).join(', '))} - ${title} | Tjoonz.com`}
+        description={description}
+        canonicalUrl={`https://www.tjoonz.com/mix/${slug}/`}
+      />
       <Aside>
         <MixDetails
           id={id}
