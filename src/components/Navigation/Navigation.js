@@ -21,7 +21,13 @@ const Navigation = ({ links = [] }) => {
 
   useEffect(() => {
     if (token) {
-      setNavLinks(links);
+      setNavLinks([...links, {
+        to: {
+          pathname: '/sign-out/',
+          state: { from: location.pathname }
+        },
+        text: 'Sign out'
+      }]);
     } else {
       setNavLinks([{
         to: {
