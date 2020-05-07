@@ -1,5 +1,6 @@
 import {
   DONE_FETCHING_MIX,
+  PREPEND_COMMENT,
   SET_MIX,
   START_FETCHING_MIX
 } from '../constants/actionTypes';
@@ -17,6 +18,18 @@ const queryReducer = (state = initialState, { type, payload }) => {
         ...state,
         isFetching: false,
         statusText: payload.statusText
+      };
+
+    case PREPEND_COMMENT:
+      return {
+        ...state,
+        current: {
+          ...state.current,
+          comments: [
+            payload.comment,
+            ...state.current.comments
+          ]
+        }
       };
 
     case SET_MIX:
