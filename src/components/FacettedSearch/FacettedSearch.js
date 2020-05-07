@@ -14,7 +14,6 @@ import Icon from '../Icon';
 import PropTypes from 'prop-types';
 import styles from './FacettedSearch.module.css';
 
-/** @todo Fix warnings introduced by React 16.13 https://github.com/facebook/react/issues/18147 */
 const FacettedSearch = ({ facet, previewCount = 10, showCombobox = false }) => {
   const dispatch = useDispatch();
   const {
@@ -40,10 +39,17 @@ const FacettedSearch = ({ facet, previewCount = 10, showCombobox = false }) => {
     setComboboxItems(filteredItems);
   };
 
+  const [comboboxSelection, setComboboxSelection] = useState(null);
   const handleComboboxSelection = ({ selectedItem }) => {
-    const action = toggleFacettedSearchItem(facet, selectedItem);
-    dispatch(action);
+    setComboboxSelection(selectedItem);
   };
+
+  useEffect(() => {
+    if (comboboxSelection !== null) {
+      const action = toggleFacettedSearchItem(facet, comboboxSelection);
+      dispatch(action);
+    }
+  }, [comboboxSelection, facet, dispatch]);
 
   const {
     isOpen: menuIsOpen,
