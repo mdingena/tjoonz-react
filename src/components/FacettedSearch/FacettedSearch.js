@@ -9,8 +9,6 @@ import { useCombobox } from 'downshift';
 import he from 'he';
 import FacettedSearchHeader from '../FacettedSearchHeader';
 import FacettedSearchItem from '../FacettedSearchItem';
-import LoadingSpinner from '../LoadingSpinner';
-import ProgressBar from '../ProgressBar';
 import Button from '../Button';
 import Icon from '../Icon';
 import PropTypes from 'prop-types';
@@ -79,14 +77,6 @@ const FacettedSearch = ({ facet, previewCount = 10, showCombobox = false }) => {
             />
           </div>
         )}
-        <div className={styles.root}>
-          <div className={styles.loading}>
-            <div className={styles.spinner}>
-              <LoadingSpinner size={32} />
-            </div>
-            <ProgressBar taskKey={`fetchAllFacetPages_${facet.KEY}`} />
-          </div>
-        </div>
       </div>
     );
   }
