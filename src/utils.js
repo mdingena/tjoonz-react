@@ -22,3 +22,8 @@ export const checkLocalStorageAvailability = () => {
 
 export const clamp = (value, lowerBound, upperBound) =>
   Math.min(Math.max(value, lowerBound), upperBound);
+
+export const stripHtmlTags = html => {
+  const parsed = new window.DOMParser().parseFromString(html, 'text/html').body;
+  return parsed.textContent || '';
+};
