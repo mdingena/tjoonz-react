@@ -25,7 +25,8 @@
 
 .input {
   width: 100%;
-  padding: 2px 5px;
+  height: 34px;
+  padding: 2px 8px;
   background-color: var(--colour-blue-800);
   border: 0;
   border-bottom: 1px solid transparent;
