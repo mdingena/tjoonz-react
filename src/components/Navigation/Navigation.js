@@ -1,5 +1,7 @@
 import React, { useRef, useState, useCallback, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import selectAuth from '../../selectors/selectAuth';
 import selectDrawer from '../../selectors/selectDrawer';
 import { useResizeObserver } from '@envato/react-breakpoints';
 import Logo from './Logo';
@@ -11,8 +13,25 @@ import styles from './Navigation.module.css';
 
 const Navigation = ({ links = [] }) => {
   const timeout = useRef();
+  const location = useLocation();
+  const { token } = useSelector(selectAuth);
   const drawerData = useSelector(selectDrawer);
   const [staleDrawerData, setStaleDrawerData] = useState(null);
+  const [navLinks, setNavLinks] = useState(links);
+
+  useEffect(() => {
+    if (token) {
+      setNavLinks(links);
+    } else {
+      setNavLinks([{
+        to: {
+          pathname: '/sign-in/',
+          state: { from: location.pathname }
+        },
+        text: 'Sign in'
+      }, ...links]);
+    }
+  }, [token, links, location.pathname]);
 
   useEffect(() => {
     if (drawerData !== null && staleDrawerData === null) {
@@ -52,7 +71,7 @@ const Navigation = ({ links = [] }) => {
     let index = 0;
 
     if (containerWidth) {
-      for (const { to } of links) {
+      for (const { to } of navLinks) {
         sumWidth += linkWidths[to];
         if (sumWidth > containerWidth) break;
         ++index;
@@ -60,19 +79,19 @@ const Navigation = ({ links = [] }) => {
     }
 
     return index;
-  }, [links, linkWidths, observedEntry]);
+  }, [navLinks, linkWidths, observedEntry]);
 
   /* Initialise linkWidths when the `links` prop changes. */
   useEffect(() => {
     const widths = {};
 
-    links.forEach(({ to }) => {
+    navLinks.forEach(({ to }) => {
       widths[to] = 0;
     });
 
     setLinkWidths(widths);
     setCutoffIndex(0);
-  }, [links]);
+  }, [navLinks, token]);
 
   /* When a resize is detected, recalculate the cutoff index. */
   useEffect(() => {
@@ -80,8 +99,8 @@ const Navigation = ({ links = [] }) => {
     setCutoffIndex(index);
   }, [linkWidths, observedEntry, calculateCutoffIndex]);
 
-  const visibleLinks = links.slice(0, cutoffIndex);
-  const hiddenLinks = links.slice(cutoffIndex);
+  const visibleLinks = navLinks.slice(0, cutoffIndex);
+  const hiddenLinks = navLinks.slice(cutoffIndex);
 
   const drawer = staleDrawerData || drawerData;
   const sidebarClassName = staleDrawerData && drawerData ? styles.reveal : styles.hide;
