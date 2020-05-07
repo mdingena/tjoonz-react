@@ -2,12 +2,14 @@ import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import selectMix from '../../selectors/selectMix';
+import selectMixStatus from '../../selectors/selectMixStatus';
 import selectMixFromQuery from '../../selectors/selectMixFromQuery';
 import fetchMix from '../../actions/fetchMix';
 import Aside from '../../components/Aside';
 import MixDetails from '../../components/MixDetails';
 import MixBody from '../../components/MixBody';
 import MixComments from '../../components/MixComments';
+import NotFound from '../../screens/NotFound';
 import styles from './Mix.module.css';
 
 const Mix = () => {
@@ -15,6 +17,7 @@ const Mix = () => {
   const dispatch = useDispatch();
   const cache = useSelector(selectMixFromQuery(slug));
   const mix = useSelector(selectMix(slug));
+  const statusText = useSelector(selectMixStatus);
 
   const {
     id,
@@ -42,30 +45,30 @@ const Mix = () => {
     }
   }, [id, slug, dispatch]);
 
+  if (statusText !== null) return <NotFound />;
+
+  if (!id) return null;
+
   return (
     <div className={styles.root}>
       <Aside>
-        {!id
-          ? <MixDetails empty />
-          : (
-            <MixDetails
-              id={id}
-              slug={slug}
-              thumbnail={thumbnail}
-              poster={poster}
-              published={published}
-              artists={artists}
-              title={title}
-              genres={genres}
-              tags={tags}
-              duration={duration}
-              description={description}
-              plays={plays}
-              downloads={downloads}
-              quality={quality}
-              fileSize={fileSize}
-            />
-          )}
+        <MixDetails
+          id={id}
+          slug={slug}
+          thumbnail={thumbnail}
+          poster={poster}
+          published={published}
+          artists={artists}
+          title={title}
+          genres={genres}
+          tags={tags}
+          duration={duration}
+          description={description}
+          plays={plays}
+          downloads={downloads}
+          quality={quality}
+          fileSize={fileSize}
+        />
       </Aside>
       <Aside>
         <MixBody content={content} />
