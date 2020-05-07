@@ -32,7 +32,12 @@ const Link = ({ to, text, onResize, onClick = noOp, collapsed = false }) => {
 };
 
 Link.propTypes = {
-  to: PropTypes.string.isRequired,
+  to: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.shape({
+      pathname: PropTypes.string.isRequired
+    })
+  ]).isRequired,
   text: PropTypes.string.isRequired,
   onResize: PropTypes.func.isRequired,
   onClick: PropTypes.func,
