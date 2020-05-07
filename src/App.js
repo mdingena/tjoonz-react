@@ -10,6 +10,7 @@ import Authenticate from './components/Authenticate';
 import Screens from './screens';
 import Home from './screens/Home';
 import Mix from './screens/Mix';
+import NotFound from './screens/NotFound';
 import SignIn from './screens/SignIn';
 import styles from './App.module.css';
 
@@ -41,6 +42,7 @@ const App = () => (
               <Route exact path='/' component={Home} />
               <Route path='/mix/:slug/' component={Mix} />
               <Route path='/sign-in/' component={SignIn} />
+              <Route component={NotFound} />
             </Screens>
           </Wrap>
           <Playlist />
