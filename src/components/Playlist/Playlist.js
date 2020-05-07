@@ -1,4 +1,5 @@
 import React from 'react';
+import { Observe } from '@envato/react-breakpoints';
 import { useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
 import { PLAYLIST_DRAWER } from '../../constants/drawers';
@@ -13,31 +14,35 @@ const Playlist = () => {
 
   return (
     <Drawer drawerKey={PLAYLIST_DRAWER.KEY} align={PLAYLIST_DRAWER.ALIGN}>
-      <div className={styles.root}>
-        {playlist.length === 0
-          ? (
-            <Button
-              onClick={() => { /* noop */ }}
-              text='Nothing in playlist'
-              disabled
-            />
-          )
-          : (
-            <>
-              <div className={styles.item}>
-                <MixListHeader />
-              </div>
-              {playlist.map((item, index) => (
-                <div
-                  key={`playlist-${index}`}
-                  className={playhead === index ? styles.active : styles.item}
-                >
-                  <MixListItem shownInPlaylist {...item} />
-                </div>
-              ))}
-            </>
-          )}
-      </div>
+      <Observe
+        box='content-box'
+        render={({ observedElementProps }) => (
+          <div className={styles.root} {...observedElementProps}>
+            {playlist.length === 0
+              ? (
+                <Button
+                  text='Nothing in playlist'
+                  disabled
+                />
+              )
+              : (
+                <>
+                  <div className={styles.item}>
+                    <MixListHeader />
+                  </div>
+                  {playlist.map((item, index) => (
+                    <div
+                      key={`playlist-${index}`}
+                      className={playhead === index ? styles.active : styles.item}
+                    >
+                      <MixListItem shownInPlaylist {...item} />
+                    </div>
+                  ))}
+                </>
+              )}
+          </div>
+        )}
+      />
     </Drawer>
   );
 };
