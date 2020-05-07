@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import authReducer from './authReducer';
 import detailsReducer from './detailsReducer';
 import drawerReducer from './drawerReducer';
 import facettedSearchReducer from './facettedSearchReducer';
@@ -8,6 +9,7 @@ import queryReducer from './queryReducer';
 import tasksReducer from './tasksReducer';
 
 const appReducer = combineReducers({
+  auth: authReducer,
   details: detailsReducer,
   drawer: drawerReducer,
   facettedSearch: facettedSearchReducer,
