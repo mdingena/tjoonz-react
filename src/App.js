@@ -11,8 +11,9 @@ import Authenticate from './components/Authenticate';
 import Screens from './screens';
 import Home from './screens/Home';
 import Mix from './screens/Mix';
-import NotFound from './screens/NotFound';
 import SignIn from './screens/SignIn';
+import SignOut from './screens/SignOut';
+import NotFound from './screens/NotFound';
 import styles from './App.module.css';
 
 const App = () => (
@@ -68,6 +69,7 @@ const App = () => (
               <Route exact path='/' component={Home} />
               <Route path='/mix/:slug/' component={Mix} />
               <Route path='/sign-in/' component={SignIn} />
+              <Route path='/sign-out/' component={SignOut} />
               <Route component={NotFound} />
             </Screens>
           </Wrap>
