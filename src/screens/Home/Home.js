@@ -105,7 +105,6 @@ const Home = () => {
                 )
                 : (
                   <Button
-                    onClick={() => { /* noop */ }}
                     text={query.isFetching ? 'Loading' : 'Need more? Change your search options'}
                     Icon={query.isFetching ? Icon.Snooze : () => null}
                     disabled
