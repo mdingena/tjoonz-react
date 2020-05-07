@@ -33,6 +33,7 @@ const SignIn = () => {
         type='text'
         placeholder='Username'
         autoComplete='username'
+        autoFocus
         aria-label='Username'
       />
       <input
