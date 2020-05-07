@@ -62,7 +62,7 @@
   margin-left: .4em;
 }
 
-.root:hover .icon {
+.root:not(:disabled):hover .icon {
   fill: var(--colour-grey-200);
 }
 
