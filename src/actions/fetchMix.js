@@ -23,10 +23,10 @@ const fetchMix = slug => async (dispatch, getState) => {
     return;
   }
 
-  const mix = response.resources.map(extractMixData)[0] || {};
+  const mix = response.resources.map(extractMixData)[0];
 
-  dispatch(setMix(mix));
-  dispatch(doneFetching());
+  dispatch(setMix(mix || {}));
+  dispatch(doneFetching(!mix ? "Couldn't find mix." : null));
   dispatch(completeTasks(SET_MIX, 1));
 };
 
