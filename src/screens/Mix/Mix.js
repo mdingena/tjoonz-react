@@ -70,7 +70,9 @@ const Mix = () => {
       <Aside>
         <MixBody content={content} />
       </Aside>
-      <MixComments comments={comments} />
+      <Aside>
+        <MixComments comments={comments} id={id} />
+      </Aside>
     </div>
   );
 };
