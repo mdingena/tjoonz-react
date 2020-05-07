@@ -9,6 +9,7 @@ import { recallAuth } from '../api/authentication';
 const storedState = recallAuth();
 
 const defaultState = {
+  isAuthenticating: false,
   token: '',
   user_email: '',
   user_nicename: '',
@@ -23,6 +24,7 @@ const authReducer = (state = initialState, { type, payload }) => {
     case DONE_SIGNING_IN:
       return {
         ...state,
+        isAuthenticating: false,
         statusText: payload.statusText
       };
 
@@ -35,6 +37,7 @@ const authReducer = (state = initialState, { type, payload }) => {
     case START_SIGNING_IN:
       return {
         ...state,
+        isAuthenticating: true,
         statusText: null
       };
 
