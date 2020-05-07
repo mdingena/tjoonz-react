@@ -43,10 +43,18 @@
   background-color: var(--colour-blue-800);
 }
 
+.root ol:first-of-type {
+  position: relative;
+  padding-top: 25px;
+}
+
 .root ol:first-of-type::before {
   content: 'Tracklist';
+  position: absolute;
+  left: -32px;
   padding: 2px 8px;
   text-transform: uppercase;
   font-size: .9rem;
+  line-height: 1.5;
   font-weight: 500;
 }
