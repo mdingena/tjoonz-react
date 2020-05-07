@@ -11,6 +11,7 @@
     "qs": "^6.9.3",
     "react": "^0.0.0-experimental-e5d06e34b",
     "react-dom": "^0.0.0-experimental-e5d06e34b",
+    "react-helmet": "^6.0.0",
     "react-redux": "^7.2.0",
     "react-router": "^5.1.2",
     "react-router-dom": "^5.1.2",
