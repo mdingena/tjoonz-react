@@ -10,6 +10,7 @@ import Authenticate from './components/Authenticate';
 import Screens from './screens';
 import Home from './screens/Home';
 import Mix from './screens/Mix';
+import SignIn from './screens/SignIn';
 import styles from './App.module.css';
 
 const App = () => (
@@ -39,6 +40,7 @@ const App = () => (
             <Screens>
               <Route exact path='/' component={Home} />
               <Route path='/mix/:slug/' component={Mix} />
+              <Route path='/sign-in/' component={SignIn} />
             </Screens>
           </Wrap>
           <Playlist />
