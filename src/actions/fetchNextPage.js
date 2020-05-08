@@ -24,9 +24,9 @@ const fetchNextPage = () => async (dispatch, getState) => {
 
   const options = { _embed: true };
 
-  if (query.facets[ARTISTS.KEY].ids > 0) options[ARTISTS.TAXONOMY] = query.facets[ARTISTS.KEY].ids.join(',');
-  if (query.facets[GENRES.KEY].ids > 0) options[GENRES.TAXONOMY] = query.facets[GENRES.KEY].ids.join(',');
-  if (query.facets[TAGS.KEY].ids > 0) options[TAGS.TAXONOMY] = query.facets[TAGS.KEY].ids.join(',');
+  if (query.facets[ARTISTS.KEY].ids.length > 0) options[ARTISTS.TAXONOMY] = query.facets[ARTISTS.KEY].ids.join(',');
+  if (query.facets[GENRES.KEY].ids.length > 0) options[GENRES.TAXONOMY] = query.facets[GENRES.KEY].ids.join(',');
+  if (query.facets[TAGS.KEY].ids.length > 0) options[TAGS.TAXONOMY] = query.facets[TAGS.KEY].ids.join(',');
 
   const response = await fetchPage(ENDPOINTS.MIXES, query.nextPage, options);
 
