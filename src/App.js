@@ -8,6 +8,7 @@ import Navigation from './components/Navigation';
 import Player from './components/Player';
 import Playlist from './components/Playlist';
 import Authenticate from './components/Authenticate';
+import Analytics from './components/Analytics';
 import Screens from './screens';
 import Home from './screens/Home';
 import Mix from './screens/Mix';
@@ -82,6 +83,7 @@ const App = () => (
           </Wrap>
         </div>
 
+        <Analytics />
       </Router>
     </ResizeObserverProvider>
     <Authenticate />
