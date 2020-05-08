@@ -5,7 +5,7 @@ import selectMix from '../../selectors/selectMix';
 import selectMixStatus from '../../selectors/selectMixStatus';
 import selectMixFromQuery from '../../selectors/selectMixFromQuery';
 import fetchMix from '../../actions/fetchMix';
-import { Helmet } from 'react-helmet';
+import MetaTags from '../../components/MetaTags';
 import he from 'he';
 import Aside from '../../components/Aside';
 import MixDetails from '../../components/MixDetails';
@@ -13,7 +13,6 @@ import MixBody from '../../components/MixBody';
 import MixComments from '../../components/MixComments';
 import NotFound from '../../screens/NotFound';
 import styles from './Mix.module.css';
-import MetaTags from '../../components/MetaTags';
 
 const Mix = () => {
   const { slug } = useParams();
