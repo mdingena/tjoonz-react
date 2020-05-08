@@ -26,7 +26,7 @@ export const GENRES = {
 export const TAGS = {
   KEY: 'TAGS',
   ENDPOINT: '/wp/v2/tags',
-  TAXONOMY: 'post_tag',
+  TAXONOMY: 'tags',
   NAME_SINGULAR: 'tag',
   NAME_PLURAL: 'tags'
 };
