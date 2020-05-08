@@ -5,8 +5,11 @@ import {
 } from '../constants/actionTypes';
 import fetchAllFacetPages from '../api/fetchAllFacetPages';
 
-const fetchFacettedSearchOptions = facet => async dispatch => {
+const fetchFacettedSearchOptions = facet => async (dispatch, getState) => {
   dispatch(startFetching(facet));
+
+  const { facettedSearch } = getState();
+  const { query } = facettedSearch[facet.KEY];
 
   const response = await fetchAllFacetPages(dispatch, facet, { per_page: 100 });
 
@@ -17,7 +20,7 @@ const fetchFacettedSearchOptions = facet => async dispatch => {
 
   const options = response.resources.map(({ id, name: text, count }) => ({ id, text, count }));
 
-  dispatch(setFacettedSearchOptions(facet, options));
+  dispatch(setFacettedSearchOptions(facet, options, query));
   dispatch(doneFetching(facet));
 };
 
@@ -33,7 +36,11 @@ const doneFetching = (facet, statusText = null) => ({
   payload: { facet, statusText }
 });
 
-const setFacettedSearchOptions = (facet, options) => ({
+const setFacettedSearchOptions = (facet, options, query) => ({
   type: SET_FACETTED_SEARCH_OPTIONS,
-  payload: { facet, options }
+  payload: {
+    facet,
+    options,
+    selected: options.filter(({ id }) => query.includes(id))
+  }
 });

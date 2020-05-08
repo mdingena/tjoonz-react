@@ -14,7 +14,7 @@ const fetchNextPage = () => async (dispatch, getState) => {
   dispatch(startFetching);
   dispatch(addTasks(APPEND_QUERY_RESULTS, 1));
 
-  const { query } = getState();
+  const { query, facettedSearch } = getState();
 
   if (!query.nextPage) {
     dispatch(doneFetching(null, 'There are no more results.'));
@@ -22,11 +22,17 @@ const fetchNextPage = () => async (dispatch, getState) => {
     return;
   }
 
-  const options = { _embed: true };
+  const ids = {
+    [ARTISTS.TAXONOMY]: query.facets[ARTISTS.KEY].ids > 0 ? query.facets[ARTISTS.KEY].ids : [],
+    [GENRES.TAXONOMY]: query.facets[GENRES.KEY].ids > 0 ? query.facets[GENRES.KEY].ids : [],
+    [TAGS.TAXONOMY]: query.facets[TAGS.KEY].ids > 0 ? query.facets[TAGS.KEY].ids : []
+  };
 
-  if (query.facets[ARTISTS.KEY].ids > 0) options[ARTISTS.TAXONOMY] = query.facets[ARTISTS.KEY].ids.join(',');
-  if (query.facets[GENRES.KEY].ids > 0) options[GENRES.TAXONOMY] = query.facets[GENRES.KEY].ids.join(',');
-  if (query.facets[TAGS.KEY].ids > 0) options[TAGS.TAXONOMY] = query.facets[TAGS.KEY].ids.join(',');
+  if (facettedSearch[ARTISTS.KEY].query.length > 0) ids[ARTISTS.TAXONOMY].push(...facettedSearch[ARTISTS.KEY].query);
+  if (facettedSearch[GENRES.KEY].query.length > 0) ids[GENRES.TAXONOMY].push(...facettedSearch[GENRES.KEY].query);
+  if (facettedSearch[TAGS.KEY].query.length > 0) ids[TAGS.TAXONOMY].push(...facettedSearch[TAGS.KEY].query);
+
+  const options = { _embed: true, ...ids };
 
   const response = await fetchPage(ENDPOINTS.MIXES, query.nextPage, options);
 

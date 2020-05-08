@@ -1,3 +1,4 @@
+import qs from 'qs';
 import {
   DONE_FETCHING_FACETTED_SEARCH_OPTIONS,
   SET_FACETTED_SEARCH_OPTIONS,
@@ -9,6 +10,34 @@ import { ARTISTS, GENRES, TAGS } from '../constants/facettedSearchFacets';
 import { AND, OR } from '../constants/facettedSearchRelations';
 import { checkLocalStorageAvailability } from '../utils';
 
+const query = qs.parse(window.location.search, { ignoreQueryPrefix: true });
+
+const reduce = (state, query) =>
+  Object.entries(state)
+    .reduce((newState, [facetKey, facetState]) => {
+      const notSelected = query && query[facetKey.toLowerCase()]
+        ? query[facetKey.toLowerCase()]
+          .split(',')
+          .filter(id => facetState.selected.every(selection => selection.id !== Number(id)))
+          .map(id => Number(id))
+        : [];
+
+      const notFetched = notSelected.filter(id => facetState.options.every(fetched => fetched.id !== id));
+      const select = notSelected.filter(id => !notFetched.includes(id));
+
+      return ({
+        ...newState,
+        [facetKey]: {
+          ...state[facetKey],
+          selected: [
+            ...state[facetKey].selected,
+            ...state[facetKey].options.filter(({ id }) => select.includes(id))
+          ],
+          query: notFetched
+        }
+      });
+    }, {});
+
 const defaultState = {
   [ARTISTS.KEY]: {
     isFetching: false,
@@ -16,7 +45,8 @@ const defaultState = {
     statusText: null,
     relation: AND,
     options: [],
-    selected: []
+    selected: [],
+    query: []
   },
   [GENRES.KEY]: {
     isFetching: false,
@@ -24,7 +54,8 @@ const defaultState = {
     statusText: null,
     relation: AND,
     options: [],
-    selected: []
+    selected: [],
+    query: []
   },
   [TAGS.KEY]: {
     isFetching: false,
@@ -32,16 +63,19 @@ const defaultState = {
     statusText: null,
     relation: OR,
     options: [],
-    selected: []
+    selected: [],
+    query: []
   }
 };
 
 const isLocalStorageAvailable = checkLocalStorageAvailability();
 const localStorage = isLocalStorageAvailable && window.localStorage.getItem('facettedSearch');
 
-export const initialState = localStorage
+const seedState = localStorage
   ? JSON.parse(localStorage)
   : defaultState;
+
+export const initialState = reduce(seedState, query);
 
 const facettedSearchReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -61,7 +95,12 @@ const facettedSearchReducer = (state = initialState, { type, payload }) => {
         [payload.facet.KEY]: {
           ...state[payload.facet.KEY],
           lastUpdated: Date.now(),
-          options: orderByCountDesc(optionsWithMixes(payload.options))
+          options: orderByCountDesc(optionsWithMixes(payload.options)),
+          selected: [
+            ...state[payload.facet.KEY].selected,
+            ...payload.selected.filter(({ id }) => state[payload.facet.KEY].selected.every(selection => selection.id !== id))
+          ],
+          query: []
         }
       };
 

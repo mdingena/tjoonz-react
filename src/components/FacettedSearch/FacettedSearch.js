@@ -20,16 +20,18 @@ const FacettedSearch = ({ facet, previewCount = 10, showCombobox = false }) => {
     isFetching,
     lastUpdated,
     options,
-    selected
+    selected,
+    query
   } = useSelector(selectFacettedSearchFacet(facet));
 
   useEffect(() => {
     const updateRequired = lastUpdated < (Date.now() - FACETTED_SEARCH_OPTIONS_TTL);
+    const hasUnresolvedQuery = query.length > 0;
 
-    if (updateRequired) {
+    if (updateRequired || hasUnresolvedQuery) {
       dispatch(fetchFacettedSearchOptions(facet));
     }
-  }, [facet, lastUpdated, dispatch]);
+  }, [facet, selected, lastUpdated, dispatch]);
 
   const [comboboxItems, setComboboxItems] = useState(options);
   const handleComboboxChange = ({ inputValue }) => {
