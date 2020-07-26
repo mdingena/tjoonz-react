@@ -20,15 +20,16 @@ html {
   --colour-grey-100: #f1f1f1;
   --colour-grey-200: #cad1d9;
   --colour-grey-400: #8899a9;
+  --colour-grey-600: #566776;
 
   --duration-short: 150ms;
   --duration-medium: 300ms;
 
   --size-navigation-bar: 46px;
   --size-player-bar: 72px;
-  
+
   --timing-function-ease-out-sine: cubic-bezier(0.39, 0.575, 0.565, 1);
-  --timing-function-ease-out-cubic: cubic-bezier(0.215, 0.610, 0.355, 1);
+  --timing-function-ease-out-cubic: cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 body {
@@ -38,7 +39,7 @@ body {
   font-family: 'Oxanium', sans-serif;
   font-size: 16px;
   font-weight: 200;
-  letter-spacing: -.03em;
+  letter-spacing: -0.03em;
 }
 
 b,

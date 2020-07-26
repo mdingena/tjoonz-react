@@ -1,0 +1,42 @@
+.root {
+  padding: 32px 10px 0;
+  text-align: center;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.9rem;
+}
+
+.list li {
+  margin: 0;
+  padding: 0.25rem 0;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--colour-grey-600);
+}
+
+.link:hover {
+  color: var(--colour-grey-400);
+}
+
+@media (min-width: 541px) {
+  .root {
+    padding: 32px 30px 0;
+  }
+
+  .list li {
+    display: inline-block;
+    padding-right: 1ch;
+    color: var(--colour-grey-600);
+  }
+
+  .list li:not(:first-of-type)::before {
+    content: '/';
+    padding-right: 1ch;
+  }
+}
