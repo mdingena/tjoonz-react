@@ -12,7 +12,7 @@ import {
 
 const initialState = {
   isPlaying: false,
-  volumeLevel: 0.512, /* 0.8 ^ 3 */
+  volumeLevel: 0.512, // 0.8 ^ 3
   playlist: [],
   playhead: null
 };

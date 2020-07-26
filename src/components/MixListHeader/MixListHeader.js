@@ -15,18 +15,10 @@ const MixListHeader = () => {
     <div className={styles.root}>
       <div className={columns < 3 ? styles.noControls : styles.controls} />
       <div className={grid[columns]}>
-        <div hidden={columns < 2}>
-          Artists
-        </div>
-        <div>
-          Title
-        </div>
-        <div hidden={columns < 4}>
-          Labels
-        </div>
-        <div hidden={columns < 3}>
-          Published
-        </div>
+        <div hidden={columns < 2}>Artists</div>
+        <div>Title</div>
+        <div hidden={columns < 4}>Labels</div>
+        <div hidden={columns < 3}>Published</div>
       </div>
     </div>
   );

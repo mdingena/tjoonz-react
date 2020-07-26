@@ -38,9 +38,18 @@ const App = () => (
         <meta property='og:title' content='Tjoonz.com | Get your low-frequency fix!' />
         <meta name='twitter:title' content='Tjoonz.com | Get your low-frequency fix!' />
 
-        <meta name='description' content='An EDM mixtape archive launched in 2008, run entirely in our spare time and out of our own pockets. Enjoy over 2,500 hour-long bass music sets.' />
-        <meta property='og:description' content='An EDM mixtape archive launched in 2008, run entirely in our spare time and out of our own pockets. Enjoy over 2,500 hour-long bass music sets.' />
-        <meta name='twitter:description' content='An EDM mixtape archive launched in 2008, run entirely in our spare time and out of our own pockets. Enjoy over 2,500 hour-long bass music sets.' />
+        <meta
+          name='description'
+          content='An EDM mixtape archive launched in 2008, run entirely in our spare time and out of our own pockets. Enjoy over 2,500 hour-long bass music sets.'
+        />
+        <meta
+          property='og:description'
+          content='An EDM mixtape archive launched in 2008, run entirely in our spare time and out of our own pockets. Enjoy over 2,500 hour-long bass music sets.'
+        />
+        <meta
+          name='twitter:description'
+          content='An EDM mixtape archive launched in 2008, run entirely in our spare time and out of our own pockets. Enjoy over 2,500 hour-long bass music sets.'
+        />
 
         <link rel='canonical' href='https://www.tjoonz.com' />
         <meta property='og:url' content='https://www.tjoonz.com' />

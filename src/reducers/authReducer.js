@@ -1,9 +1,4 @@
-import {
-  DONE_SIGNING_IN,
-  SET_AUTH,
-  START_SIGNING_IN,
-  UNSET_AUTH
-} from '../constants/actionTypes';
+import { DONE_SIGNING_IN, SET_AUTH, START_SIGNING_IN, UNSET_AUTH } from '../constants/actionTypes';
 import { recallAuth } from '../api/authentication';
 
 const storedState = recallAuth();

@@ -8,7 +8,9 @@ const MixComments = ({ comments, id }) => (
   <div className={styles.root}>
     <div className={styles.heading}>Comments</div>
     <CommentForm id={id} />
-    {comments.map(comment => <Comment key={`comment-${comment.id}`} {...comment} />)}
+    {comments.map(comment => (
+      <Comment key={`comment-${comment.id}`} {...comment} />
+    ))}
   </div>
 );
 

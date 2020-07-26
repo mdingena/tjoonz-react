@@ -1,7 +1,4 @@
-import {
-  DONE_SUBMITTING_COMMENT,
-  START_SUBMITTING_COMMENT
-} from '../constants/actionTypes';
+import { DONE_SUBMITTING_COMMENT, START_SUBMITTING_COMMENT } from '../constants/actionTypes';
 
 const initialState = {
   isSubmitting: false,

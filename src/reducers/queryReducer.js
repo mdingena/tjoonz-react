@@ -9,14 +9,16 @@ import {
 import { initialState as facettedSearchInitialState } from './facettedSearchReducer';
 
 const reduce = state =>
-  Object.entries(state)
-    .reduce((newState, [facetKey, facetState]) => ({
+  Object.entries(state).reduce(
+    (newState, [facetKey, facetState]) => ({
       ...newState,
       [facetKey]: {
         relation: facetState.relation,
         ids: facetState.selected.map(({ id }) => id)
       }
-    }), {});
+    }),
+    {}
+  );
 
 const initialState = {
   isFetching: false,

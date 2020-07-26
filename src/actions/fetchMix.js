@@ -1,8 +1,4 @@
-import {
-  DONE_FETCHING_MIX,
-  SET_MIX,
-  START_FETCHING_MIX
-} from '../constants/actionTypes';
+import { DONE_FETCHING_MIX, SET_MIX, START_FETCHING_MIX } from '../constants/actionTypes';
 import { ENDPOINTS } from '../constants/api';
 import addTasks from '../actions/addTasks';
 import completeTasks from '../actions/completeTasks';

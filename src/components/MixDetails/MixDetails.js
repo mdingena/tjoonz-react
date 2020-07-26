@@ -88,21 +88,19 @@ const MixDetails = ({
   return (
     <div className={routeMatch ? styles.root : styles.drawer}>
       <div className={posterRevealed ? styles.posterRevealed : styles.posterLoading}>
-        {!empty && poster
-          ? (
-            <>
-              <img key={thumbnail} src={thumbnail} alt={title} />
-              <img ref={posterRef} key={poster} src={poster} alt={title} onLoad={handlePosterLoaded} />
-            </>
-          )
-          : (
-            <div className={styles.logo}>
-              <div>
-                <div />
-                <div />
-              </div>
+        {!empty && poster ? (
+          <>
+            <img key={thumbnail} src={thumbnail} alt={title} />
+            <img ref={posterRef} key={poster} src={poster} alt={title} onLoad={handlePosterLoaded} />
+          </>
+        ) : (
+          <div className={styles.logo}>
+            <div>
+              <div />
+              <div />
             </div>
-          )}
+          </div>
+        )}
       </div>
       {!empty && (
         <div className={styles.controls}>
@@ -111,16 +109,8 @@ const MixDetails = ({
             text={isTrackAtPlayhead && isPlaying ? 'Pause' : 'Play'}
             Icon={isTrackAtPlayhead && isPlaying ? Icon.Pause : Icon.Play}
           />
-          <Button
-            onClick={handlePlaylistClick}
-            text='Queue'
-            Icon={isInPlaylist ? Icon.CheckSquare : Icon.Square}
-          />
-          <Button
-            onClick={() => console.log('download')}
-            text='Download'
-            Icon={Icon.CloudDownload}
-          />
+          <Button onClick={handlePlaylistClick} text='Queue' Icon={isInPlaylist ? Icon.CheckSquare : Icon.Square} />
+          <Button onClick={() => console.log('download')} text='Download' Icon={Icon.CloudDownload} />
         </div>
       )}
       {!empty && !routeMatch && (
@@ -154,14 +144,14 @@ const MixDetails = ({
         </div>
       )}
       <div className={styles.description}>
-        {!empty
-          ? description
-          : (
-            <>
-              <h1>Tjoonz.com</h1>
-              <p>An EDM mixtape archive launched in 2008, run entirely in our spare time and out of our own pockets.</p>
-            </>
-          )}
+        {!empty ? (
+          description
+        ) : (
+          <>
+            <h1>Tjoonz.com</h1>
+            <p>An EDM mixtape archive launched in 2008, run entirely in our spare time and out of our own pockets.</p>
+          </>
+        )}
       </div>
       {!empty && (
         <div className={styles.meta}>
@@ -172,13 +162,17 @@ const MixDetails = ({
           {quality > 0 && (
             <>
               <div>Quality</div>
-              <div>{quality} <small>kbps</small></div>
+              <div>
+                {quality} <small>kbps</small>
+              </div>
             </>
           )}
           {fileSize > 0 && (
             <>
               <div>File size</div>
-              <div>{fileSize} <small>MB</small></div>
+              <div>
+                {fileSize} <small>MB</small>
+              </div>
             </>
           )}
         </div>
@@ -194,22 +188,28 @@ MixDetails.propTypes = {
   thumbnail: PropTypes.string,
   poster: PropTypes.string,
   published: PropTypes.string,
-  artists: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired
-  })),
+  artists: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired
+    })
+  ),
   title: PropTypes.string,
-  genres: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired
-  })),
-  tags: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired
-  })),
+  genres: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired
+    })
+  ),
+  tags: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired
+    })
+  ),
   duration: PropTypes.string,
   description: PropTypes.string,
   plays: PropTypes.number,

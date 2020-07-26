@@ -21,14 +21,17 @@ const CommentForm = ({ id }) => {
     history.push('/sign-in/', { from: location.pathname });
   }, [history, location.pathname]);
 
-  const handleSubmit = useCallback(event => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    event => {
+      event.preventDefault();
 
-    const { comment } = event.target.elements;
+      const { comment } = event.target.elements;
 
-    const action = submitComment(comment.value, id);
-    dispatch(action);
-  }, [dispatch, id]);
+      const action = submitComment(comment.value, id);
+      dispatch(action);
+    },
+    [dispatch, id]
+  );
 
   useEffect(() => {
     if (ref.current && !comment.isSubmitting && comment.statusText === null) {
@@ -37,13 +40,7 @@ const CommentForm = ({ id }) => {
   }, [comment]);
 
   if (!auth.token) {
-    return (
-      <Button
-        onClick={handleSignIn}
-        text='Sign in to comment'
-        Icon={Icon.ShieldCheck}
-      />
-    );
+    return <Button onClick={handleSignIn} text='Sign in to comment' Icon={Icon.ShieldCheck} />;
   }
 
   return (
@@ -55,9 +52,7 @@ const CommentForm = ({ id }) => {
         placeholder='Write a comment'
         aria-label='Write a comment'
       />
-      {comment.statusText && (
-        <div className={styles.statusText}>{he.decode(comment.statusText)}</div>
-      )}
+      {comment.statusText && <div className={styles.statusText}>{he.decode(comment.statusText)}</div>}
       <Button
         text={comment.isSubmitting ? 'Submitting' : 'Submit comment'}
         Icon={comment.isSubmitting ? Icon.Snooze : Icon.CommentAltCheck}

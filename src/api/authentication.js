@@ -31,9 +31,7 @@ export const authenticate = async (username, password) => {
   return auth;
 };
 
-export const recallAuth = () => isLocalStorageAvailable
-  ? JSON.parse(window.localStorage.getItem('auth'))
-  : null;
+export const recallAuth = () => (isLocalStorageAvailable ? JSON.parse(window.localStorage.getItem('auth')) : null);
 
 export const validateToken = async token => {
   if (!token) return false;

@@ -27,16 +27,12 @@ const Drawer = ({ drawerKey, align, children }) => {
   }, [isOpen, wasOpen]);
 
   const showOverlay = wasOpen || isOpen;
-  const revealClassName = drawer && drawer.TRANSPARENT_OVERLAY
-    ? styles.revealTransparent
-    : styles.revealOpaque;
+  const revealClassName = drawer && drawer.TRANSPARENT_OVERLAY ? styles.revealTransparent : styles.revealOpaque;
   const className = wasOpen && isOpen ? revealClassName : styles.hide;
 
   return (
     <>
-      {showOverlay && (
-        <div className={className} />
-      )}
+      {showOverlay && <div className={className} />}
       <aside className={isOpen ? styles.open : styles[align]}>
         <div ref={ref} className={styles.overflow}>
           {children}

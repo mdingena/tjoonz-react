@@ -1,8 +1,4 @@
-import {
-  DONE_FETCHING_QUERY_RESULTS,
-  SET_QUERY_RESULTS,
-  START_FETCHING_QUERY_RESULTS
-} from '../constants/actionTypes';
+import { DONE_FETCHING_QUERY_RESULTS, SET_QUERY_RESULTS, START_FETCHING_QUERY_RESULTS } from '../constants/actionTypes';
 import { ENDPOINTS } from '../constants/api';
 import { ARTISTS, GENRES, TAGS } from '../constants/facettedSearchFacets';
 import addTasks from '../actions/addTasks';
@@ -18,9 +14,12 @@ const updateQuery = () => async (dispatch, getState) => {
 
   const options = { _embed: true };
 
-  if (facettedSearch[ARTISTS.KEY].selected.length > 0) options[ARTISTS.TAXONOMY] = facettedSearch[ARTISTS.KEY].selected.map(({ id }) => id).join(',');
-  if (facettedSearch[GENRES.KEY].selected.length > 0) options[GENRES.TAXONOMY] = facettedSearch[GENRES.KEY].selected.map(({ id }) => id).join(',');
-  if (facettedSearch[TAGS.KEY].selected.length > 0) options[TAGS.TAXONOMY] = facettedSearch[TAGS.KEY].selected.map(({ id }) => id).join(',');
+  if (facettedSearch[ARTISTS.KEY].selected.length > 0)
+    options[ARTISTS.TAXONOMY] = facettedSearch[ARTISTS.KEY].selected.map(({ id }) => id).join(',');
+  if (facettedSearch[GENRES.KEY].selected.length > 0)
+    options[GENRES.TAXONOMY] = facettedSearch[GENRES.KEY].selected.map(({ id }) => id).join(',');
+  if (facettedSearch[TAGS.KEY].selected.length > 0)
+    options[TAGS.TAXONOMY] = facettedSearch[TAGS.KEY].selected.map(({ id }) => id).join(',');
 
   const response = await fetchPage(ENDPOINTS.MIXES, 1, options);
 

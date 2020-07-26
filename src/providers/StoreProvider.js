@@ -6,10 +6,6 @@ import facettedSearchSubscriber from '../subscribers/facettedSearchSubscriber';
 
 store.subscribe(debounce(facettedSearchSubscriber, 1000));
 
-const StoreProvider = ({ children }) => (
-  <Provider store={store}>
-    {children}
-  </Provider>
-);
+const StoreProvider = ({ children }) => <Provider store={store}>{children}</Provider>;
 
 export default StoreProvider;

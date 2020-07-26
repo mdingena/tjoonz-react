@@ -18,11 +18,7 @@ const extractMixData = ({
     _tjnz_bitrate: quality,
     _tjnz_filesize: fileSize
   },
-  _embedded: {
-    'wp:term': terms,
-    'wp:featuredmedia': featuredImage,
-    replies: comments
-  }
+  _embedded: { 'wp:term': terms, 'wp:featuredmedia': featuredImage, replies: comments }
 }) => ({
   id,
   slug,
@@ -78,26 +74,26 @@ export const toPublishDate = dateGmt => {
 export const toDuration = seconds => {
   if (!seconds) return null;
   const hours = Math.floor(seconds / 3600);
-  seconds = seconds - (hours * 3600);
+  seconds = seconds - hours * 3600;
   const minutes = Math.floor(seconds / 60);
-  seconds = seconds - (minutes * 60);
+  seconds = seconds - minutes * 60;
   return `${hours}:${(100 + minutes).toString().substr(1)}:${(100 + seconds).toString().substr(1)}`;
 };
 
 /**
-* Formats a bit rate.
-* @param {Number} bps Rate in bits per second.
-* @returns {Number} Rate in kilobits per second.
-*/
+ * Formats a bit rate.
+ * @param {Number} bps Rate in bits per second.
+ * @returns {Number} Rate in kilobits per second.
+ */
 export const toKbps = bps => {
   return Number((bps / 1000).toFixed(0));
 };
 
 /**
-* Formats a file size.
-* @param {Number} bytes File size in bytes.
-* @returns {Number} File size in megabytes.
-*/
+ * Formats a file size.
+ * @param {Number} bytes File size in bytes.
+ * @returns {Number} File size in megabytes.
+ */
 export const toMegabytes = bytes => {
   return Math.ceil(bytes / 1048576);
 };
@@ -115,19 +111,21 @@ export const extractArtworkSrc = (media, size = 'full') => {
 
 export const extractComments = wpReplies => {
   const comments = (wpReplies || [])[0] || [];
-  return comments.map(({
-    id,
-    author_name: authorName,
-    author_url: authorUrl,
-    author_avatar_urls: { 96: authorAvatar },
-    date: published,
-    content: { rendered: content }
-  }) => ({
-    id,
-    authorName: he.decode(authorName),
-    authorUrl,
-    authorAvatar,
-    published: toPublishDate(published),
-    content: he.decode(content)
-  }));
+  return comments.map(
+    ({
+      id,
+      author_name: authorName,
+      author_url: authorUrl,
+      author_avatar_urls: { 96: authorAvatar },
+      date: published,
+      content: { rendered: content }
+    }) => ({
+      id,
+      authorName: he.decode(authorName),
+      authorUrl,
+      authorAvatar,
+      published: toPublishDate(published),
+      content: he.decode(content)
+    })
+  );
 };

@@ -8,9 +8,7 @@ const Screens = ({ children }) => {
 
   return (
     <Transition location={location}>
-      <Switch location={location}>
-        {children}
-      </Switch>
+      <Switch location={location}>{children}</Switch>
     </Transition>
   );
 };

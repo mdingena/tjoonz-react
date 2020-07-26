@@ -2,12 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styles from './Comment.module.css';
 
-const Comment = ({
-  authorName,
-  authorAvatar,
-  published,
-  content
-}) => {
+const Comment = ({ authorName, authorAvatar, published, content }) => {
   const avatarRef = useRef();
   const [avatarRevealed, revealAvatar] = useState(false);
 

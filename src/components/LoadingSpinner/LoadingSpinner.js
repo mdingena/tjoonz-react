@@ -23,7 +23,7 @@ const LoadingSpinner = ({ size }) => {
 
     return () => {
       clearInterval(interval);
-      setTick(t => t >= 6 ? 6 : 0);
+      setTick(t => (t >= 6 ? 6 : 0));
     };
   }, [isSettled]);
 

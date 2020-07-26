@@ -1,8 +1,4 @@
-import {
-  DONE_SIGNING_IN,
-  SET_AUTH,
-  START_SIGNING_IN
-} from '../constants/actionTypes';
+import { DONE_SIGNING_IN, SET_AUTH, START_SIGNING_IN } from '../constants/actionTypes';
 import addTasks from '../actions/addTasks';
 import completeTasks from '../actions/completeTasks';
 import { authenticate } from '../api/authentication';

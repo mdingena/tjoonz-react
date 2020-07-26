@@ -50,15 +50,7 @@ const Player = () => {
   const hasTrackAtPlayhead = playlist[playhead];
   const isPlaylistDrawer = drawer && drawer.KEY === PLAYLIST_DRAWER.KEY;
 
-  const {
-    slug,
-    thumbnail,
-    poster,
-    title,
-    artists,
-    genres,
-    tags
-  } = (playlist[playhead] || {});
+  const { slug, thumbnail, poster, title, artists, genres, tags } = playlist[playhead] || {};
 
   const handlePosterLoaded = () => revealPoster(true);
   const routeMatch = useRouteMatch({ path: `/mix/${slug}/` });
@@ -147,58 +139,36 @@ const Player = () => {
           onTouchEnd={handleDragEnd}
           onContextMenu={handleContextMenu}
         >
-          <div
-            className={styles.progress}
-            style={{ width: `${playbackProgress * 100}%` }}
-          />
+          <div className={styles.progress} style={{ width: `${playbackProgress * 100}%` }} />
         </div>
-        <button
-          className={styles.poster}
-          onClick={handleNavigate}
-          disabled={!slug || routeMatch}
-        >
+        <button className={styles.poster} onClick={handleNavigate} disabled={!slug || routeMatch}>
           <div className={posterRevealed ? styles.posterRevealed : styles.posterLoading}>
-            {poster
-              ? (
-                <>
-                  <img key={thumbnail} src={thumbnail} alt={title} />
-                  <img key={poster} src={poster} alt={title} onLoad={handlePosterLoaded} />
-                </>
-              )
-              : (
-                <div className={styles.logo}>
-                  <div>
-                    <div />
-                    <div />
-                  </div>
+            {poster ? (
+              <>
+                <img key={thumbnail} src={thumbnail} alt={title} />
+                <img key={poster} src={poster} alt={title} onLoad={handlePosterLoaded} />
+              </>
+            ) : (
+              <div className={styles.logo}>
+                <div>
+                  <div />
+                  <div />
                 </div>
-              )}
+              </div>
+            )}
           </div>
         </button>
         <div className={styles.details}>
-          <div className={styles.title}>
-            {title}
-          </div>
-          {slug && (
-            <div className={styles.artists}>
-              {he.decode(artists.map(({ name }) => name).join(', '))}
-            </div>
-          )}
+          <div className={styles.title}>{title}</div>
+          {slug && <div className={styles.artists}>{he.decode(artists.map(({ name }) => name).join(', '))}</div>}
           {slug && (
             <div className={styles.labels}>
-              {he.decode([
-                ...genres.map(({ name }) => name),
-                ...tags.map(({ name }) => name)
-              ].join(', '))}
+              {he.decode([...genres.map(({ name }) => name), ...tags.map(({ name }) => name)].join(', '))}
             </div>
           )}
         </div>
         <div className={styles.controls}>
-          <button
-            className={styles.button}
-            onClick={handleSkipBackwardClick}
-            title='Skip backward'
-          >
+          <button className={styles.button} onClick={handleSkipBackwardClick} title='Skip backward'>
             <Icon.Backward className={styles.icon} />
           </button>
           <button
@@ -206,15 +176,13 @@ const Player = () => {
             onClick={handlePlaybackClick}
             title={hasTrackAtPlayhead && isPlaying ? 'Pause' : 'Play'}
           >
-            {hasTrackAtPlayhead && isPlaying
-              ? <Icon.Pause className={styles.icon} />
-              : <Icon.Play className={styles.icon} />}
+            {hasTrackAtPlayhead && isPlaying ? (
+              <Icon.Pause className={styles.icon} />
+            ) : (
+              <Icon.Play className={styles.icon} />
+            )}
           </button>
-          <button
-            className={styles.button}
-            onClick={handleSkipForwardClick}
-            title='Skip forward'
-          >
+          <button className={styles.button} onClick={handleSkipForwardClick} title='Skip forward'>
             <Icon.Forward className={styles.icon} />
           </button>
           <div className={styles.volume}>
@@ -229,11 +197,7 @@ const Player = () => {
           <Icon.ListMusic className={styles.icon} />
         </button>
       </div>
-      <Audio
-        isDragging={isDragging}
-        scrubTo={scrubPosition}
-        onPlaybackProgress={handlePlaybackProgress}
-      />
+      <Audio isDragging={isDragging} scrubTo={scrubPosition} onPlaybackProgress={handlePlaybackProgress} />
     </>
   );
 };

@@ -24,7 +24,7 @@ const FacettedSearchList = ({ facet, previewCount = 10 }) => {
   }, [facet, lastUpdated, dispatch]);
 
   const [isExpanded, setExpanded] = useState(false);
-  const handleExpandClick = () => setExpanded((state) => !state);
+  const handleExpandClick = () => setExpanded(state => !state);
 
   const listItems = [
     ...options.slice(0, previewCount),

@@ -7,6 +7,4 @@ export default {
   component: FacettedSearchHeader
 };
 
-export const facettedSearchHeader = () => (
-  <FacettedSearchHeader facet={GENRES} />
-);
+export const facettedSearchHeader = () => <FacettedSearchHeader facet={GENRES} />;

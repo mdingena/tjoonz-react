@@ -85,7 +85,7 @@ const Audio = ({ isDragging, scrubTo, onPlaybackProgress }) => {
             /** @todo
              * Figure out how to avoid interrupting the play() request by a new load request.
              * https://goo.gl/LdLk22
-            */
+             */
             audioRef.current.load();
             loadedId.current = trackAtPlayhead.id;
           }

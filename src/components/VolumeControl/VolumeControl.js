@@ -34,7 +34,7 @@ const VolumeControl = () => {
   const handleClick = () => setOpen(state => !state);
 
   const handleDragStart = event => {
-    const linearVolume = getDragPosition(event) / (sliderRef.current.clientHeight);
+    const linearVolume = getDragPosition(event) / sliderRef.current.clientHeight;
     const clampedVolume = clamp(linearVolume, 0, 1);
 
     setVolumeSlider(clampedVolume);
@@ -43,7 +43,7 @@ const VolumeControl = () => {
 
   const handleDrag = event => {
     if (isDragging) {
-      const linearVolume = getDragPosition(event) / (sliderRef.current.clientHeight);
+      const linearVolume = getDragPosition(event) / sliderRef.current.clientHeight;
       const clampedVolume = clamp(linearVolume, 0, 1);
       const action = setVolume(clampedVolume);
 
@@ -76,10 +76,7 @@ const VolumeControl = () => {
 
   return (
     <div className={styles.root}>
-      <button
-        className={styles.button}
-        onClick={handleClick}
-      >
+      <button className={styles.button} onClick={handleClick}>
         {volumeIcon}
       </button>
       {isOpen && (
@@ -96,10 +93,7 @@ const VolumeControl = () => {
             onContextMenu={handleContextMenu}
           >
             <div className={styles.track}>
-              <div
-                className={styles.volume}
-                style={{ height: `${volumeSlider * 100}%` }}
-              />
+              <div className={styles.volume} style={{ height: `${volumeSlider * 100}%` }} />
             </div>
           </div>
         </div>

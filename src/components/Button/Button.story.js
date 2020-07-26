@@ -8,9 +8,5 @@ export default {
 };
 
 export const button = () => (
-  <Button
-    onClick={() => console.log('Clicked button')}
-    text='This is a button'
-    Icon={Icon.CaretDown}
-  />
+  <Button onClick={() => console.log('Clicked button')} text='This is a button' Icon={Icon.CaretDown} />
 );

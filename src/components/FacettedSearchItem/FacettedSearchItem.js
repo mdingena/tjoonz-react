@@ -16,15 +16,9 @@ const FacettedSearchItem = ({ facet, item }) => {
   };
 
   return (
-    <div
-      className={isSelected ? styles.checked : styles.unchecked}
-      onClick={toggle}
-      aria-checked={isSelected}
-    >
+    <div className={isSelected ? styles.checked : styles.unchecked} onClick={toggle} aria-checked={isSelected}>
       <label className={styles.label}>
-        {isSelected
-          ? <Icon.CheckSquare className={styles.icon} />
-          : <Icon.Square className={styles.icon} />}
+        {isSelected ? <Icon.CheckSquare className={styles.icon} /> : <Icon.Square className={styles.icon} />}
         <span className={styles.count}>
           <span>{item.count.toLocaleString()}</span>
           <Icon.Times className={styles.icon} />

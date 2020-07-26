@@ -21,10 +21,7 @@ const Link = ({ to, text, onResize, onClick = noOp, collapsed = false }) => {
       activeClassName={styles.active}
       onClick={onClick}
     >
-      <span
-        ref={ref}
-        className={styles.text}
-      >
+      <span ref={ref} className={styles.text}>
         {text}
       </span>
     </NavLink>

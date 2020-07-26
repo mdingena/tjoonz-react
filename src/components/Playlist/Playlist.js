@@ -18,28 +18,20 @@ const Playlist = () => {
         box='content-box'
         render={({ observedElementProps }) => (
           <div className={styles.root} {...observedElementProps}>
-            {playlist.length === 0
-              ? (
-                <Button
-                  text='Nothing in playlist'
-                  disabled
-                />
-              )
-              : (
-                <>
-                  <div className={styles.item}>
-                    <MixListHeader />
+            {playlist.length === 0 ? (
+              <Button text='Nothing in playlist' disabled />
+            ) : (
+              <>
+                <div className={styles.item}>
+                  <MixListHeader />
+                </div>
+                {playlist.map((item, index) => (
+                  <div key={`playlist-${index}`} className={playhead === index ? styles.active : styles.item}>
+                    <MixListItem shownInPlaylist {...item} />
                   </div>
-                  {playlist.map((item, index) => (
-                    <div
-                      key={`playlist-${index}`}
-                      className={playhead === index ? styles.active : styles.item}
-                    >
-                      <MixListItem shownInPlaylist {...item} />
-                    </div>
-                  ))}
-                </>
-              )}
+                ))}
+              </>
+            )}
           </div>
         )}
       />

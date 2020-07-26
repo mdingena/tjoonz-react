@@ -16,9 +16,7 @@ const Wrapper = ({ children }) => {
 
   return (
     <>
-      <div style={{ padding: 50 }}>
-        {children}
-      </div>
+      <div style={{ padding: 50 }}>{children}</div>
       <button onClick={add5}>Add 5 tasks</button>
       <button onClick={complete1}>Complete 1 task</button>
     </>

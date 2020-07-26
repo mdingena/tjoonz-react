@@ -1,7 +1,9 @@
 import { SET_PLAYHEAD } from '../constants/actionTypes';
 
 const setPlayhead = index => (dispatch, getState) => {
-  const { player: { playlist } } = getState();
+  const {
+    player: { playlist }
+  } = getState();
 
   const isValidIndex = playlist[index];
 

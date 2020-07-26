@@ -1,9 +1,5 @@
 import he from 'he';
-import {
-  DONE_SUBMITTING_COMMENT,
-  START_SUBMITTING_COMMENT,
-  SUBMIT_COMMENT
-} from '../constants/actionTypes';
+import { DONE_SUBMITTING_COMMENT, START_SUBMITTING_COMMENT, SUBMIT_COMMENT } from '../constants/actionTypes';
 import addTasks from '../actions/addTasks';
 import completeTasks from '../actions/completeTasks';
 import { forgetAuth } from '../api/authentication';
@@ -16,7 +12,9 @@ const submitComment = (comment, id) => async (dispatch, getState) => {
   dispatch(startSubmitting(id));
   dispatch(addTasks(SUBMIT_COMMENT, 1));
 
-  const { auth: { token } } = getState();
+  const {
+    auth: { token }
+  } = getState();
 
   if (!token) {
     forgetAuth();

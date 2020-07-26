@@ -13,12 +13,12 @@ const tasksReducer = (state = {}, { type, payload }) => {
     case COMPLETE_TASKS:
       return hasMoreTasks(state, payload)
         ? {
-          ...state,
-          [payload.key]: {
-            ...state[payload.key],
-            completed: state[payload.key].completed + payload.count
+            ...state,
+            [payload.key]: {
+              ...state[payload.key],
+              completed: state[payload.key].completed + payload.count
+            }
           }
-        }
         : {};
 
     case REMOVE_ALL_TASKS:
@@ -46,19 +46,17 @@ export const getTasks = (state, key) => state[key] || { completed: 0, count: 0 }
 
 const hasMoreTasks = (state, payload) => {
   const hasMoreCurrentTasks = state[payload.key]
-    ? state[payload.key].count > (state[payload.key].completed + payload.count)
+    ? state[payload.key].count > state[payload.key].completed + payload.count
     : false;
 
   const { completed, count } = getAllTasks(state);
-  const hasMoreOtherTasks = count > (completed + payload.count);
+  const hasMoreOtherTasks = count > completed + payload.count;
 
   return hasMoreCurrentTasks || hasMoreOtherTasks;
 };
 
 const removeFromQueue = (state, payload) =>
   Object.entries(state).reduce(
-    (queue, { key, tasks }) => key !== payload.key
-      ? { ...queue, [key]: tasks }
-      : queue,
+    (queue, { key, tasks }) => (key !== payload.key ? { ...queue, [key]: tasks } : queue),
     {}
   );

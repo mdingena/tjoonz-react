@@ -13,14 +13,17 @@ const SignIn = () => {
   const dispatch = useDispatch();
   const auth = useSelector(selectAuth);
 
-  const handleSubmit = useCallback(event => {
-    event.preventDefault();
+  const handleSubmit = useCallback(
+    event => {
+      event.preventDefault();
 
-    const { username, password } = event.target.elements;
-    const action = signIn(username.value, password.value);
+      const { username, password } = event.target.elements;
+      const action = signIn(username.value, password.value);
 
-    dispatch(action);
-  }, [dispatch]);
+      dispatch(action);
+    },
+    [dispatch]
+  );
 
   const redirectTo = (location.state || {}).from || '/';
 
@@ -46,9 +49,7 @@ const SignIn = () => {
           autoComplete='current-password'
           aria-label='Password'
         />
-        {auth.statusText && (
-          <div className={styles.statusText}>{he.decode(auth.statusText)}</div>
-        )}
+        {auth.statusText && <div className={styles.statusText}>{he.decode(auth.statusText)}</div>}
         <div className={styles.submit}>
           <Button
             text={auth.isAuthenticating ? 'Signing in' : 'Sign in'}
@@ -58,8 +59,22 @@ const SignIn = () => {
           />
         </div>
       </form>
-      <a className={styles.link} href='https://www.tjoonz.com/wp-login.php?action=lostpassword' rel='noopener referrer' target='_blank'>Lost your password?</a>
-      <a className={styles.link} href='https://www.tjoonz.com/wp-login.php?action=register' rel='noopener referrer' target='_blank'>Register</a>
+      <a
+        className={styles.link}
+        href='https://www.tjoonz.com/wp-login.php?action=lostpassword'
+        rel='noopener referrer'
+        target='_blank'
+      >
+        Lost your password?
+      </a>
+      <a
+        className={styles.link}
+        href='https://www.tjoonz.com/wp-login.php?action=register'
+        rel='noopener referrer'
+        target='_blank'
+      >
+        Register
+      </a>
     </>
   );
 };

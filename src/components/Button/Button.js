@@ -2,29 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Button.module.css';
 
-const Button = ({
-  onClick,
-  text,
-  Icon = () => null,
-  disabled = false,
-  align = 'center',
-  type = 'button'
-}) => {
+const Button = ({ onClick, text, Icon = () => null, disabled = false, align = 'center', type = 'button' }) => {
   const className = [styles.root, styles[align]].join(' ');
 
   return (
-    <button
-      className={className}
-      onClick={onClick}
-      disabled={disabled}
-      type={type}
-    >
+    <button className={className} onClick={onClick} disabled={disabled} type={type}>
       {align !== 'right' && <Icon className={styles.iconLeft} />}
-      {text && (
-        <span className={styles.text}>
-          {text}
-        </span>
-      )}
+      {text && <span className={styles.text}>{text}</span>}
       {align === 'right' && <Icon className={styles.iconRight} />}
     </button>
   );

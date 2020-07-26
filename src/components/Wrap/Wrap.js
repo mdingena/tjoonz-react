@@ -3,8 +3,8 @@ import { Observe } from '@envato/react-breakpoints';
 import PropTypes from 'prop-types';
 import styles from './Wrap.module.css';
 
-const Wrap = ({ observe = false, children }) => observe
-  ? (
+const Wrap = ({ observe = false, children }) =>
+  observe ? (
     <Observe
       box='content-box'
       render={({ observedElementProps }) => (
@@ -13,11 +13,8 @@ const Wrap = ({ observe = false, children }) => observe
         </div>
       )}
     />
-  )
-  : (
-    <div className={styles.root}>
-      {children}
-    </div>
+  ) : (
+    <div className={styles.root}>{children}</div>
   );
 
 Wrap.propTypes = {

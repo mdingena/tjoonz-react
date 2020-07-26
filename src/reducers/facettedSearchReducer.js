@@ -39,9 +39,7 @@ const defaultState = {
 const isLocalStorageAvailable = checkLocalStorageAvailability();
 const localStorage = isLocalStorageAvailable && window.localStorage.getItem('facettedSearch');
 
-export const initialState = localStorage
-  ? JSON.parse(localStorage)
-  : defaultState;
+export const initialState = localStorage ? JSON.parse(localStorage) : defaultState;
 
 const facettedSearchReducer = (state = initialState, { type, payload }) => {
   switch (type) {
@@ -78,14 +76,14 @@ const facettedSearchReducer = (state = initialState, { type, payload }) => {
     case TOGGLE_FACETTED_SEARCH_ITEM:
       return payload.item
         ? {
-          ...state,
-          [payload.facet.KEY]: {
-            ...state[payload.facet.KEY],
-            selected: isSelectedFacetItem(state, payload.facet, payload.item)
-              ? deselectFacetItem(state, payload.facet, payload.item)
-              : selectFacetItem(state, payload.facet, payload.item)
+            ...state,
+            [payload.facet.KEY]: {
+              ...state[payload.facet.KEY],
+              selected: isSelectedFacetItem(state, payload.facet, payload.item)
+                ? deselectFacetItem(state, payload.facet, payload.item)
+                : selectFacetItem(state, payload.facet, payload.item)
+            }
           }
-        }
         : state;
 
     case TOGGLE_FACETTED_SEARCH_RELATION:
@@ -93,9 +91,7 @@ const facettedSearchReducer = (state = initialState, { type, payload }) => {
         ...state,
         [payload.facet.KEY]: {
           ...state[payload.facet.KEY],
-          relation: state[payload.facet.KEY].relation === OR
-            ? AND
-            : OR
+          relation: state[payload.facet.KEY].relation === OR ? AND : OR
         }
       };
 
@@ -106,17 +102,12 @@ const facettedSearchReducer = (state = initialState, { type, payload }) => {
 
 export default facettedSearchReducer;
 
-export const isSelectedFacetItem = (state, facet, item) =>
-  state[facet.KEY].selected.some(({ id }) => id === item.id);
+export const isSelectedFacetItem = (state, facet, item) => state[facet.KEY].selected.some(({ id }) => id === item.id);
 
-const deselectFacetItem = (state, facet, item) =>
-  state[facet.KEY].selected.filter(({ id }) => id !== item.id);
+const deselectFacetItem = (state, facet, item) => state[facet.KEY].selected.filter(({ id }) => id !== item.id);
 
-const selectFacetItem = (state, facet, item) =>
-  [item, ...state[facet.KEY].selected];
+const selectFacetItem = (state, facet, item) => [item, ...state[facet.KEY].selected];
 
-const optionsWithMixes = items =>
-  items.filter(item => item.count);
+const optionsWithMixes = items => items.filter(item => item.count);
 
-const orderByCountDesc = items =>
-  [...items].sort((a, b) => b.count - a.count);
+const orderByCountDesc = items => [...items].sort((a, b) => b.count - a.count);

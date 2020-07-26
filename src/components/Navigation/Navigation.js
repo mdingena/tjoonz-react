@@ -21,21 +21,27 @@ const Navigation = ({ links = [] }) => {
 
   useEffect(() => {
     if (token) {
-      setNavLinks([...links, {
-        to: {
-          pathname: '/sign-out/',
-          state: { from: location.pathname }
-        },
-        text: 'Sign out'
-      }]);
+      setNavLinks([
+        ...links,
+        {
+          to: {
+            pathname: '/sign-out/',
+            state: { from: location.pathname }
+          },
+          text: 'Sign out'
+        }
+      ]);
     } else {
-      setNavLinks([{
-        to: {
-          pathname: '/sign-in/',
-          state: { from: location.pathname }
+      setNavLinks([
+        {
+          to: {
+            pathname: '/sign-in/',
+            state: { from: location.pathname }
+          },
+          text: 'Sign in'
         },
-        text: 'Sign in'
-      }, ...links]);
+        ...links
+      ]);
     }
   }, [token, links, location.pathname]);
 
@@ -116,42 +122,29 @@ const Navigation = ({ links = [] }) => {
       <Logo />
       <div ref={ref} className={styles.links}>
         {visibleLinks.map(({ to, text }) => (
-          <Link
-            key={to}
-            to={to}
-            text={text}
-            onResize={width => handleLinkResize(to, width)}
-          />
+          <Link key={to} to={to} text={text} onResize={width => handleLinkResize(to, width)} />
         ))}
       </div>
       <div>
         {hiddenLinks.length > 0 && (
           <Downshift>
-            {({
-              getMenuProps,
-              isOpen,
-              getToggleButtonProps,
-              closeMenu
-            }) => (
+            {({ getMenuProps, isOpen, getToggleButtonProps, closeMenu }) => (
               <div className={isOpen ? styles.open : styles.closed}>
-                <button
-                  className={styles.button}
-                  aria-label='toggle menu'
-                  {...getToggleButtonProps()}
-                >
+                <button className={styles.button} aria-label='toggle menu' {...getToggleButtonProps()}>
                   &#8942;
                 </button>
                 <div className={styles.list} {...getMenuProps()}>
-                  {isOpen && hiddenLinks.map(({ to, text }) => (
-                    <Link
-                      key={to}
-                      to={to}
-                      text={text}
-                      onResize={width => handleLinkResize(to, width)}
-                      onClick={() => closeMenu()}
-                      collapsed
-                    />
-                  ))}
+                  {isOpen &&
+                    hiddenLinks.map(({ to, text }) => (
+                      <Link
+                        key={to}
+                        to={to}
+                        text={text}
+                        onResize={width => handleLinkResize(to, width)}
+                        onClick={() => closeMenu()}
+                        collapsed
+                      />
+                    ))}
                 </div>
               </div>
             )}
@@ -168,10 +161,12 @@ const Navigation = ({ links = [] }) => {
 };
 
 Navigation.propTypes = {
-  links: PropTypes.arrayOf(PropTypes.shape({
-    to: PropTypes.string.isRequired,
-    text: PropTypes.string.isRequired
-  })).isRequired
+  links: PropTypes.arrayOf(
+    PropTypes.shape({
+      to: PropTypes.string.isRequired,
+      text: PropTypes.string.isRequired
+    })
+  ).isRequired
 };
 
 export default Navigation;

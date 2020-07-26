@@ -17,22 +17,18 @@ const CloseButton = ({ drawer }) => {
   const Icon = drawer.CLOSE_ICON || (() => null);
 
   return (
-    <button
-      className={className}
-      onClick={handleClick}
-      type='button'
-    >
+    <button className={className} onClick={handleClick} type='button'>
       {drawer.ALIGN !== 'right' && <Icon className={styles.iconLeft} />}
       {drawer.SHOW_PROGRESS && drawer.ALIGN === 'right' && (
-        <div className={styles.spinnerLeft}><LoadingSpinner size={32} /></div>
+        <div className={styles.spinnerLeft}>
+          <LoadingSpinner size={32} />
+        </div>
       )}
-      {drawer.CLOSE_TEXT && (
-        <span className={styles.text}>
-          {drawer.CLOSE_TEXT}
-        </span>
-      )}
+      {drawer.CLOSE_TEXT && <span className={styles.text}>{drawer.CLOSE_TEXT}</span>}
       {drawer.SHOW_PROGRESS && drawer.ALIGN !== 'right' && (
-        <div className={styles.spinnerRight}><LoadingSpinner size={32} /></div>
+        <div className={styles.spinnerRight}>
+          <LoadingSpinner size={32} />
+        </div>
       )}
       {drawer.ALIGN === 'right' && <Icon className={styles.iconRight} />}
     </button>

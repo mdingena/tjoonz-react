@@ -76,49 +76,36 @@ const Home = () => {
           <div className={styles.results} {...observedElementProps}>
             {columns < 2 && (
               <div className={styles.searchButton}>
-                <Button
-                  onClick={handleOpenDrawer}
-                  text='Search options'
-                  Icon={Icon.Tasks}
-                  disabled={drawer !== null}
-                />
+                <Button onClick={handleOpenDrawer} text='Search options' Icon={Icon.Tasks} disabled={drawer !== null} />
               </div>
             )}
             {query.results.length > 0 && <MixListHeader />}
             {query.results.length === 0
               ? query.statusText
               : query.results.map((result, index) => (
-                <MixListItem
-                  key={`result-${index}`}
-                  detailsInDrawer={columns < 3}
-                  {...result}
-                />
-              ))}
+                  <MixListItem key={`result-${index}`} detailsInDrawer={columns < 3} {...result} />
+                ))}
             <div className={styles.footer}>
-              {query.nextPage && !query.statusText
-                ? (
-                  <Button
-                    onClick={() => dispatch(fetchNextPage())}
-                    text={query.isFetching ? 'Loading' : 'Show more results'}
-                    Icon={query.isFetching ? Icon.Snooze : Icon.CaretDown}
-                    disabled={query.isFetching}
-                  />
-                )
-                : (
-                  <Button
-                    text={query.isFetching ? 'Loading' : 'Need more? Change your search options'}
-                    Icon={query.isFetching ? Icon.Snooze : () => null}
-                    disabled
-                  />
-                )}
+              {query.nextPage && !query.statusText ? (
+                <Button
+                  onClick={() => dispatch(fetchNextPage())}
+                  text={query.isFetching ? 'Loading' : 'Show more results'}
+                  Icon={query.isFetching ? Icon.Snooze : Icon.CaretDown}
+                  disabled={query.isFetching}
+                />
+              ) : (
+                <Button
+                  text={query.isFetching ? 'Loading' : 'Need more? Change your search options'}
+                  Icon={query.isFetching ? Icon.Snooze : () => null}
+                  disabled
+                />
+              )}
             </div>
           </div>
         )}
       />
       <Aside drawer={columns < 3 ? RESULT_DETAILS_DRAWER : undefined}>
-        {details
-          ? <MixDetails {...details} />
-          : <MixDetails empty />}
+        {details ? <MixDetails {...details} /> : <MixDetails empty />}
       </Aside>
     </div>
   );

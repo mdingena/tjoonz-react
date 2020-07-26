@@ -7,7 +7,7 @@ import styles from './ProgressBar.module.css';
 
 const ProgressBar = ({ taskKey = undefined }) => {
   const { completed, count } = useSelector(taskKey ? selectTasks(taskKey) : selectAllTasks);
-  const progress = count > 0 ? (completed / count) : 1;
+  const progress = count > 0 ? completed / count : 1;
   const progressing = progress < 1;
 
   return (

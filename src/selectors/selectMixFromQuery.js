@@ -1,5 +1,3 @@
-const selectMixFromQuery = slug =>
-  ({ query }) =>
-    query.results.find(item => item.slug === slug) || {};
+const selectMixFromQuery = slug => ({ query }) => query.results.find(item => item.slug === slug) || {};
 
 export default selectMixFromQuery;
