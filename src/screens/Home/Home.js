@@ -10,7 +10,8 @@ import { SEARCH_DRAWER, RESULT_DETAILS_DRAWER } from '../../constants/drawers';
 import { ARTISTS, GENRES, TAGS } from '../../constants/facettedSearchFacets';
 import Aside from '../../components/Aside';
 import Icon from '../../components/Icon';
-import FacettedSearch from '../../components/FacettedSearch';
+import FacettedSearchCombobox from '../../components/FacettedSearchCombobox';
+import FacettedSearchList from '../../components/FacettedSearchList';
 import Button from '../../components/Button';
 import MixListHeader from '../../components/MixListHeader';
 import MixListItem from '../../components/MixListItem';
@@ -64,9 +65,9 @@ const Home = () => {
     <div className={grid[columns]}>
       <Aside drawer={columns < 2 ? SEARCH_DRAWER : undefined}>
         <div className={styles.search}>
-          <FacettedSearch facet={ARTISTS} showCombobox />
-          <FacettedSearch facet={TAGS} showCombobox />
-          <FacettedSearch facet={GENRES} previewCount={10} />
+          <FacettedSearchCombobox facet={ARTISTS} />
+          <FacettedSearchCombobox facet={TAGS} />
+          <FacettedSearchList facet={GENRES} previewCount={10} />
         </div>
       </Aside>
       <Observe

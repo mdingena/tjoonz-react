@@ -1,0 +1,6 @@
+.root {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  background-color: var(--colour-blue-900);
+}
