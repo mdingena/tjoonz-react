@@ -15,6 +15,7 @@ import Mix from './screens/Mix';
 import SignIn from './screens/SignIn';
 import SignOut from './screens/SignOut';
 import NotFound from './screens/NotFound';
+import Footer from './components/Footer';
 import styles from './App.module.css';
 
 const App = () => (
@@ -59,17 +60,7 @@ const App = () => (
 
         <div className={styles.navigation}>
           <Wrap>
-            <Navigation
-              links={[
-                { to: '/charts/', text: 'Charts' },
-                { to: '/about/', text: 'About Tjoonz' },
-                { to: '/about/uploading/', text: 'About Uploading' },
-                { to: '/about/contributing/', text: 'Become an Editor' },
-                { to: '/thanks/', text: 'Special Thanks' },
-                { to: '/privacy-policy/', text: 'Privacy Policy' },
-                { to: '/about/feedback/', text: 'Feedback' }
-              ]}
-            />
+            <Navigation />
           </Wrap>
         </div>
 
@@ -83,6 +74,15 @@ const App = () => (
               <Route component={NotFound} />
             </Screens>
           </Wrap>
+          <Footer
+            links={[
+              { to: '/about/', text: 'About' },
+              { to: '/about/contributing/', text: 'Become an Editor' },
+              { to: '/privacy-policy/', text: 'Privacy Policy' },
+              { to: '/disclaimer/', text: 'Disclaimer' },
+              { to: '/thanks/', text: 'Special Thanks' }
+            ]}
+          />
           <Playlist />
         </div>
 

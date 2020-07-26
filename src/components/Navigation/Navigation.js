@@ -22,6 +22,7 @@ const Navigation = ({ links = [] }) => {
   useEffect(() => {
     if (token) {
       setNavLinks([
+        { to: '/my/', text: 'My Account' },
         ...links,
         {
           to: {
@@ -166,7 +167,7 @@ Navigation.propTypes = {
       to: PropTypes.string.isRequired,
       text: PropTypes.string.isRequired
     })
-  ).isRequired
+  )
 };
 
 export default Navigation;
