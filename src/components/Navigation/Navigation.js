@@ -22,8 +22,8 @@ const Navigation = ({ links = [] }) => {
   useEffect(() => {
     if (token) {
       setNavLinks([
-        { to: '/my/', text: 'My Account' },
         ...links,
+        { to: '/my/', text: 'My Account' },
         {
           to: {
             pathname: '/sign-out/',
@@ -34,14 +34,14 @@ const Navigation = ({ links = [] }) => {
       ]);
     } else {
       setNavLinks([
+        ...links,
         {
           to: {
             pathname: '/sign-in/',
             state: { from: location.pathname }
           },
           text: 'Sign in'
-        },
-        ...links
+        }
       ]);
     }
   }, [token, links, location.pathname]);

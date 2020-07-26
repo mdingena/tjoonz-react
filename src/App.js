@@ -60,7 +60,7 @@ const App = () => (
 
         <div className={styles.navigation}>
           <Wrap>
-            <Navigation />
+            <Navigation links={[{ to: '/about/uploading', text: 'Upload' }]} />
           </Wrap>
         </div>
 
