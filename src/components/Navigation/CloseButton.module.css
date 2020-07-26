@@ -14,7 +14,7 @@
   font-size: 1.0625rem;
   line-height: 1;
   font-weight: 500;
-  letter-spacing: -.03em;
+  letter-spacing: -0.03em;
   text-transform: uppercase;
   color: var(--colour-grey-200);
   cursor: pointer;
@@ -49,12 +49,12 @@
 
 .iconLeft {
   composes: icon;
-  margin-right: .4em;
+  margin-right: 0.4em;
 }
 
 .iconRight {
   composes: icon;
-  margin-left: .4em;
+  margin-left: 0.4em;
 }
 
 .root:hover .icon {
@@ -62,7 +62,7 @@
 }
 
 .text {
-  font-size: .7647058824em;
+  font-size: 0.7647058824em;
 }
 
 .spinnerLeft {

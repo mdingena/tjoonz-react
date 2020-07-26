@@ -7,7 +7,7 @@
 .statusText {
   min-height: 34px;
   padding: 6px 8px;
-  font-size: .9rem;
+  font-size: 0.9rem;
   line-height: 1.5;
   font-weight: 500;
   text-align: center;
@@ -26,7 +26,7 @@
   font-size: 1rem;
   line-height: 1.5;
   font-weight: 200;
-  letter-spacing: -.03em;
+  letter-spacing: -0.03em;
   color: var(--colour-grey-100);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
