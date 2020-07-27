@@ -14,6 +14,7 @@ const Footer = ({ links }) => (
         </li>
       ))}
     </ul>
+    <p>Tjoonz.com est. 2008</p>
   </footer>
 );
 
