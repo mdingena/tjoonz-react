@@ -2,6 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useRouteMatch, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
+import selectAuth from '../../selectors/selectAuth';
 import appendPlaylistItems from '../../actions/appendPlaylistItems';
 import removePlaylistItems from '../../actions/removePlaylistItems';
 import resumePlayback from '../../actions/resumePlayback';
@@ -29,12 +30,15 @@ const MixDetails = ({
   description,
   plays,
   downloads,
+  likes,
+  dislikes,
   quality,
   fileSize
 }) => {
   const routeMatch = useRouteMatch({ path: `/mix/${slug}/` });
   const dispatch = useDispatch();
   const { isPlaying, playlist, playhead } = useSelector(selectPlayer);
+  const { token } = useSelector(selectAuth);
 
   const isInPlaylist = !empty && playlist.find(item => item.id === id);
   const isTrackAtPlayhead = !empty && (playlist[playhead] || {}).id === id;
@@ -85,6 +89,8 @@ const MixDetails = ({
     if (!posterRevealed && posterRef.current && posterRef.current.complete) handlePosterLoaded();
   });
 
+  const score = likes - dislikes;
+
   return (
     <div className={routeMatch ? styles.root : styles.drawer}>
       <div className={posterRevealed ? styles.posterRevealed : styles.posterLoading}>
@@ -119,6 +125,16 @@ const MixDetails = ({
           <span className={styles.text}>Tracklist and comments</span>
         </Link>
       )}
+      {
+        // @todo: WP voting API
+        false && !empty && token && (
+          <div className={styles.voting}>
+            <Button onClick={() => console.log('upvote')} text='Like' Icon={Icon.AngleDoubleUp} />
+            <div className={styles.score}>{`${score < 0 ? '' : '+'}${score.toLocaleString()}`}</div>
+            <Button onClick={() => console.log('downvote')} text='Dislike' Icon={Icon.AngleDoubleDown} />
+          </div>
+        )
+      }
       {!empty && (
         <div className={styles.details}>
           <div>Published</div>
@@ -159,6 +175,17 @@ const MixDetails = ({
           <div>{plays}</div>
           <div>Downloads</div>
           <div>{downloads}</div>
+          {
+            // @todo: WP voting API
+            false && (
+              <>
+                <div>Likes</div>
+                <div>{likes}</div>
+                <div>Dislikes</div>
+                <div>{dislikes}</div>
+              </>
+            )
+          }
           {quality > 0 && (
             <>
               <div>Quality</div>

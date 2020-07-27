@@ -14,6 +14,8 @@ const extractMixData = ({
     _yoast_wpseo_metadesc: description,
     _tjnz_plays: plays,
     _tjnz_downloads: downloads,
+    _tjnz_likes: likes,
+    _tjnz_dislikes: dislikes,
     _tjnz_duration: duration,
     _tjnz_bitrate: quality,
     _tjnz_filesize: fileSize
@@ -33,6 +35,8 @@ const extractMixData = ({
   thumbnail: extractArtworkSrc(featuredImage, 'thumbnail'),
   plays,
   downloads,
+  likes,
+  dislikes,
   duration: toDuration(duration),
   quality: toKbps(quality),
   fileSize: toMegabytes(fileSize),

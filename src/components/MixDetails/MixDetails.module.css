@@ -80,6 +80,14 @@
   color: var(--colour-grey-200);
 }
 
+.voting {
+  display: grid;
+  grid-template-columns: 1fr minmax(64px, min-content) 1fr;
+  gap: 2px;
+  text-align: center;
+  color: var(--colour-grey-400);
+}
+
 .icon {
   height: 1em;
   margin-right: 0.4em;
@@ -101,6 +109,7 @@
   gap: 2px 0;
 }
 
+.score,
 .details div,
 .meta div {
   min-height: 34px;

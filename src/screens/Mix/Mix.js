@@ -34,6 +34,8 @@ const Mix = () => {
     thumbnail,
     plays,
     downloads,
+    likes,
+    dislikes,
     duration,
     quality,
     fileSize,
@@ -73,6 +75,8 @@ const Mix = () => {
           description={description}
           plays={plays}
           downloads={downloads}
+          likes={likes}
+          dislikes={dislikes}
           quality={quality}
           fileSize={fileSize}
         />
