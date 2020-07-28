@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Observe, useBreakpoints } from '@envato/react-breakpoints';
 import { useDispatch, useSelector } from 'react-redux';
 import selectDrawer from '../../selectors/selectDrawer';
@@ -6,6 +6,7 @@ import selectQuery from '../../selectors/selectQuery';
 import selectDetails from '../../selectors/selectDetails';
 import openDrawer from '../../actions/openDrawer';
 import fetchNextPage from '../../actions/fetchNextPage';
+import updateQuery from '../../actions/updateQuery';
 import { SEARCH_DRAWER, RESULT_DETAILS_DRAWER } from '../../constants/drawers';
 import { ARTISTS, GENRES, TAGS } from '../../constants/facettedSearchFacets';
 import Aside from '../../components/Aside';
@@ -25,15 +26,26 @@ const grid = {
 };
 
 const Home = () => {
+  const queryHasUpdated = useRef(false);
   const dispatch = useDispatch();
   const drawer = useSelector(selectDrawer);
   const query = useSelector(selectQuery);
   const details = useSelector(selectDetails);
 
   useEffect(() => {
-    if (!query.isFetching && query.statusText === null && query.results.length === 0) {
-      const action = fetchNextPage();
-      dispatch(action);
+    if (!query.isFetching && query.statusText === null) {
+      let action;
+
+      if (query.results.length === 0) {
+        action = fetchNextPage();
+      } else if (query.results.length === 1 && !queryHasUpdated.current) {
+        queryHasUpdated.current = true;
+        action = updateQuery();
+      }
+
+      if (action) {
+        dispatch(action);
+      }
     }
   }, [query, dispatch]);
 
