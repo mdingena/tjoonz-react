@@ -49,7 +49,7 @@ const Mix = () => {
     }
   }, [id, slug, dispatch]);
 
-  if (statusText !== null) return <NotFound />;
+  if (statusText === '404') return <NotFound />;
 
   if (!id) return null;
 
