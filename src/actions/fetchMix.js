@@ -1,11 +1,12 @@
 import { DONE_FETCHING_MIX, SET_MIX, START_FETCHING_MIX } from '../constants/actionTypes';
 import { ENDPOINTS } from '../constants/api';
-import addTasks from '../actions/addTasks';
-import completeTasks from '../actions/completeTasks';
+import addTasks from './addTasks';
+import completeTasks from './completeTasks';
+import upsertMixInQuery from './upsertMixInQuery';
 import fetchPage from '../api/fetchPage';
 import extractMixData from '../api/extractMixData';
 
-const fetchMix = slug => async (dispatch, getState) => {
+const fetchMix = slug => async dispatch => {
   dispatch(startFetching());
   dispatch(addTasks(SET_MIX, 1));
 
@@ -22,7 +23,8 @@ const fetchMix = slug => async (dispatch, getState) => {
   const mix = response.resources.map(extractMixData)[0];
 
   dispatch(setMix(mix || {}));
-  dispatch(doneFetching(!mix ? "Couldn't find mix." : null));
+  dispatch(upsertMixInQuery(mix || {}));
+  dispatch(doneFetching(!mix ? '404' : null));
   dispatch(completeTasks(SET_MIX, 1));
 };
 
