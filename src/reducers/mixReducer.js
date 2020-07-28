@@ -1,7 +1,15 @@
-import { DONE_FETCHING_MIX, PREPEND_COMMENT, SET_MIX, START_FETCHING_MIX } from '../constants/actionTypes';
+import {
+  DONE_FETCHING_MIX,
+  DONE_SUBMITTING_VOTE,
+  PREPEND_COMMENT,
+  SET_MIX,
+  START_FETCHING_MIX,
+  START_SUBMITTING_VOTE
+} from '../constants/actionTypes';
 
 const initialState = {
   isFetching: false,
+  isVoting: false,
   statusText: null,
   current: {}
 };
@@ -12,6 +20,13 @@ const queryReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isFetching: false,
+        statusText: payload.statusText
+      };
+
+    case DONE_SUBMITTING_VOTE:
+      return {
+        ...state,
+        isVoting: false,
         statusText: payload.statusText
       };
 
@@ -34,6 +49,12 @@ const queryReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isFetching: true
+      };
+
+    case START_SUBMITTING_VOTE:
+      return {
+        ...state,
+        isVoting: true
       };
 
     default:

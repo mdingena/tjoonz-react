@@ -4,7 +4,8 @@ import {
   DONE_FETCHING_QUERY_RESULTS,
   SET_QUERY_RESULTS,
   START_FETCHING_NEXT_QUERY_RESULTS_PAGE,
-  START_FETCHING_QUERY_RESULTS
+  START_FETCHING_QUERY_RESULTS,
+  UPSERT_MIX_IN_QUERY_RESULTS
 } from '../constants/actionTypes';
 import { initialState as facettedSearchInitialState } from './facettedSearchReducer';
 
@@ -62,6 +63,16 @@ const queryReducer = (state = initialState, { type, payload }) => {
         ...state,
         isFetching: true,
         facets: reduce(payload.facettedSearch)
+      };
+
+    case UPSERT_MIX_IN_QUERY_RESULTS:
+      const update = state.results.findIndex(mix => mix.id === payload.mix.id);
+
+      return {
+        ...state,
+        results: update
+          ? [...state.results.slice(0, update), payload.mix, ...state.results.slice(update + 1)]
+          : [...state.results, payload.mix]
       };
 
     default:
