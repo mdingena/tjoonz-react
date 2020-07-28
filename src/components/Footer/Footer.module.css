@@ -11,7 +11,8 @@
   list-style: none;
 }
 
-.list li {
+.list li,
+.root p {
   margin: 0;
   padding: 0.25rem 0;
 }
@@ -25,7 +26,7 @@
   color: var(--colour-grey-400);
 }
 
-@media (min-width: 541px) {
+@media (min-width: 650px) {
   .root {
     padding: 32px 30px 0;
   }

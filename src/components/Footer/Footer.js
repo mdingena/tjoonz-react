@@ -13,6 +13,13 @@ const Footer = ({ links }) => (
           </Link>
         </li>
       ))}
+      <li>
+        {/* eslint-disable react/jsx-no-target-blank */}
+        <a className={styles.link} href='https://www.tjoonz.com/wp-admin/profile.php' target='_blank'>
+          Manage Profile
+        </a>
+        {/* eslint-enable react/jsx-no-target-blank */}
+      </li>
     </ul>
     <p>Tjoonz.com est. 2008</p>
   </footer>
