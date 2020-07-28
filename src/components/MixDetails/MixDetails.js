@@ -3,12 +3,14 @@ import { useRouteMatch, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
 import selectAuth from '../../selectors/selectAuth';
+import selectMixVoting from '../../selectors/selectMixVoting';
 import appendPlaylistItems from '../../actions/appendPlaylistItems';
 import removePlaylistItems from '../../actions/removePlaylistItems';
 import resumePlayback from '../../actions/resumePlayback';
 import pausePlayback from '../../actions/pausePlayback';
 import startPlayback from '../../actions/startPlayback';
 import closeDrawer from '../../actions/closeDrawer';
+import submitVote from '../../actions/submitVote';
 import Button from '../Button';
 import Icon from '../Icon';
 import he from 'he';
@@ -39,6 +41,7 @@ const MixDetails = ({
   const dispatch = useDispatch();
   const { isPlaying, playlist, playhead } = useSelector(selectPlayer);
   const { token } = useSelector(selectAuth);
+  const isVoting = useSelector(selectMixVoting);
 
   const isInPlaylist = !empty && playlist.find(item => item.id === id);
   const isTrackAtPlayhead = !empty && (playlist[playhead] || {}).id === id;
@@ -89,6 +92,12 @@ const MixDetails = ({
     if (!posterRevealed && posterRef.current && posterRef.current.complete) handlePosterLoaded();
   });
 
+  const handleVote = liked => {
+    const action = submitVote(liked, id, slug);
+
+    dispatch(action);
+  };
+
   const score = likes - dislikes;
 
   return (
@@ -116,7 +125,7 @@ const MixDetails = ({
             Icon={isTrackAtPlayhead && isPlaying ? Icon.Pause : Icon.Play}
           />
           <Button onClick={handlePlaylistClick} text='Queue' Icon={isInPlaylist ? Icon.CheckSquare : Icon.Square} />
-          <Button onClick={() => console.log('download')} text='Download' Icon={Icon.CloudDownload} />
+          <Button onClick={() => console.log('todo')} text='Download' Icon={Icon.CloudDownload} />
         </div>
       )}
       {!empty && !routeMatch && (
@@ -125,16 +134,13 @@ const MixDetails = ({
           <span className={styles.text}>Tracklist and comments</span>
         </Link>
       )}
-      {
-        // @todo: WP voting API
-        false && !empty && token && (
-          <div className={styles.voting}>
-            <Button onClick={() => console.log('upvote')} text='Like' Icon={Icon.AngleDoubleUp} />
-            <div className={styles.score}>{`${score < 0 ? '' : '+'}${score.toLocaleString()}`}</div>
-            <Button onClick={() => console.log('downvote')} text='Dislike' Icon={Icon.AngleDoubleDown} />
-          </div>
-        )
-      }
+      {!empty && token && (
+        <div className={styles.voting}>
+          <Button onClick={() => handleVote(true)} text='Like' Icon={Icon.AngleDoubleUp} disabled={isVoting} />
+          <div className={styles.score}>{`${score < 0 ? '' : '+'}${score.toLocaleString()}`}</div>
+          <Button onClick={() => handleVote(false)} text='Dislike' Icon={Icon.AngleDoubleDown} disabled={isVoting} />
+        </div>
+      )}
       {!empty && (
         <div className={styles.details}>
           <div>Published</div>
@@ -175,17 +181,10 @@ const MixDetails = ({
           <div>{plays}</div>
           <div>Downloads</div>
           <div>{downloads}</div>
-          {
-            // @todo: WP voting API
-            false && (
-              <>
-                <div>Likes</div>
-                <div>{likes}</div>
-                <div>Dislikes</div>
-                <div>{dislikes}</div>
-              </>
-            )
-          }
+          <div>Likes</div>
+          <div>{likes}</div>
+          <div>Dislikes</div>
+          <div>{dislikes}</div>
           {quality > 0 && (
             <>
               <div>Quality</div>
@@ -241,6 +240,8 @@ MixDetails.propTypes = {
   description: PropTypes.string,
   plays: PropTypes.number,
   downloads: PropTypes.number,
+  likes: PropTypes.number,
+  dislikes: PropTypes.number,
   quality: PropTypes.number,
   fileSize: PropTypes.number
 };
