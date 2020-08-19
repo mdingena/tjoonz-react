@@ -21,6 +21,8 @@ html {
   --colour-grey-200: #cad1d9;
   --colour-grey-400: #8899a9;
   --colour-grey-600: #566776;
+  --colour-red-500: #bb1919;
+  --colour-red-600: #812828;
 
   --duration-short: 150ms;
   --duration-medium: 300ms;

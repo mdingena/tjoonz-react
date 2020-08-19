@@ -2,8 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styles from './Button.module.css';
 
-const Button = ({ onClick, text, Icon = () => null, disabled = false, align = 'center', type = 'button' }) => {
-  const className = [styles.root, styles[align]].join(' ');
+const Button = ({
+  onClick,
+  text,
+  Icon = () => null,
+  disabled = false,
+  align = 'center',
+  type = 'button',
+  danger = false
+}) => {
+  const className = [danger ? styles.danger : styles.root, styles[align]].join(' ');
 
   return (
     <button className={className} onClick={onClick} disabled={disabled} type={type}>
@@ -20,7 +28,8 @@ Button.propTypes = {
   Icon: PropTypes.func,
   disabled: PropTypes.bool,
   align: PropTypes.oneOf(['left', 'center', 'right']),
-  type: PropTypes.oneOf(['button', 'submit'])
+  type: PropTypes.oneOf(['button', 'submit']),
+  danger: PropTypes.bool
 };
 
 export default Button;

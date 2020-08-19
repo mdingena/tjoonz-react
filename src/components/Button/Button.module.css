@@ -23,6 +23,12 @@
   -moz-osx-font-smoothing: antialiased;
 }
 
+.danger {
+  composes: root;
+  background-color: var(--colour-red-600);
+  color: var(--colour-grey-200);
+}
+
 .left {
   justify-content: flex-start;
 }
@@ -52,6 +58,10 @@
   fill: var(--colour-grey-400);
 }
 
+.danger .icon {
+  fill: var(--colour-grey-200);
+}
+
 .iconLeft {
   composes: icon;
   margin-right: 0.4em;
@@ -64,6 +74,15 @@
 
 .root:not(:disabled):hover .icon {
   fill: var(--colour-grey-200);
+}
+
+.danger:not(:disabled):hover {
+  background-color: var(--colour-red-500);
+  color: #fff;
+}
+
+.danger:not(:disabled):hover .icon {
+  fill: var(--colour-grey-100);
 }
 
 .text {
