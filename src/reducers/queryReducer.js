@@ -1,4 +1,5 @@
 import {
+  APPEND_MY_COLLECTIONS_MIXES_RESULTS,
   APPEND_QUERY_RESULTS,
   DONE_FETCHING_NEXT_QUERY_RESULTS_PAGE,
   DONE_FETCHING_QUERY_RESULTS,
@@ -31,6 +32,7 @@ const initialState = {
 
 const queryReducer = (state = initialState, { type, payload }) => {
   switch (type) {
+    case APPEND_MY_COLLECTIONS_MIXES_RESULTS:
     case APPEND_QUERY_RESULTS:
       return {
         ...state,
