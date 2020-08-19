@@ -16,6 +16,7 @@ const TASK = 'SAVE_MIX_TO_COLLECTION';
 
 const CollectionPicker = ({ mixId, onClose }) => {
   const hasFetched = useRef(false);
+  const inputRef = useRef(null);
   const dispatch = useDispatch();
   const { token } = useSelector(selectAuth);
   const collections = useSelector(selectCollections);
@@ -31,22 +32,22 @@ const CollectionPicker = ({ mixId, onClose }) => {
     }
   }, [collections, dispatch]);
 
-  const handleSave = async collectionId => {
+  const handleSave = async (collectionId, collectionName = null) => {
     dispatch(addTasks(TASK, 1));
-    const response = await postMyCollectionsMix(mixId, collectionId, null, token);
-    console.log(response);
+    const response = await postMyCollectionsMix(mixId, collectionId, collectionName, token);
     if (!response.ok) {
       dispatch(completeTasks(TASK, 1));
       return;
     }
 
     const result = await response.json();
-    console.log(result);
 
     if (!result.success) {
       dispatch(completeTasks(TASK, 1));
       return;
     }
+
+    if (inputRef.current) inputRef.current.value = '';
 
     dispatch(fetchMyCollections());
     dispatch(completeTasks(TASK, 1));
@@ -57,8 +58,8 @@ const CollectionPicker = ({ mixId, onClose }) => {
       <Button onClick={onClose} text='Close' />
       <div className={styles.collections}>
         <div className={styles.new}>
-          <input className={styles.input} placeholder='Create new collection' />
-          <Button onClick={() => console.log('todo')} Icon={Icon.Save} text='New' />
+          <input ref={inputRef} className={styles.input} placeholder='Create new collection' />
+          <Button onClick={() => handleSave(0, inputRef.current.value)} Icon={Icon.Save} text='New' />
         </div>
         {collections.collections.map(({ id, name, count, mixes }, index) => (
           <SelectCollection
