@@ -23,7 +23,7 @@ const Navigation = ({ links = [] }) => {
     if (token) {
       setNavLinks([
         ...links,
-        { to: '/my/', text: 'My Account' },
+        { to: '/my/collections/', text: 'My Collections' },
         {
           to: {
             pathname: '/sign-out/',
