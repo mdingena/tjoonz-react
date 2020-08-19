@@ -13,6 +13,7 @@ import closeDrawer from '../../actions/closeDrawer';
 import submitVote from '../../actions/submitVote';
 import Button from '../Button';
 import Icon from '../Icon';
+import CollectionPicker from '../CollectionPicker';
 import he from 'he';
 import PropTypes from 'prop-types';
 import styles from './MixDetails.module.css';
@@ -42,6 +43,7 @@ const MixDetails = ({
   const { isPlaying, playlist, playhead } = useSelector(selectPlayer);
   const { token } = useSelector(selectAuth);
   const isVoting = useSelector(selectMixVoting);
+  const [showCollectionPicker, setShowCollectionPicker] = useState(false);
 
   const isInPlaylist = !empty && playlist.find(item => item.id === id);
   const isTrackAtPlayhead = !empty && (playlist[playhead] || {}).id === id;
@@ -117,101 +119,118 @@ const MixDetails = ({
           </div>
         )}
       </div>
-      {!empty && (
-        <div className={styles.controls}>
-          <div className={styles.voting}>
-            {!empty && token && (
-              <>
-                <Button onClick={() => handleVote(true)} text='Like' Icon={Icon.AngleDoubleUp} disabled={isVoting} />
-                <div className={styles.score}>{`${score < 0 ? '' : '+'}${score.toLocaleString()}`}</div>
+      {showCollectionPicker ? (
+        <CollectionPicker mixId={id} onClose={() => setShowCollectionPicker(false)} />
+      ) : (
+        <>
+          {!empty && (
+            <div className={styles.controls}>
+              <div className={styles.voting}>
+                {!empty && token && (
+                  <>
+                    <Button
+                      onClick={() => handleVote(true)}
+                      text='Like'
+                      Icon={Icon.AngleDoubleUp}
+                      disabled={isVoting}
+                    />
+                    <div className={styles.score}>{`${score < 0 ? '' : '+'}${score.toLocaleString()}`}</div>
+                    <Button
+                      onClick={() => handleVote(false)}
+                      text='Dislike'
+                      Icon={Icon.AngleDoubleDown}
+                      disabled={isVoting}
+                    />
+                  </>
+                )}
+              </div>
+              <div className={styles.mixControls}>
                 <Button
-                  onClick={() => handleVote(false)}
-                  text='Dislike'
-                  Icon={Icon.AngleDoubleDown}
-                  disabled={isVoting}
+                  onClick={handlePlaybackClick}
+                  text={isTrackAtPlayhead && isPlaying ? 'Pause' : 'Play'}
+                  Icon={isTrackAtPlayhead && isPlaying ? Icon.Pause : Icon.Play}
                 />
+                <Button
+                  onClick={handlePlaylistClick}
+                  text='Queue'
+                  Icon={isInPlaylist ? Icon.CheckSquare : Icon.Square}
+                />
+                <Button onClick={() => console.log('todo')} text='Download' Icon={Icon.CloudDownload} />
+                <Button onClick={() => setShowCollectionPicker(true)} text='Save' Icon={Icon.Save} />
+              </div>
+            </div>
+          )}
+          {!empty && !routeMatch && (
+            <Link to={`/mix/${slug}/`} className={styles.link} onClick={handleTracklistClick}>
+              <Icon.ListOl className={styles.icon} />
+              <span className={styles.text}>Tracklist and comments</span>
+            </Link>
+          )}
+          {!empty && (
+            <div className={styles.details}>
+              <div>Published</div>
+              <div>{published}</div>
+              <div>Artists</div>
+              <div>{he.decode(artists.map(({ name }) => name).join(', '))}</div>
+              <div>Title</div>
+              <div>{title}</div>
+              <div>Genres</div>
+              <div>{he.decode(genres.map(({ name }) => name).join(', '))}</div>
+              {tags.length > 0 && (
+                <>
+                  <div>Tags</div>
+                  <div>{he.decode(tags.map(({ name }) => name).join(', '))}</div>
+                </>
+              )}
+              {duration && (
+                <>
+                  <div>Duration</div>
+                  <div>{duration}</div>
+                </>
+              )}
+            </div>
+          )}
+          <div className={styles.description}>
+            {!empty ? (
+              description
+            ) : (
+              <>
+                <h1>Tjoonz.com</h1>
+                <p>
+                  An EDM mixtape archive launched in 2008, run entirely in our spare time and out of our own pockets.
+                </p>
               </>
             )}
           </div>
-          <div className={styles.mixControls}>
-            <Button
-              onClick={handlePlaybackClick}
-              text={isTrackAtPlayhead && isPlaying ? 'Pause' : 'Play'}
-              Icon={isTrackAtPlayhead && isPlaying ? Icon.Pause : Icon.Play}
-            />
-            <Button onClick={handlePlaylistClick} text='Queue' Icon={isInPlaylist ? Icon.CheckSquare : Icon.Square} />
-            <Button onClick={() => console.log('todo')} text='Download' Icon={Icon.CloudDownload} />
-            <Button onClick={() => console.log('todo')} text='Save' Icon={Icon.Save} />
-          </div>
-        </div>
-      )}
-      {!empty && !routeMatch && (
-        <Link to={`/mix/${slug}/`} className={styles.link} onClick={handleTracklistClick}>
-          <Icon.ListOl className={styles.icon} />
-          <span className={styles.text}>Tracklist and comments</span>
-        </Link>
-      )}
-      {!empty && (
-        <div className={styles.details}>
-          <div>Published</div>
-          <div>{published}</div>
-          <div>Artists</div>
-          <div>{he.decode(artists.map(({ name }) => name).join(', '))}</div>
-          <div>Title</div>
-          <div>{title}</div>
-          <div>Genres</div>
-          <div>{he.decode(genres.map(({ name }) => name).join(', '))}</div>
-          {tags.length > 0 && (
-            <>
-              <div>Tags</div>
-              <div>{he.decode(tags.map(({ name }) => name).join(', '))}</div>
-            </>
+          {!empty && (
+            <div className={styles.meta}>
+              <div>Plays</div>
+              <div>{plays}</div>
+              <div>Downloads</div>
+              <div>{downloads}</div>
+              <div>Likes</div>
+              <div>{likes}</div>
+              <div>Dislikes</div>
+              <div>{dislikes}</div>
+              {quality > 0 && (
+                <>
+                  <div>Quality</div>
+                  <div>
+                    {quality} <small>kbps</small>
+                  </div>
+                </>
+              )}
+              {fileSize > 0 && (
+                <>
+                  <div>File size</div>
+                  <div>
+                    {fileSize} <small>MB</small>
+                  </div>
+                </>
+              )}
+            </div>
           )}
-          {duration && (
-            <>
-              <div>Duration</div>
-              <div>{duration}</div>
-            </>
-          )}
-        </div>
-      )}
-      <div className={styles.description}>
-        {!empty ? (
-          description
-        ) : (
-          <>
-            <h1>Tjoonz.com</h1>
-            <p>An EDM mixtape archive launched in 2008, run entirely in our spare time and out of our own pockets.</p>
-          </>
-        )}
-      </div>
-      {!empty && (
-        <div className={styles.meta}>
-          <div>Plays</div>
-          <div>{plays}</div>
-          <div>Downloads</div>
-          <div>{downloads}</div>
-          <div>Likes</div>
-          <div>{likes}</div>
-          <div>Dislikes</div>
-          <div>{dislikes}</div>
-          {quality > 0 && (
-            <>
-              <div>Quality</div>
-              <div>
-                {quality} <small>kbps</small>
-              </div>
-            </>
-          )}
-          {fileSize > 0 && (
-            <>
-              <div>File size</div>
-              <div>
-                {fileSize} <small>MB</small>
-              </div>
-            </>
-          )}
-        </div>
+        </>
       )}
     </div>
   );
