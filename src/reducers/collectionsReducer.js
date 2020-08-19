@@ -17,7 +17,7 @@ const initialState = {
   nextPage: 1
 };
 
-const COLLECTIONSReducer = (state = initialState, { type, payload }) => {
+const collectionsReducer = (state = initialState, { type, payload }) => {
   switch (type) {
     case APPEND_MY_COLLECTIONS_MIXES_RESULTS:
       return {
@@ -48,7 +48,6 @@ const COLLECTIONSReducer = (state = initialState, { type, payload }) => {
       };
 
     case SET_MY_COLLECTIONS_RESULTS:
-      console.log(payload.results[0]);
       return {
         ...state,
         collections: payload.results,
@@ -75,4 +74,4 @@ const COLLECTIONSReducer = (state = initialState, { type, payload }) => {
   }
 };
 
-export default COLLECTIONSReducer;
+export default collectionsReducer;
