@@ -93,6 +93,10 @@ const MixDetails = ({
   const handlePosterLoaded = () => revealPoster(true);
 
   useEffect(() => {
+    setShowCollectionPicker(false);
+  }, [id]);
+
+  useEffect(() => {
     revealPoster(false);
   }, [thumbnail]);
 
