@@ -34,3 +34,10 @@ export const PLAYLIST_DRAWER = {
   SHOW_PROGRESS: true,
   TRANSPARENT_OVERLAY: true
 };
+
+export const MY_COLLECTIONS_DRAWER = {
+  KEY: 'MY_COLLECTIONS_DRAWER',
+  ALIGN: 'left',
+  CLOSE_TEXT: 'Close my collections',
+  CLOSE_ICON: Icon.ArrowLeftBold
+};
