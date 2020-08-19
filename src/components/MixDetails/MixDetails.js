@@ -119,13 +119,30 @@ const MixDetails = ({
       </div>
       {!empty && (
         <div className={styles.controls}>
-          <Button
-            onClick={handlePlaybackClick}
-            text={isTrackAtPlayhead && isPlaying ? 'Pause' : 'Play'}
-            Icon={isTrackAtPlayhead && isPlaying ? Icon.Pause : Icon.Play}
-          />
-          <Button onClick={handlePlaylistClick} text='Queue' Icon={isInPlaylist ? Icon.CheckSquare : Icon.Square} />
-          <Button onClick={() => console.log('todo')} text='Download' Icon={Icon.CloudDownload} />
+          <div className={styles.voting}>
+            {!empty && token && (
+              <>
+                <Button onClick={() => handleVote(true)} text='Like' Icon={Icon.AngleDoubleUp} disabled={isVoting} />
+                <div className={styles.score}>{`${score < 0 ? '' : '+'}${score.toLocaleString()}`}</div>
+                <Button
+                  onClick={() => handleVote(false)}
+                  text='Dislike'
+                  Icon={Icon.AngleDoubleDown}
+                  disabled={isVoting}
+                />
+              </>
+            )}
+          </div>
+          <div className={styles.mixControls}>
+            <Button
+              onClick={handlePlaybackClick}
+              text={isTrackAtPlayhead && isPlaying ? 'Pause' : 'Play'}
+              Icon={isTrackAtPlayhead && isPlaying ? Icon.Pause : Icon.Play}
+            />
+            <Button onClick={handlePlaylistClick} text='Queue' Icon={isInPlaylist ? Icon.CheckSquare : Icon.Square} />
+            <Button onClick={() => console.log('todo')} text='Download' Icon={Icon.CloudDownload} />
+            <Button onClick={() => console.log('todo')} text='Save' Icon={Icon.Save} />
+          </div>
         </div>
       )}
       {!empty && !routeMatch && (
@@ -133,13 +150,6 @@ const MixDetails = ({
           <Icon.ListOl className={styles.icon} />
           <span className={styles.text}>Tracklist and comments</span>
         </Link>
-      )}
-      {!empty && token && (
-        <div className={styles.voting}>
-          <Button onClick={() => handleVote(true)} text='Like' Icon={Icon.AngleDoubleUp} disabled={isVoting} />
-          <div className={styles.score}>{`${score < 0 ? '' : '+'}${score.toLocaleString()}`}</div>
-          <Button onClick={() => handleVote(false)} text='Dislike' Icon={Icon.AngleDoubleDown} disabled={isVoting} />
-        </div>
       )}
       {!empty && (
         <div className={styles.details}>
