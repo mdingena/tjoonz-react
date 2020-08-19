@@ -3,7 +3,7 @@ import setDetails from './setDetails';
 
 const upsertMixInQuery = mix => dispatch => {
   dispatch(upsertMix(mix));
-  dispatch(setDetails(mix.id));
+  dispatch(setDetails(mix));
 };
 
 export default upsertMixInQuery;

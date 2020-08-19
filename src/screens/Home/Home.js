@@ -95,7 +95,7 @@ const Home = () => {
             {query.results.length === 0
               ? query.statusText
               : query.results.map((result, index) => (
-                  <MixListItem key={`result-${index}`} detailsInDrawer={columns < 3} {...result} />
+                  <MixListItem key={`result-${index}`} detailsInDrawer={columns < 3} mix={result} />
                 ))}
             <div className={styles.footer}>
               {query.nextPage && !query.statusText ? (

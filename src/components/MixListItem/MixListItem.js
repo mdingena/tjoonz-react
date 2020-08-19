@@ -32,18 +32,9 @@ export const breakpoints = {
   630: 4
 };
 
-const MixListItem = ({
-  shownInPlaylist = false,
-  detailsInDrawer = false,
-  id,
-  slug,
-  thumbnail,
-  title,
-  artists,
-  genres,
-  tags,
-  published
-}) => {
+const MixListItem = ({ shownInPlaylist = false, detailsInDrawer = false, mix }) => {
+  const { id, slug, thumbnail, title, artists, genres, tags, published } = mix;
+
   const history = useHistory();
   const dispatch = useDispatch();
   const { isPlaying, playlist, playhead } = useSelector(selectPlayer);
@@ -99,7 +90,7 @@ const MixListItem = ({
         dispatch(drawerAction);
       }
 
-      const detailsAction = setDetails(id);
+      const detailsAction = setDetails(mix);
       dispatch(detailsAction);
     }
   };
@@ -185,32 +176,34 @@ const MixListItem = ({
 MixListItem.propTypes = {
   shownInPlaylist: PropTypes.bool,
   detailsInDrawer: PropTypes.bool,
-  id: PropTypes.number.isRequired,
-  slug: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string,
-  title: PropTypes.string.isRequired,
-  artists: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  genres: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired
-    })
-  ).isRequired,
-  tags: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired
-    })
-  ),
-  published: PropTypes.string.isRequired
+  mix: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    slug: PropTypes.string.isRequired,
+    thumbnail: PropTypes.string,
+    title: PropTypes.string.isRequired,
+    artists: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        slug: PropTypes.string.isRequired
+      })
+    ).isRequired,
+    genres: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        slug: PropTypes.string.isRequired
+      })
+    ).isRequired,
+    tags: PropTypes.arrayOf(
+      PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        name: PropTypes.string.isRequired,
+        slug: PropTypes.string.isRequired
+      })
+    ),
+    published: PropTypes.string.isRequired
+  }).isRequired
 };
 
 export default MixListItem;

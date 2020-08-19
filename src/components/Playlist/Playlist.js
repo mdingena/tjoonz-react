@@ -27,7 +27,7 @@ const Playlist = () => {
                 </div>
                 {playlist.map((item, index) => (
                   <div key={`playlist-${index}`} className={playhead === index ? styles.active : styles.item}>
-                    <MixListItem shownInPlaylist {...item} />
+                    <MixListItem shownInPlaylist mix={item} />
                   </div>
                 ))}
               </>
