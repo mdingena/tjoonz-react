@@ -4,8 +4,9 @@
   flex-direction: row;
   align-items: center;
   width: 100%;
+  max-width: 1420px;
   height: var(--size-navigation-bar);
-  margin: 0;
+  margin: 0 auto;
   padding: 0;
   border: none;
   background: transparent;
