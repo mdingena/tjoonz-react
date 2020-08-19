@@ -26,7 +26,7 @@ const grid = {
 };
 
 const Home = () => {
-  const queryHasUpdated = useRef(false);
+  const hasFetched = useRef(false);
   const dispatch = useDispatch();
   const drawer = useSelector(selectDrawer);
   const query = useSelector(selectQuery);
@@ -38,8 +38,8 @@ const Home = () => {
 
       if (query.results.length === 0) {
         action = fetchNextPage();
-      } else if (query.results.length === 1 && !queryHasUpdated.current) {
-        queryHasUpdated.current = true;
+      } else if (!hasFetched.current) {
+        hasFetched.current = true;
         action = updateQuery();
       }
 
@@ -91,8 +91,8 @@ const Home = () => {
                 <Button onClick={handleOpenDrawer} text='Search options' Icon={Icon.Tasks} disabled={drawer !== null} />
               </div>
             )}
-            {query.results.length > 0 && <MixListHeader />}
-            {query.results.length === 0
+            {hasFetched.current && query.results.length > 0 && <MixListHeader />}
+            {hasFetched.current && query.results.length === 0
               ? query.statusText
               : query.results.map((result, index) => (
                   <MixListItem key={`result-${index}`} detailsInDrawer={columns < 3} mix={result} />
