@@ -6,11 +6,13 @@ import drawerReducer from './drawerReducer';
 import facettedSearchReducer from './facettedSearchReducer';
 import mixReducer from './mixReducer';
 import playerReducer from './playerReducer';
+import collectionsReducer from './collectionsReducer';
 import queryReducer from './queryReducer';
 import tasksReducer from './tasksReducer';
 
 const appReducer = combineReducers({
   auth: authReducer,
+  collections: collectionsReducer,
   comment: commentReducer,
   details: detailsReducer,
   drawer: drawerReducer,
