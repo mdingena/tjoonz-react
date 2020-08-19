@@ -1,5 +1,5 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { useRouteMatch, Link } from 'react-router-dom';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
+import { useRouteMatch, useHistory, useLocation, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import selectPlayer from '../../selectors/selectPlayer';
 import selectAuth from '../../selectors/selectAuth';
@@ -39,6 +39,8 @@ const MixDetails = ({
   fileSize
 }) => {
   const routeMatch = useRouteMatch({ path: `/mix/${slug}/` });
+  const history = useHistory();
+  const location = useLocation();
   const dispatch = useDispatch();
   const { isPlaying, playlist, playhead } = useSelector(selectPlayer);
   const { token } = useSelector(selectAuth);
@@ -47,6 +49,10 @@ const MixDetails = ({
 
   const isInPlaylist = !empty && playlist.find(item => item.id === id);
   const isTrackAtPlayhead = !empty && (playlist[playhead] || {}).id === id;
+
+  const handleSignIn = useCallback(() => {
+    history.push('/sign-in/', { from: location.pathname });
+  }, [history, location.pathname]);
 
   const handlePlaybackClick = () => {
     let action;
@@ -119,32 +125,34 @@ const MixDetails = ({
           </div>
         )}
       </div>
-      {showCollectionPicker ? (
+      {token && showCollectionPicker ? (
         <CollectionPicker mixId={id} onClose={() => setShowCollectionPicker(false)} />
       ) : (
         <>
           {!empty && (
             <div className={styles.controls}>
-              <div className={styles.voting}>
-                {!empty && token && (
-                  <>
-                    <Button
-                      onClick={() => handleVote(true)}
-                      text='Like'
-                      Icon={Icon.AngleDoubleUp}
-                      disabled={isVoting}
-                    />
-                    <div className={styles.score}>{`${score < 0 ? '' : '+'}${score.toLocaleString()}`}</div>
-                    <Button
-                      onClick={() => handleVote(false)}
-                      text='Dislike'
-                      Icon={Icon.AngleDoubleDown}
-                      disabled={isVoting}
-                    />
-                  </>
-                )}
-              </div>
-              <div className={styles.mixControls}>
+              {token && (
+                <div className={styles.voting}>
+                  {!empty && token && (
+                    <>
+                      <Button
+                        onClick={() => handleVote(true)}
+                        text='Like'
+                        Icon={Icon.AngleDoubleUp}
+                        disabled={isVoting}
+                      />
+                      <div className={styles.score}>{`${score < 0 ? '' : '+'}${score.toLocaleString()}`}</div>
+                      <Button
+                        onClick={() => handleVote(false)}
+                        text='Dislike'
+                        Icon={Icon.AngleDoubleDown}
+                        disabled={isVoting}
+                      />
+                    </>
+                  )}
+                </div>
+              )}
+              <div className={token ? styles.splitControls : styles.spanControls}>
                 <Button
                   onClick={handlePlaybackClick}
                   text={isTrackAtPlayhead && isPlaying ? 'Pause' : 'Play'}
@@ -156,9 +164,12 @@ const MixDetails = ({
                   Icon={isInPlaylist ? Icon.CheckSquare : Icon.Square}
                 />
                 <Button onClick={() => console.log('todo')} text='Download' Icon={Icon.CloudDownload} />
-                <Button onClick={() => setShowCollectionPicker(true)} text='Save' Icon={Icon.Save} />
+                {token && <Button onClick={() => setShowCollectionPicker(true)} text='Save' Icon={Icon.Save} />}
               </div>
             </div>
+          )}
+          {!empty && !token && (
+            <Button onClick={handleSignIn} text='Sign in to vote and collect' Icon={Icon.ShieldCheck} />
           )}
           {!empty && !routeMatch && (
             <Link to={`/mix/${slug}/`} className={styles.link} onClick={handleTracklistClick}>

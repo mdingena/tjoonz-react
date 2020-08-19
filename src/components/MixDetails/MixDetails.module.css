@@ -99,9 +99,15 @@
   margin: 2px 0;
 }
 
-.mixControls {
+.splitControls {
   display: grid;
   gap: 2px;
+}
+
+.spanControls {
+  composes: splitControls;
+  grid-column: span 2;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
 .icon {
