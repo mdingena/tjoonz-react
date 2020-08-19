@@ -17,7 +17,7 @@ const postMyCollectionsMix = (mixId, collectionId, collectionName, token) => {
     json: true
   };
 
-  return window.fetch(`${BASE_URL}${ENDPOINTS.POST_MY_COLLECTIONS_MIX}/${collectionId}`, options);
+  return window.fetch(`${BASE_URL}${ENDPOINTS.MY_COLLECTIONS}/${collectionId}`, options);
 };
 
 export default postMyCollectionsMix;

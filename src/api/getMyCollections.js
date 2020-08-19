@@ -10,7 +10,7 @@ const getMyCollections = token => {
     json: true
   };
 
-  return window.fetch(`${BASE_URL}${ENDPOINTS.GET_MY_COLLECTIONS}`, options);
+  return window.fetch(`${BASE_URL}${ENDPOINTS.MY_COLLECTIONS}`, options);
 };
 
 export default getMyCollections;
