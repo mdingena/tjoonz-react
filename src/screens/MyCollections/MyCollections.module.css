@@ -49,8 +49,9 @@
   font-family: 'Oxanium', sans-serif;
   font-size: 1rem;
   line-height: 1.5;
-  font-weight: 200;
-  color: var(--colour-grey-100);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  color: var(--colour-grey-200);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: antialiased;
