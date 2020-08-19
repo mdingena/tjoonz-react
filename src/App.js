@@ -12,6 +12,7 @@ import Analytics from './components/Analytics';
 import Screens from './screens';
 import Home from './screens/Home';
 import Mix from './screens/Mix';
+import MyCollections from './screens/MyCollections';
 import SignIn from './screens/SignIn';
 import SignOut from './screens/SignOut';
 import NotFound from './screens/NotFound';
@@ -69,6 +70,7 @@ const App = () => (
             <Screens>
               <Route exact path='/' component={Home} />
               <Route path='/mix/:slug/' component={Mix} />
+              <Route path='/my/collections/' component={MyCollections} />
               <Route path='/sign-in/' component={SignIn} />
               <Route path='/sign-out/' component={SignOut} />
               <Route component={NotFound} />

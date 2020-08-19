@@ -1,0 +1,100 @@
+.root {
+  display: grid;
+  gap: 30px;
+}
+
+.oneColumn {
+  composes: root;
+  grid-template-columns: 1fr;
+}
+
+.twoColumns {
+  composes: root;
+  grid-template-columns: 220px 1fr;
+}
+
+.threeColumns {
+  composes: root;
+  grid-template-columns: 220px 1fr 280px;
+}
+
+.myCollections {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  align-content: flex-start;
+  background-color: var(--colour-blue-900);
+}
+
+.myCollectionsHeading {
+  padding: 2px 5px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.playlistName,
+.controls {
+  display: grid;
+  gap: 2px;
+}
+
+.input {
+  width: 100%;
+  height: 34px;
+  padding: 2px 8px;
+  background-color: var(--colour-blue-800);
+  border: 0;
+  border-bottom: 1px solid transparent;
+  font-family: 'Oxanium', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5;
+  font-weight: 200;
+  color: var(--colour-grey-100);
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: antialiased;
+}
+
+.input:focus {
+  outline: none;
+  border-bottom: 1px solid var(--colour-grey-400);
+}
+
+.input::placeholder {
+  color: var(--colour-grey-400);
+}
+
+.controls {
+  grid-template-columns: 1fr 1fr;
+}
+
+.results {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  align-content: flex-start;
+}
+
+.searchButton {
+  padding-bottom: 8px;
+}
+
+.footer {
+  padding-top: 16px;
+}
+
+.footer:first-of-type {
+  padding-top: 34px;
+}
+
+@media (min-width: 426px) {
+  .playlistName {
+    grid-template-columns: 1fr 90px;
+  }
+
+  .controls {
+    grid-template-columns: 120px 100px;
+    justify-content: flex-end;
+  }
+}
