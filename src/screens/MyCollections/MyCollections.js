@@ -9,6 +9,9 @@ import selectDetails from '../../selectors/selectDetails';
 import openDrawer from '../../actions/openDrawer';
 import fetchMyCollections from '../../actions/fetchMyCollections';
 import fetchMyCollectionsMixesNextPage from '../../actions/fetchMyCollectionsMixesNextPage';
+import addTasks from '../../actions/addTasks';
+import completeTasks from '../../actions/completeTasks';
+import deleteMyCollection from '../../api/deleteMyCollection';
 import { MY_COLLECTIONS_DRAWER, RESULT_DETAILS_DRAWER } from '../../constants/drawers';
 import Aside from '../../components/Aside';
 import Icon from '../../components/Icon';
@@ -18,6 +21,8 @@ import MixListHeader from '../../components/MixListHeader';
 import MixListItem from '../../components/MixListItem';
 import MixDetails from '../../components/MixDetails';
 import styles from './MyCollections.module.css';
+
+const DELETE_COLLECTION = 'DELETE_COLLECTION';
 
 const grid = {
   1: styles.oneColumn,
@@ -64,6 +69,27 @@ const MyCollections = () => {
   const handleOpenDrawer = () => {
     const action = openDrawer(MY_COLLECTIONS_DRAWER);
     dispatch(action);
+  };
+
+  const handleDelete = async () => {
+    dispatch(addTasks(DELETE_COLLECTION, 1));
+
+    const response = await deleteMyCollection(collections.current.id, auth.token);
+
+    if (!response.ok) {
+      dispatch(completeTasks(DELETE_COLLECTION, 1));
+      return;
+    }
+
+    const result = await response.json();
+
+    if (!result.success) {
+      dispatch(completeTasks(DELETE_COLLECTION, 1));
+      return;
+    }
+
+    dispatch(fetchMyCollections());
+    dispatch(completeTasks(DELETE_COLLECTION, 1));
   };
 
   const [columns = 1] = useBreakpoints({
@@ -122,7 +148,7 @@ const MyCollections = () => {
             <div className={styles.controls}>
               {isDeletePending ? (
                 <>
-                  <Button onClick={() => console.log('todo')} text='Delete forever' disabled={drawer !== null} danger />
+                  <Button onClick={handleDelete} text='Delete forever' disabled={drawer !== null} danger />
                   <Button onClick={() => setIsDeletePending(false)} text='Cancel' disabled={drawer !== null} />
                 </>
               ) : (
