@@ -91,7 +91,7 @@
 
 @media (min-width: 426px) {
   .playlistName {
-    grid-template-columns: 1fr 90px;
+    grid-template-columns: 1fr 100px;
   }
 
   .controls {

@@ -143,7 +143,7 @@ const MyCollections = () => {
                 type='text'
                 defaultValue={collections.current.name}
               />
-              <Button onClick={() => console.log('todo')} text='Save' Icon={Icon.Save} disabled={drawer !== null} />
+              <Button onClick={() => console.log('todo')} text='Rename' Icon={Icon.Save} disabled={drawer !== null} />
             </div>
             <div className={styles.controls}>
               {isDeletePending ? (
