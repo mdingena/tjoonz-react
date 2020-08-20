@@ -9,6 +9,7 @@ import selectDetails from '../../selectors/selectDetails';
 import openDrawer from '../../actions/openDrawer';
 import fetchMyCollections from '../../actions/fetchMyCollections';
 import fetchMyCollectionsMixesNextPage from '../../actions/fetchMyCollectionsMixesNextPage';
+import renameMyCollection from '../../actions/renameMyCollection';
 import addTasks from '../../actions/addTasks';
 import completeTasks from '../../actions/completeTasks';
 import deleteMyCollection from '../../api/deleteMyCollection';
@@ -32,6 +33,7 @@ const grid = {
 
 const MyCollections = () => {
   const hasFetched = useRef(false);
+  const inputRef = useRef(null);
   const history = useHistory();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -40,6 +42,8 @@ const MyCollections = () => {
   const collections = useSelector(selectCollections);
   const details = useSelector(selectDetails);
   const [isDeletePending, setIsDeletePending] = useState(false);
+
+  console.log('###', collections);
 
   const handleSignIn = useCallback(() => {
     history.push('/sign-in/', { from: location.pathname });
@@ -69,6 +73,13 @@ const MyCollections = () => {
   const handleOpenDrawer = () => {
     const action = openDrawer(MY_COLLECTIONS_DRAWER);
     dispatch(action);
+  };
+
+  const handleRename = () => {
+    if (inputRef.current) {
+      const action = renameMyCollection(collections.current.id, inputRef.current.value);
+      dispatch(action);
+    }
   };
 
   const handleDelete = async () => {
@@ -138,12 +149,13 @@ const MyCollections = () => {
             <div className={styles.playlistName}>
               <input
                 key={collections.current.id}
+                ref={inputRef}
                 className={styles.input}
                 placeholder='Collection name'
                 type='text'
                 defaultValue={collections.current.name}
               />
-              <Button onClick={() => console.log('todo')} text='Rename' Icon={Icon.Save} disabled={drawer !== null} />
+              <Button onClick={handleRename} text='Rename' Icon={Icon.Save} disabled={drawer !== null} />
             </div>
             <div className={styles.controls}>
               {isDeletePending ? (

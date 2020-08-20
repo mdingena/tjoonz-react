@@ -3,6 +3,7 @@ import {
   DELETE_MIX_FROM_MY_COLLECTION,
   DONE_FETCHING_NEXT_MY_COLLECTIONS_RESULTS_PAGE,
   DONE_FETCHING_MY_COLLECTIONS_RESULTS,
+  RENAME_MY_COLLECTION,
   SET_MY_COLLECTIONS_CURRENT,
   SET_MY_COLLECTIONS_RESULTS,
   START_FETCHING_NEXT_MY_COLLECTIONS_RESULTS_PAGE,
@@ -67,6 +68,32 @@ const collectionsReducer = (state = initialState, { type, payload }) => {
         ...state,
         isFetching: false,
         statusText: payload.statusText
+      };
+
+    case RENAME_MY_COLLECTION:
+      const renameCollectionIndex = state.collections.findIndex(({ id }) => id === payload.id);
+      console.log(renameCollectionIndex, payload);
+
+      return {
+        ...state,
+        collections:
+          typeof renameCollectionIndex !== 'undefined'
+            ? [
+                ...state.collections.slice(0, renameCollectionIndex),
+                {
+                  ...state.collections[renameCollectionIndex],
+                  name: payload.name
+                },
+                ...state.collections.slice(renameCollectionIndex + 1)
+              ]
+            : state.collections,
+        current:
+          state.current.id === payload.id
+            ? {
+                ...state.current,
+                name: payload.name
+              }
+            : state.current
       };
 
     case SET_MY_COLLECTIONS_CURRENT:
