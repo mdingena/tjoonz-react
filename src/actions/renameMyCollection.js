@@ -8,14 +8,6 @@ const renameMyCollection = (id, name) => async (dispatch, getState) => {
 
   const truncatedName = name.substr(0, 255);
 
-  dispatch({
-    type: RENAME_MY_COLLECTION,
-    payload: {
-      id,
-      name: truncatedName
-    }
-  });
-
   const {
     auth: { token }
   } = getState();
@@ -33,6 +25,14 @@ const renameMyCollection = (id, name) => async (dispatch, getState) => {
     dispatch(completeTasks(RENAME_MY_COLLECTION, 1));
     return;
   }
+
+  dispatch({
+    type: RENAME_MY_COLLECTION,
+    payload: {
+      id,
+      name: truncatedName
+    }
+  });
 
   dispatch(completeTasks(RENAME_MY_COLLECTION, 1));
 };
