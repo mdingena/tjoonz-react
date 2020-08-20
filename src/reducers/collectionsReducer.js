@@ -31,17 +31,18 @@ const collectionsReducer = (state = initialState, { type, payload }) => {
 
       return {
         ...state,
-        collections: deleteFromCollectionIndex
-          ? [
-              ...state.collections.slice(0, deleteFromCollectionIndex),
-              {
-                ...state.collections[deleteFromCollectionIndex],
-                count: Number(state.collections[deleteFromCollectionIndex].count) - 1,
-                mixes: state.collections[deleteFromCollectionIndex].mixes.filter(id => id !== payload.mixId)
-              },
-              ...state.collections.slice(deleteFromCollectionIndex + 1)
-            ]
-          : state.collections,
+        collections:
+          typeof deleteFromCollectionIndex !== 'undefined'
+            ? [
+                ...state.collections.slice(0, deleteFromCollectionIndex),
+                {
+                  ...state.collections[deleteFromCollectionIndex],
+                  count: Number(state.collections[deleteFromCollectionIndex].count) - 1,
+                  mixes: state.collections[deleteFromCollectionIndex].mixes.filter(id => id !== payload.mixId)
+                },
+                ...state.collections.slice(deleteFromCollectionIndex + 1)
+              ]
+            : state.collections,
         current:
           state.current.id === payload.collectionId
             ? {
