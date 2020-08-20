@@ -72,7 +72,6 @@ const collectionsReducer = (state = initialState, { type, payload }) => {
 
     case RENAME_MY_COLLECTION:
       const renameCollectionIndex = state.collections.findIndex(({ id }) => id === payload.id);
-      console.log(renameCollectionIndex, payload);
 
       return {
         ...state,

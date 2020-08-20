@@ -43,8 +43,6 @@ const MyCollections = () => {
   const details = useSelector(selectDetails);
   const [isDeletePending, setIsDeletePending] = useState(false);
 
-  console.log('###', collections);
-
   const handleSignIn = useCallback(() => {
     history.push('/sign-in/', { from: location.pathname });
   }, [history, location.pathname]);
