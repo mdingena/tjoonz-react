@@ -36,7 +36,10 @@ const queryReducer = (state = initialState, { type, payload }) => {
     case APPEND_QUERY_RESULTS:
       return {
         ...state,
-        results: [...state.results, ...payload.results]
+        results: [
+          ...state.results,
+          ...payload.results.filter(result => state.results.every(({ id }) => id !== result.id))
+        ]
       };
 
     case DONE_FETCHING_NEXT_QUERY_RESULTS_PAGE:
