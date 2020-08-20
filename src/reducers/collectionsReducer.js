@@ -29,10 +29,10 @@ const collectionsReducer = (state = initialState, { type, payload }) => {
     case DELETE_MIX_FROM_MY_COLLECTION:
       const deleteFromCollectionIndex = state.collections.findIndex(({ id }) => id === payload.collectionId);
 
-      return deleteFromCollectionIndex && state.current.id === payload.collectionId
-        ? {
-            ...state,
-            collections: [
+      return {
+        ...state,
+        collections: deleteFromCollectionIndex
+          ? [
               ...state.collections.slice(0, deleteFromCollectionIndex),
               {
                 ...state.collections[deleteFromCollectionIndex],
@@ -40,15 +40,18 @@ const collectionsReducer = (state = initialState, { type, payload }) => {
                 mixes: state.collections[deleteFromCollectionIndex].mixes.filter(id => id !== payload.mixId)
               },
               ...state.collections.slice(deleteFromCollectionIndex + 1)
-            ],
-            current: {
-              ...state.current,
-              count: Number(state.current.count) - 1,
-              mixes: state.current.mixes.filter(id => id !== payload.mixId)
-            },
-            mixes: state.mixes.filter(({ id }) => id !== payload.mixId)
-          }
-        : state;
+            ]
+          : state.collections,
+        current:
+          state.current.id === payload.collectionId
+            ? {
+                ...state.current,
+                count: Number(state.current.count) - 1,
+                mixes: state.current.mixes.filter(id => id !== payload.mixId)
+              }
+            : state.current,
+        mixes: state.mixes.filter(({ id }) => id !== payload.mixId)
+      };
 
     case DONE_FETCHING_NEXT_MY_COLLECTIONS_RESULTS_PAGE:
       return {
