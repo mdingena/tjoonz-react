@@ -7,10 +7,13 @@ const deleteMyCollection = (collectionId, token) => {
       Authorization: `Bearer ${token}`,
       'Content-Type': 'application/json'
     },
+    body: JSON.stringify({
+      collection_id: collectionId
+    }),
     json: true
   };
 
-  return window.fetch(`${BASE_URL}${ENDPOINTS.MY_COLLECTIONS}/${collectionId}`, options);
+  return window.fetch(`${BASE_URL}${ENDPOINTS.MY_COLLECTIONS}`, options);
 };
 
 export default deleteMyCollection;
