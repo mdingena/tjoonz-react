@@ -12,7 +12,7 @@ import Icon from '../Icon';
 import SelectCollection from './SelectCollection';
 import styles from './CollectionPicker.module.css';
 
-const TASK = 'SAVE_MIX_TO_COLLECTION';
+const SAVE_MIX_TO_COLLECTION = 'SAVE_MIX_TO_COLLECTION';
 
 const CollectionPicker = ({ mixId, onClose }) => {
   const hasFetched = useRef(false);
@@ -33,24 +33,26 @@ const CollectionPicker = ({ mixId, onClose }) => {
   }, [collections, dispatch]);
 
   const handleSave = async (collectionId, collectionName = null) => {
-    dispatch(addTasks(TASK, 1));
+    dispatch(addTasks(SAVE_MIX_TO_COLLECTION, 1));
+
     const response = await postMyCollectionsMix(mixId, collectionId, collectionName, token);
+
     if (!response.ok) {
-      dispatch(completeTasks(TASK, 1));
+      dispatch(completeTasks(SAVE_MIX_TO_COLLECTION, 1));
       return;
     }
 
     const result = await response.json();
 
     if (!result.success) {
-      dispatch(completeTasks(TASK, 1));
+      dispatch(completeTasks(SAVE_MIX_TO_COLLECTION, 1));
       return;
     }
 
     if (inputRef.current) inputRef.current.value = '';
 
     dispatch(fetchMyCollections());
-    dispatch(completeTasks(TASK, 1));
+    dispatch(completeTasks(SAVE_MIX_TO_COLLECTION, 1));
   };
 
   return (
