@@ -1,5 +1,6 @@
 import {
   APPEND_MY_COLLECTIONS_MIXES_RESULTS,
+  DELETE_MIX_FROM_MY_COLLECTION,
   DONE_FETCHING_NEXT_MY_COLLECTIONS_RESULTS_PAGE,
   DONE_FETCHING_MY_COLLECTIONS_RESULTS,
   SET_MY_COLLECTIONS_CURRENT,
@@ -24,6 +25,30 @@ const collectionsReducer = (state = initialState, { type, payload }) => {
         ...state,
         mixes: [...state.mixes, ...payload.results]
       };
+
+    case DELETE_MIX_FROM_MY_COLLECTION:
+      const deleteFromCollectionIndex = state.collections.findIndex(({ id }) => id === payload.collectionId);
+
+      return deleteFromCollectionIndex && state.current.id === payload.collectionId
+        ? {
+            ...state,
+            collections: [
+              ...state.collections.slice(0, deleteFromCollectionIndex),
+              {
+                ...state.collections[deleteFromCollectionIndex],
+                count: Number(state.collections[deleteFromCollectionIndex].count) - 1,
+                mixes: state.collections[deleteFromCollectionIndex].mixes.filter(id => id !== payload.mixId)
+              },
+              ...state.collections.slice(deleteFromCollectionIndex + 1)
+            ],
+            current: {
+              ...state.current,
+              count: Number(state.current.count) - 1,
+              mixes: state.current.mixes.filter(id => id !== payload.mixId)
+            },
+            mixes: state.mixes.filter(({ id }) => id !== payload.mixId)
+          }
+        : state;
 
     case DONE_FETCHING_NEXT_MY_COLLECTIONS_RESULTS_PAGE:
       return {

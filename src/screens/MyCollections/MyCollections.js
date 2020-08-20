@@ -17,8 +17,8 @@ import Aside from '../../components/Aside';
 import Icon from '../../components/Icon';
 import Button from '../../components/Button';
 import ManageCollection from '../../components/ManageCollection';
-import MixListHeader from '../../components/MixListHeader';
-import MixListItem from '../../components/MixListItem';
+import CollectionListHeader from '../../components/CollectionListHeader';
+import CollectionListItem from '../../components/CollectionListItem';
 import MixDetails from '../../components/MixDetails';
 import styles from './MyCollections.module.css';
 
@@ -172,9 +172,14 @@ const MyCollections = () => {
               collections.statusText
             ) : (
               <>
-                <MixListHeader />
+                <CollectionListHeader />
                 {collections.mixes.map((mix, index) => (
-                  <MixListItem key={`mix-${index}`} detailsInDrawer={columns < 3} mix={mix} />
+                  <CollectionListItem
+                    key={`mix-${index}`}
+                    detailsInDrawer={columns < 3}
+                    mix={mix}
+                    collectionId={collections.current.id}
+                  />
                 ))}
               </>
             )}
