@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useRouteMatch } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import selectAuth from '../../selectors/selectAuth';
 import selectCollections from '../../selectors/selectCollections';
@@ -17,20 +18,22 @@ const SAVE_MIX_TO_COLLECTION = 'SAVE_MIX_TO_COLLECTION';
 const CollectionPicker = ({ mixId, onClose }) => {
   const hasFetched = useRef(false);
   const inputRef = useRef(null);
+  const match = useRouteMatch('/my/collections');
   const dispatch = useDispatch();
   const { token } = useSelector(selectAuth);
   const collections = useSelector(selectCollections);
 
   useEffect(() => {
     if (
-      !hasFetched.current ||
-      (!collections.isFetching && collections.statusText === null && collections.collections.length === 0)
+      !match &&
+      (!hasFetched.current ||
+        (!collections.isFetching && collections.statusText === null && collections.collections.length === 0))
     ) {
       hasFetched.current = true;
       const action = fetchMyCollections();
       dispatch(action);
     }
-  }, [collections, dispatch]);
+  }, [match, collections, dispatch]);
 
   const handleSave = async (collectionId, collectionName = null) => {
     dispatch(addTasks(SAVE_MIX_TO_COLLECTION, 1));
