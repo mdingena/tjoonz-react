@@ -1,6 +1,7 @@
 import {
   APPEND_PLAYLIST_ITEMS,
   PAUSE_PLAYBACK,
+  QUEUE_MY_COLLECTION,
   REMOVE_PLAYLIST_ITEMS,
   RESUME_PLAYBACK,
   SET_PLAYHEAD,
@@ -32,6 +33,12 @@ const playerReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         isPlaying: false
+      };
+
+    case QUEUE_MY_COLLECTION:
+      return {
+        ...state,
+        playlist: [...state.playlist, ...payload.mixes]
       };
 
     case REMOVE_PLAYLIST_ITEMS:
