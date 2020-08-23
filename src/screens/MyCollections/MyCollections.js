@@ -8,7 +8,7 @@ import selectCollections from '../../selectors/selectCollections';
 import selectDetails from '../../selectors/selectDetails';
 import openDrawer from '../../actions/openDrawer';
 import fetchMyCollections from '../../actions/fetchMyCollections';
-import fetchMyCollectionsMixesNextPage from '../../actions/fetchMyCollectionsMixesNextPage';
+import fetchMyCollectionsMixes from '../../actions/fetchMyCollectionsMixes';
 import renameMyCollection from '../../actions/renameMyCollection';
 import addTasks from '../../actions/addTasks';
 import completeTasks from '../../actions/completeTasks';
@@ -196,7 +196,7 @@ const MyCollections = () => {
             <div className={styles.footer}>
               {!collections.isFetching && collections.current.id && !collections.statusText ? (
                 <Button
-                  onClick={() => dispatch(fetchMyCollectionsMixesNextPage())}
+                  onClick={() => dispatch(fetchMyCollectionsMixes())}
                   text={
                     collections.current.mixes.length && collections.nextPage ? 'Show more results' : 'End of collection'
                   }

@@ -3,14 +3,13 @@ import {
   APPEND_MY_COLLECTIONS_MIXES_RESULTS,
   START_FETCHING_NEXT_MY_COLLECTIONS_RESULTS_PAGE
 } from '../constants/actionTypes';
-import { ENDPOINTS } from '../constants/api';
 import addTasks from './addTasks';
 import completeTasks from './completeTasks';
 import { forgetAuth } from '../api/authentication';
-import fetchPage from '../api/fetchPage';
+import fetchAllMyCollectionsMixes from '../api/fetchAllMyCollectionsMixes';
 import extractMixData from '../api/extractMixData';
 
-const fetchMyCollectionsMixesNextPage = () => async (dispatch, getState) => {
+const fetchMyCollectionsMixes = () => async (dispatch, getState) => {
   dispatch(startFetching());
   dispatch(addTasks(APPEND_MY_COLLECTIONS_MIXES_RESULTS, 1));
 
@@ -38,11 +37,13 @@ const fetchMyCollectionsMixesNextPage = () => async (dispatch, getState) => {
     return;
   }
 
-  const options = { _embed: true };
+  const options = {
+    _embed: true,
+    include: collections.current.mixes.join(','),
+    per_page: 100
+  };
 
-  if (collections.current.mixes.length) options.include = collections.current.mixes.join(',');
-
-  const response = await fetchPage(ENDPOINTS.MIXES, collections.nextPage, options);
+  const response = await fetchAllMyCollectionsMixes(dispatch, collections.current.id, options);
 
   if (!response.ok) {
     dispatch(doneFetching(null, response.statusText));
@@ -60,7 +61,7 @@ const fetchMyCollectionsMixesNextPage = () => async (dispatch, getState) => {
   dispatch(completeTasks(APPEND_MY_COLLECTIONS_MIXES_RESULTS, 1));
 };
 
-export default fetchMyCollectionsMixesNextPage;
+export default fetchMyCollectionsMixes;
 
 const startFetching = () => ({
   type: START_FETCHING_NEXT_MY_COLLECTIONS_RESULTS_PAGE

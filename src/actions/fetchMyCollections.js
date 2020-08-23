@@ -1,3 +1,4 @@
+import { useRouteMatch } from 'react-router';
 import {
   DONE_FETCHING_MY_COLLECTIONS_RESULTS,
   SET_MY_COLLECTIONS_RESULTS,
@@ -5,7 +6,7 @@ import {
 } from '../constants/actionTypes';
 import addTasks from './addTasks';
 import completeTasks from './completeTasks';
-import fetchMyCollectionsMixesNextPage from './fetchMyCollectionsMixesNextPage';
+import fetchMyCollectionsMixes from './fetchMyCollectionsMixes';
 import { forgetAuth } from '../api/authentication';
 import getMyCollections from '../api/getMyCollections';
 import extractCollectionData from '../api/extractCollectionData';
@@ -46,7 +47,7 @@ const fetchMyCollections = (fetchWithMixes = false) => async (dispatch, getState
 
   dispatch(setMyCollectionsResults(collections));
 
-  if (fetchWithMixes) dispatch(fetchMyCollectionsMixesNextPage());
+  if (fetchWithMixes) dispatch(fetchMyCollectionsMixes());
 
   dispatch(doneFetching());
   dispatch(completeTasks(SET_MY_COLLECTIONS_RESULTS, 1));

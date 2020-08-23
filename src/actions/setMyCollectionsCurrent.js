@@ -1,5 +1,5 @@
 import { SET_MY_COLLECTIONS_CURRENT } from '../constants/actionTypes';
-import fetchMyCollectionsMixesNextPage from './fetchMyCollectionsMixesNextPage';
+import fetchMyCollectionsMixes from './fetchMyCollectionsMixes';
 
 const setMyCollectionsCurrent = id => dispatch => {
   dispatch({
@@ -7,7 +7,7 @@ const setMyCollectionsCurrent = id => dispatch => {
     payload: { id }
   });
 
-  dispatch(fetchMyCollectionsMixesNextPage());
+  dispatch(fetchMyCollectionsMixes());
 };
 
 export default setMyCollectionsCurrent;
