@@ -54,7 +54,7 @@ const CollectionPicker = ({ mixId, onClose }) => {
 
     if (inputRef.current) inputRef.current.value = '';
 
-    dispatch(fetchMyCollections());
+    dispatch(fetchMyCollections(true));
     dispatch(completeTasks(SAVE_MIX_TO_COLLECTION, 1));
   };
 
