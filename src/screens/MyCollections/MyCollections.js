@@ -53,7 +53,7 @@ const MyCollections = () => {
       (!collections.isFetching && collections.statusText === null && collections.collections.length === 0)
     ) {
       hasFetched.current = true;
-      const action = fetchMyCollections();
+      const action = fetchMyCollections(true);
       dispatch(action);
     }
   }, [collections, dispatch]);

@@ -10,7 +10,7 @@ import { forgetAuth } from '../api/authentication';
 import getMyCollections from '../api/getMyCollections';
 import extractCollectionData from '../api/extractCollectionData';
 
-const fetchMyCollections = () => async (dispatch, getState) => {
+const fetchMyCollections = (fetchWithMixes = false) => async (dispatch, getState) => {
   dispatch(startFetching());
   dispatch(addTasks(SET_MY_COLLECTIONS_RESULTS, 1));
 
@@ -45,7 +45,8 @@ const fetchMyCollections = () => async (dispatch, getState) => {
   const collections = result.result.collections.map(extractCollectionData);
 
   dispatch(setMyCollectionsResults(collections));
-  dispatch(fetchMyCollectionsMixesNextPage());
+
+  if (fetchWithMixes) dispatch(fetchMyCollectionsMixesNextPage());
 
   dispatch(doneFetching());
   dispatch(completeTasks(SET_MY_COLLECTIONS_RESULTS, 1));
