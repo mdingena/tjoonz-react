@@ -10,6 +10,7 @@ import openDrawer from '../../actions/openDrawer';
 import fetchMyCollections from '../../actions/fetchMyCollections';
 import fetchMyCollectionsMixes from '../../actions/fetchMyCollectionsMixes';
 import renameMyCollection from '../../actions/renameMyCollection';
+import queueMyCollection from '../../actions/queueMyCollection';
 import addTasks from '../../actions/addTasks';
 import completeTasks from '../../actions/completeTasks';
 import deleteMyCollection from '../../api/deleteMyCollection';
@@ -101,6 +102,20 @@ const MyCollections = () => {
     dispatch(completeTasks(DELETE_COLLECTION, 1));
   };
 
+  const queueable =
+    hasFetched.current &&
+    !collections.isFetching &&
+    collections.statusText === null &&
+    collections.current.mixes &&
+    collections.current.mixes.length === collections.mixes.length;
+
+  const handleQueuing = () => {
+    if (queueable) {
+      const action = queueMyCollection(collections.mixes);
+      dispatch(action);
+    }
+  };
+
   const [columns = 1] = useBreakpoints({
     box: 'content-box',
     widths: {
@@ -164,10 +179,10 @@ const MyCollections = () => {
               ) : (
                 <>
                   <Button
-                    onClick={() => console.log('todo')}
-                    text='Queue all'
-                    Icon={Icon.PlusSquare}
-                    disabled={drawer !== null}
+                    onClick={handleQueuing}
+                    text={queueable ? 'Queue all' : 'Loading'}
+                    Icon={queueable ? Icon.PlusSquare : Icon.Snooze}
+                    disabled={drawer !== null || !queueable}
                   />
                   <Button
                     onClick={() => setIsDeletePending(true)}
