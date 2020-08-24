@@ -58,3 +58,14 @@
   line-height: 1.5;
   font-weight: 500;
 }
+
+.root a,
+.root a:visited,
+.root a:active {
+  color: var(--colour-blue-400);
+  text-decoration: none;
+}
+
+.root a:hover {
+  color: var(--colour-grey-100);
+}
