@@ -1,6 +1,7 @@
 export const BASE_URL = 'https://www.tjoonz.com/wp-json';
 
-export const BASE_STREAM_URL = 'https://www.tjoonz.com/beta.php?id='; /** @todo */
+export const BASE_STREAM_URL = 'https://www.tjoonz.com/stream.php?id=';
+export const BASE_DOWNLOAD_URL = 'https://www.tjoonz.com/download.php?id=';
 
 export const ENDPOINTS = {
   COMMENTS: '/wp/v2/comments',

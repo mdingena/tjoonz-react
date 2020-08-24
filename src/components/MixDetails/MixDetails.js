@@ -11,6 +11,7 @@ import pausePlayback from '../../actions/pausePlayback';
 import startPlayback from '../../actions/startPlayback';
 import closeDrawer from '../../actions/closeDrawer';
 import submitVote from '../../actions/submitVote';
+import { BASE_DOWNLOAD_URL } from '../../constants/api';
 import Button from '../Button';
 import Icon from '../Icon';
 import CollectionPicker from '../CollectionPicker';
@@ -167,7 +168,10 @@ const MixDetails = ({
                   text='Queue'
                   Icon={isInPlaylist ? Icon.CheckSquare : Icon.Square}
                 />
-                <Button onClick={() => console.log('todo')} text='Download' Icon={Icon.CloudDownload} />
+                <a className={styles.link} href={`${BASE_DOWNLOAD_URL}${id}`} download>
+                  <Icon.CloudDownload className={styles.icon} />
+                  <span className={styles.text}>Download</span>
+                </a>
                 {token && <Button onClick={() => setShowCollectionPicker(true)} text='Save' Icon={Icon.Save} />}
               </div>
             </div>
