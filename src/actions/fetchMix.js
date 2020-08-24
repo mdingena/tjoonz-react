@@ -23,7 +23,11 @@ const fetchMix = slug => async dispatch => {
   const mix = response.resources.map(extractMixData)[0];
 
   dispatch(setMix(mix || {}));
-  dispatch(upsertMixInQuery(mix || {}));
+
+  if (mix) {
+    dispatch(upsertMixInQuery(mix));
+  }
+
   dispatch(doneFetching(!mix ? '404' : null));
   dispatch(completeTasks(SET_MIX, 1));
 };
