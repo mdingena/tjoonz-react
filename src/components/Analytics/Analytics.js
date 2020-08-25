@@ -5,6 +5,7 @@ const Analytics = () => {
   const { pathname } = useLocation();
 
   useEffect(() => {
+    window.ga('set', 'page', pathname);
     window.ga('send', 'pageview');
   }, [pathname]);
 
