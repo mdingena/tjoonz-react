@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import selectAllTasks from '../../selectors/selectAllTasks';
-import PropTypes from 'prop-types';
 import styles from './LoadingSpinner.module.css';
 
-const LoadingSpinner = ({ size }) => {
+const LoadingSpinner = () => {
   const { completed, count } = useSelector(selectAllTasks);
   const shouldSettle = count === 0 && completed === 0;
   const [isSettled, setSettled] = useState(false);
@@ -81,24 +80,13 @@ const LoadingSpinner = ({ size }) => {
   }, [tick, shouldSettle]);
 
   return (
-    <div
-      className={styles.root}
-      style={{
-        '--width': `${size}px`,
-        '--height': `${size * 0.5625}px`,
-        '--gap': `${size * 0.2}px`
-      }}
-    >
+    <div className={styles.root}>
       <div className={styles.skew}>
         <div className={styles[classNameA]} />
         <div className={styles[classNameB]} />
       </div>
     </div>
   );
-};
-
-LoadingSpinner.propTypes = {
-  size: PropTypes.number.isRequired
 };
 
 export default LoadingSpinner;

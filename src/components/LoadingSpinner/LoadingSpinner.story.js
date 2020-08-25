@@ -25,6 +25,6 @@ const Wrapper = ({ children }) => {
 
 export const Spinning = () => (
   <Wrapper>
-    <LoadingSpinner size={500} />
+    <LoadingSpinner />
   </Wrapper>
 );

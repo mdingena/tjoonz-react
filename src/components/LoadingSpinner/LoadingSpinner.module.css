@@ -1,12 +1,12 @@
 .root {
-  width: calc(var(--width) * 1.3639702);
-  padding: 0 calc(var(--width) * 0.1819851);
+  width: 43.6470464px;
+  padding: 0 5.8235232px;
 }
 
 .skew {
   position: relative;
-  width: var(--width);
-  height: var(--height);
+  width: 32px;
+  height: 18px;
   transform: skewX(-20deg);
 }
 
@@ -22,18 +22,18 @@
 }
 
 .cube {
-  width: calc((var(--width) / 2) - (var(--gap) / 2));
-  height: calc((var(--height) / 2) - (var(--gap) / 2));
+  width: 12.8px;
+  height: 5.8px;
 }
 
 .tall {
-  width: calc((var(--width) / 2) - (var(--gap) / 2));
-  height: 100%;
+  width: 12.8px;
+  height: 18px;
 }
 
 .wide {
-  width: 100%;
-  height: calc((var(--height) / 2) - (var(--gap) / 2));
+  width: 32px;
+  height: 5.8px;
 }
 
 .leftShrinkVertically {
@@ -43,7 +43,7 @@
 
 .rightShrinkVertically {
   composes: indicator cube;
-  transform: translate(calc((var(--width) / 2) + (var(--gap) / 2)), calc((var(--height) / 2) + (var(--gap) / 2)));
+  transform: translate(19.2px, 12.2px);
 }
 
 .topExpandHorizontally {
@@ -53,17 +53,17 @@
 
 .bottomExpandHorizontally {
   composes: indicator wide;
-  transform: translate(0px, calc((var(--height) / 2) + (var(--gap) / 2)));
+  transform: translate(0px, 12.2px);
 }
 
 .topShrinkHorizontally {
   composes: indicator cube;
-  transform: translate(calc((var(--width) / 2) + (var(--gap) / 2)), 0px);
+  transform: translate(19.2px, 0px);
 }
 
 .bottomShrinkHorizontally {
   composes: indicator cube;
-  transform: translate(0px, calc((var(--height) / 2) + (var(--gap) / 2)));
+  transform: translate(0px, 12.2px);
 }
 
 .leftExpandVertically {
@@ -73,5 +73,5 @@
 
 .rightExpandVertically {
   composes: indicator tall;
-  transform: translate(calc((var(--width) / 2) + (var(--gap) / 2)), 0px);
+  transform: translate(19.2px, 0px);
 }

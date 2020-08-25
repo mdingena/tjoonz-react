@@ -21,13 +21,13 @@ const CloseButton = ({ drawer }) => {
       {drawer.ALIGN !== 'right' && <Icon className={styles.iconLeft} />}
       {drawer.SHOW_PROGRESS && drawer.ALIGN === 'right' && (
         <div className={styles.spinnerLeft}>
-          <LoadingSpinner size={32} />
+          <LoadingSpinner />
         </div>
       )}
       {drawer.CLOSE_TEXT && <span className={styles.text}>{drawer.CLOSE_TEXT}</span>}
       {drawer.SHOW_PROGRESS && drawer.ALIGN !== 'right' && (
         <div className={styles.spinnerRight}>
-          <LoadingSpinner size={32} />
+          <LoadingSpinner />
         </div>
       )}
       {drawer.ALIGN === 'right' && <Icon className={styles.iconRight} />}

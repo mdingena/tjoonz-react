@@ -6,7 +6,7 @@ import styles from './Logo.module.css';
 
 const Logo = () => (
   <NavLink to='/' className={styles.root}>
-    <LoadingSpinner size={32} />
+    <LoadingSpinner />
     <div className={styles.column}>
       <span className={styles.text}>Tjoonz.com</span>
       <div className={styles.progressBar}>
