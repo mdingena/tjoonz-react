@@ -8,6 +8,8 @@ import Button from '../../components/Button';
 import Icon from '../../components/Icon';
 import styles from './SignIn.module.css';
 
+/* eslint-disable react/jsx-no-target-blank */
+
 const SignIn = () => {
   const location = useLocation();
   const dispatch = useDispatch();
@@ -61,7 +63,7 @@ const SignIn = () => {
       </form>
       <a
         className={styles.link}
-        href='https://www.tjoonz.com/wp-login.php?action=lostpassword'
+        href='https://www.tjoonz.com/system/wp-login.php?action=lostpassword'
         rel='noopener referrer'
         target='_blank'
       >
@@ -69,7 +71,7 @@ const SignIn = () => {
       </a>
       <a
         className={styles.link}
-        href='https://www.tjoonz.com/wp-login.php?action=register'
+        href='https://www.tjoonz.com/system/wp-login.php?action=register'
         rel='noopener referrer'
         target='_blank'
       >
