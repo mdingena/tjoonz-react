@@ -4,12 +4,13 @@ import './index.css';
 import App from './App';
 import setupGoogleAnalytics from './setupGoogleAnalytics';
 
+setupGoogleAnalytics();
+
 const rootElement = document.getElementById('root');
 
-ReactDOM.createRoot(rootElement).render(
+ReactDOM.render(
   <React.StrictMode>
     <App />
-  </React.StrictMode>
+  </React.StrictMode>,
+  rootElement
 );
-
-setupGoogleAnalytics();
