@@ -1,4 +1,3 @@
-import { useRouteMatch } from 'react-router';
 import {
   DONE_FETCHING_MY_COLLECTIONS_RESULTS,
   SET_MY_COLLECTIONS_RESULTS,
