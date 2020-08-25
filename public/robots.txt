@@ -1,3 +1,16 @@
-# https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /system/
+Disallow: /feed/
+Disallow: /trackback/
+Disallow: /wp-admin/
+Disallow: /wp-content/cache/
+Disallow: /wp-content/plugins/
+Disallow: /wp-content/upgrade/
+Disallow: /wp-content/w3tc-config/
+Disallow: /wp-content/index.php
+Disallow: /wp-content/advanced-cache.php
+Disallow: /wp-content/maintenance.php
+Disallow: /wp-content/w3-total-cache-config.php
+Disallow: /wp-includes/
+Disallow: /xmlrpc.php
+Disallow: /blackhole/
