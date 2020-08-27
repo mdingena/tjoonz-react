@@ -69,3 +69,7 @@
 .root a:hover {
   color: var(--colour-grey-100);
 }
+
+.root img {
+  width: 100%;
+}
